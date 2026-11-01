@@ -33,7 +33,7 @@ Concept blueprint for low-cost single-use flexible rhinolaryngoscope: exploded +
 - [x] `site/` template + CSS (bench-bridge tokens: paper, ink, accent, Plex Mono, 44 px taps) + JS (drawing/view toggles, theme)
 - [x] `tools/site/build.cjs`: README.md (SSOT) → page; tables → stacked cards ≤640 px; drawing SVGs inlined (theme ink); viewer at `viewer/`
 - [x] `tools/site/serve.cjs` (`npm run dev`, tailnet link) + `tools/site/shot.cjs` (5 viewports, fails on overflow/page error)
-- [x] `.github/workflows/pages.yml` → GitHub Pages at juntotechnologies.com/flexscope-blueprint/
+- [x] `.github/workflows/pages.yml` → GitHub Pages at flexscope.juntotechnologies.com (Pages custom domain set; needs DNS CNAME flexscope → juntotechnologies.github.io)
 
 | Auto check | Result |
 |---|---|
