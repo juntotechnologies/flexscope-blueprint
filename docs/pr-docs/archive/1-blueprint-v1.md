@@ -1,6 +1,6 @@
 # PR 1: Blueprint v1 — cheap single-use flex rhinolaryngoscope
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/blueprint-v1`
 
