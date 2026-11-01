@@ -1,6 +1,6 @@
 {
   "_note": "SSOT for site copy + URLs. Body text comes from README.md; drawing titles from drawing/data.json.",
-  "url": "https://juntotechnologies.com/flexscope-blueprint/",
+  "url": "https://flexscope.juntotechnologies.com/",
   "repo": "https://github.com/juntotechnologies/flexscope-blueprint",
   "org": {"name": "Junto Technologies", "url": "https://juntotechnologies.com/"},
   "wordmark": ["FLEX", "SCOPE"],
