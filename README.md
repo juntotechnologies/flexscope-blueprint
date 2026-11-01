@@ -4,7 +4,9 @@ Concept blueprint: cheap single-use flexible rhinolaryngoscope ("nose scope" ENT
 
 **Concept only.** Not a medical device, not cleared, not for patient use. Dims estimated unless cited. Drawings not to scale (NTS).
 
-Interactive viewer: open `dist/index.html` (standalone, offline; exploded/assembled toggle, part labels, color, SVG/PNG/PDF export).
+Site: https://juntotechnologies.com/flexscope-blueprint/ (drawings + interactive viewer). Local viewer: `dist/index.html` (offline; exploded/assembled, part labels, color, SVG/PNG/PDF export).
+
+## Drawings
 
 | Whole scope, exploded | Distal tip, exploded |
 |---|---|
@@ -13,9 +15,9 @@ Interactive viewer: open `dist/index.html` (standalone, offline; exploded/assemb
 
 ## Target spec
 
-Benchmark = Ambu aScope 4 RhinoLaryngo Slim (single-use market reference).
+Benchmark = Ambu aScope 4 RhinoLaryngo Slim (single-use market reference; values per Ambu spec page).
 
-| Item | Benchmark (Ambu Slim, per Ambu spec page) | This concept |
+| Item | Ambu Slim | This concept |
 |---|---|---|
 | Insertion cord OD | 3.0 mm | 3.0 mm |
 | Distal end OD | 3.5 mm | 3.5 mm |
@@ -26,20 +28,20 @@ Benchmark = Ambu aScope 4 RhinoLaryngo Slim (single-use market reference).
 
 ## How it works (parts = drawing labels)
 
-| # | Part | Job | Cheap build route |
-|---|---|---|---|
-| 1 | Distal tip (camera + LEDs) | Image + light at tip | 3.5 mm molded housing; wafer-level CMOS camera; 2 white LEDs beside it |
-| 2 | Camera module + cable | Sensor | OmniVision OVM6948: 0.65 × 0.65 × 1.158 mm, 200 × 200 px, 120° FOV, analog out, single-use target (OVM6948 brief). Hi-res alt: OV6946-class 400 × 400 (est.) |
-| 3 | Cover window | Seal + optical face | Clear PC/PMMA disc, UV-cure glued |
-| 4 | Bending links (×8) | Flex in 1 plane | Stainless/nitinol rings, or 1 laser-cut notched hypotube (fewer parts) |
-| 5 | Pull wires (×2) | Steer tip up/down | Stainless or PE (Dyneema) braid, anchored in tip housing, wound on drum |
-| 6 | Bending sheath | Smooth seal over links | Thin TPU/PEBAX sleeve |
-| 7 | Insertion cord | Carry wires + cable | PEBAX/TPU multi-lumen extrusion, 3.0 mm |
-| 8 | Nose strain relief | Kink guard at handle | Overmolded TPU |
-| 9 | Handle shell L/R | Grip + enclosure | 2 injection-molded ABS/PC halves, snap or ultrasonic weld |
-| 10 | Angulation lever + drum | Thumb → wire pull | 1 molded part; detent friction pad |
-| 11 | USB video bridge board | Sensor → UVC video, LED drive | Small PCB: sensor companion/ISP + UVC bridge chip + LED current driver |
-| 12 | Cable strain relief + USB-C cable | Power + video to host | Off-the-shelf USB-C cable, overmolded boot |
+| Part | Job | Cheap build route |
+|---|---|---|
+| Distal tip (camera + LEDs) | Image + light at tip | 3.5 mm molded housing; wafer-level CMOS camera; 2 white LEDs beside it |
+| Camera module + cable | Sensor | OmniVision OVM6948: 0.65 × 0.65 × 1.158 mm, 200 × 200 px, 120° FOV, analog out, single-use target (OVM6948 brief). Hi-res alt: OV6946-class 400 × 400 (est.) |
+| Cover window | Seal + optical face | Clear PC/PMMA disc, UV-cure glued |
+| Bending links (×8) | Flex in 1 plane | Stainless/nitinol rings, or 1 laser-cut notched hypotube (fewer parts) |
+| Pull wires (×2) | Steer tip up/down | Stainless or PE (Dyneema) braid, anchored in tip housing, wound on drum |
+| Bending sheath | Smooth seal over links | Thin TPU/PEBAX sleeve |
+| Insertion cord | Carry wires + cable | PEBAX/TPU multi-lumen extrusion, 3.0 mm |
+| Nose strain relief | Kink guard at handle | Overmolded TPU |
+| Handle shell L/R | Grip + enclosure | 2 injection-molded ABS/PC halves, snap or ultrasonic weld |
+| Angulation lever + drum | Thumb → wire pull | 1 molded part; detent friction pad |
+| USB video bridge board | Sensor → UVC video, LED drive | Small PCB: sensor companion/ISP + UVC bridge chip + LED current driver |
+| Cable strain relief + USB-C cable | Power + video to host | Off-the-shelf USB-C cable, overmolded boot |
 
 ## Cost-down levers (vs single-use incumbents)
 
@@ -81,9 +83,10 @@ Device type = nasopharyngoscope; expect FDA Class II, 510(k) (verify product cod
 | `drawing/scope.js`, `drawing/tip.js` | 3D models |
 | `evidence.md` | Per-feature evidence class (sourced / estimated / illustrative) |
 | `dist/index.html` | Built viewer |
+| `site/`, `tools/site/` | Pages site: template + build (README → page) + viewport shots |
 | `tools/teardown/`, `.agents/skills/teardown/` | Teardown skill (from bench-bridge) |
 
-Cmds: `npm i` → `npm run proof` → `npm run check`.
+Cmds: `npm i` → `npm run proof` → `npm run check` → `npm run site`.
 
 ## Sources
 

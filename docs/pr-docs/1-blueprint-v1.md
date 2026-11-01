@@ -27,3 +27,17 @@ Concept blueprint for low-cost single-use flexible rhinolaryngoscope: exploded +
 
 - [x] Walk: open every proof PNG; parts readable, none floating unexplained
 - [ ] Walk: viewer exports (SVG/PNG/PDF) open + keep colors — not run
+
+## Site (added 2026-11-01, Shaun asked: deploy as site, mobile-friendly like bench-bridge, repo public)
+
+- [x] `site/` template + CSS (bench-bridge tokens: paper, ink, accent, Plex Mono, 44 px taps) + JS (drawing/view toggles, theme)
+- [x] `tools/site/build.cjs`: README.md (SSOT) → page; tables → stacked cards ≤640 px; drawing SVGs inlined (theme ink); viewer at `viewer/`
+- [x] `tools/site/serve.cjs` (`npm run dev`, tailnet link) + `tools/site/shot.cjs` (5 viewports, fails on overflow/page error)
+- [x] `.github/workflows/pages.yml` → GitHub Pages at juntotechnologies.com/flexscope-blueprint/
+
+| Auto check | Result |
+|---|---|
+| `shot.cjs` site, 360/390/844/768/1366 | 0 overflow, 0 page errors |
+| `shot.cjs` viewer, same viewports | 0 overflow, 0 page errors |
+
+- [x] Walk: phone 390 light + dark; drawing/view toggles swap sheet; tables readable as cards
