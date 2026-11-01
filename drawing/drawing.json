@@ -1,0 +1,114 @@
+{
+  "dependencies": "../node_modules",
+  "modelScripts": [
+    "gen/data.js",
+    "scope.js",
+    "tip.js"
+  ],
+  "drawings": [
+    {
+      "id": "scope",
+      "title": "Single-use flexible rhinolaryngoscope (concept)",
+      "description": "Illustrative low-cost single-use ENT scope concept: 3.5 mm tip, 3.0 mm cord, thumb-lever angulation, USB UVC video to a phone or laptop. Cord shortened for the page; not to scale.",
+      "initialView": "exploded",
+      "parameters": [
+        {
+          "key": "cordShown",
+          "label": "Cord length shown",
+          "min": 60,
+          "max": 300,
+          "default": 80,
+          "step": 10,
+          "unit": "mm"
+        }
+      ],
+      "parts": [
+        {
+          "id": "shellLeft",
+          "name": "Handle shell, left"
+        },
+        {
+          "id": "shellRight",
+          "name": "Handle shell, right"
+        },
+        {
+          "id": "lever",
+          "name": "Angulation lever + drum"
+        },
+        {
+          "id": "board",
+          "name": "USB video bridge board"
+        },
+        {
+          "id": "pullWires",
+          "name": "Pull wires (x2)"
+        },
+        {
+          "id": "nose",
+          "name": "Nose strain relief"
+        },
+        {
+          "id": "cord",
+          "name": "Insertion cord"
+        },
+        {
+          "id": "bending",
+          "name": "Bending section"
+        },
+        {
+          "id": "tip",
+          "name": "Distal tip (camera + LEDs)"
+        },
+        {
+          "id": "boot",
+          "name": "Cable strain relief"
+        },
+        {
+          "id": "cable",
+          "name": "USB-C cable"
+        }
+      ]
+    },
+    {
+      "id": "tip",
+      "title": "Distal tip + bending section (concept)",
+      "description": "Illustrative 3.5 mm distal tip: 1 mm-class CMOS camera, two LEDs, cover window, 8 bending links steered by 2 pull wires under a thin sheath. Proportions estimated; not a manufacturing drawing.",
+      "initialView": "exploded",
+      "parameters": [],
+      "parts": [
+        {
+          "id": "cord",
+          "name": "Insertion cord (multi-lumen)"
+        },
+        {
+          "id": "links",
+          "name": "Bending links (x8)"
+        },
+        {
+          "id": "sheath",
+          "name": "Bending sheath"
+        },
+        {
+          "id": "wires",
+          "name": "Pull wires (x2)"
+        },
+        {
+          "id": "housing",
+          "name": "Tip housing"
+        },
+        {
+          "id": "camera",
+          "name": "Camera module + cable"
+        },
+        {
+          "id": "leds",
+          "name": "LEDs (x2)"
+        },
+        {
+          "id": "window",
+          "name": "Cover window"
+        }
+      ]
+    }
+  ]
+}

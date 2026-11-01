@@ -9,6 +9,7 @@ Concept blueprint: low-cost single-use flexible rhinolaryngoscope (ENT nose scop
 - PNG proofs need `resvg` (`brew install resvg`); Quick Look fallback crops sheets square.
 - Every cost, dim, part claim in README cites source or says estimate. No invented prices.
 - Linter not set up yet (no app code; JS models only).
+- Hosting: GitHub Pages at subdomain `flexscope.juntotechnologies.com` (CNAME → `juntotechnologies.github.io`, DNS = Google Cloud DNS, Shaun-owned). Never use `juntotechnologies.com/<repo>/` paths: apex + www are on Netlify, so project-path Pages 404.
 
 Coding workflow w/ Shaun ("me").
 

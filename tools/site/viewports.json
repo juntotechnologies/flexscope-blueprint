@@ -1,0 +1,7 @@
+[
+  {"name": "phone-small", "width": 360, "height": 640},
+  {"name": "phone-portrait", "width": 390, "height": 844, "full": true},
+  {"name": "phone-landscape", "width": 844, "height": 390},
+  {"name": "tablet-portrait", "width": 768, "height": 1024},
+  {"name": "laptop", "width": 1366, "height": 768}
+]

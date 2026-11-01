@@ -1,0 +1,16 @@
+{
+  "_note": "SSOT for site copy + URLs. Body text comes from README.md; drawing titles from drawing/data.json.",
+  "url": "https://flexscope.juntotechnologies.com/",
+  "repo": "https://github.com/juntotechnologies/flexscope-blueprint",
+  "org": {"name": "Junto Technologies", "url": "https://juntotechnologies.com/"},
+  "wordmark": ["FLEX", "SCOPE"],
+  "title": "Flexscope Blueprint — low-cost single-use ENT scope concept",
+  "description": "Concept blueprint for a low-cost single-use flexible rhinolaryngoscope: exploded teardown drawings, parts, cost-down levers and regulatory path.",
+  "chip": "Concept · NTS",
+  "dwgPrefix": "FS",
+  "viewerLabel": "Open 3D viewer",
+  "repoLabel": "Source on GitHub",
+  "views": [{"id": "exploded", "label": "Exploded"}, {"id": "assembled", "label": "Assembled"}],
+  "skipSections": ["Drawings", "Repo"],
+  "out": "dist-site"
+}
