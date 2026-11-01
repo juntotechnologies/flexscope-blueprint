@@ -1,0 +1,16 @@
+{
+  "name": "flexscope-blueprint",
+  "private": true,
+  "scripts": {
+    "gen": "node tools/gen.cjs",
+    "build": "npm run gen && node tools/teardown/scripts/build-viewer.cjs drawing/drawing.json dist/index.html",
+    "proof:quick": "npm run gen && node tools/teardown/scripts/proof.cjs drawing/drawing.json proof/quick --quick",
+    "proof": "npm run gen && node tools/teardown/scripts/proof.cjs drawing/drawing.json proof/full",
+    "check": "node tools/gen.cjs --check && npm run build && node tools/teardown/scripts/check-viewer.cjs dist/index.html check/"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "jspdf": "^4.2.1",
+    "svg2pdf.js": "^2.9.0"
+  }
+}
