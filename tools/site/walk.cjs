@@ -18,10 +18,11 @@ async function runStep(browser, url, outDir, step) {
   const page = await browser.newPage({viewport: step.viewport, deviceScaleFactor: 2, colorScheme: step.colorScheme || 'light'});
   const errors = [];
   page.on('pageerror', function onError(e) { errors.push(e.message); });
-  await page.goto(url + (step.hash || ''), {waitUntil: 'load'});
-  if (!step.hash) await page.waitForSelector(WALK.ready, {timeout: 20000});
+  await page.goto(url + (step.path || '') + (step.hash || ''), {waitUntil: 'load'});
+  const ready = step.pageReady ?? (step.hash ? null : WALK.ready);
+  if (ready) await page.waitForSelector(ready, {timeout: 20000});
   for (const action of step.actions) await act(page, action);
-  const expectOk = step.expect ? await page.locator(step.expect).count() > 0 : true;
+  const expectOk = (step.expect ? await page.locator(step.expect).count() > 0 : true) && (step.expectJs ? await page.evaluate(step.expectJs) === true : true);
   const vscroll = await page.evaluate('document.documentElement.scrollHeight - document.documentElement.clientHeight');
   const file = path.join(outDir, `${step.name}.png`);
   await page.screenshot({path: file});

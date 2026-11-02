@@ -9,6 +9,7 @@ Concept blueprint: low-cost single-use flexible rhinolaryngoscope (ENT nose scop
 - PNG proofs need `resvg` (`brew install resvg`); Quick Look fallback crops sheets square.
 - Every cost, dim, part claim in README cites source or says estimate. No invented prices.
 - Site = 1 screen, no page scroll (bench-bridge style). Motion = slide rendered parts (`drawing/slides.js`); never per-frame exact renders (tip mid frame was 4.9 s). Checks: `npm run site:shots <url> <dir> '#viewport[aria-busy="false"]'` + `npm run site:walk <url> <dir>` vs `npm run dev` tailnet link. Set `SHOT_CHROME_PATH` (headless shell).
+- Quality test: `tools/quality/study.json` SSOT. Open-license clips (CC BY etc., already published) → commit in `tools/quality/open/`, credit + license in `study.json`, credits page on site. Private clips (cousin/hospital) → never commit (`sources/` gitignored), never public w/o hospital approval.
 - Linter not set up yet (no app code; JS models only).
 - Hosting: GitHub Pages at subdomain `flexscope.juntotechnologies.com` (CNAME → `juntotechnologies.github.io`, DNS = Squarespace Domains (ex-Google Domains), Shaun-owned). Never use `juntotechnologies.com/<repo>/` paths: apex + www are on Netlify, so project-path Pages 404.
 

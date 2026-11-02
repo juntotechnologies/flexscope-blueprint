@@ -1,0 +1,87 @@
+{
+  "_note": "SSOT for the image-quality study: levels (camera classes), questions, clips + true answers + credits, where clips + answers live. make-clips.cjs, build.cjs, analyze.cjs read this. Clip id = opaque (shown to raters, in file names); name = human label (never shipped). source: open = committed open-license file tools/quality/open/<name>.mp4 → public build (out); private = tools/quality/sources/<name>.mp4 (gitignored) → --real build (privateOut, gitignored). crop = ffmpeg crop to the scope image (default: centered square).",
+  "title": "Scope image quality test",
+  "minutes": 5,
+  "levels": [
+    {"id": "q720", "label": "720×720", "cameraClass": "3.9 mm USB module", "size": 720, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q400", "label": "400×400", "cameraClass": "OV6946-class 1.4 mm", "size": 400, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200", "label": "200×200", "cameraClass": "OVM6948-class 1 mm", "size": 200, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200low", "label": "200×200 + noise, 15 fps", "cameraClass": "OVM6948-class, poor light", "size": 200, "fps": 15, "noise": 18, "blur": 0.6}
+  ],
+  "questions": [
+    {"id": "lesion", "text": "Any lesion (mass or growth) visible?", "options": [ "Yes", "No", "Can't tell" ], "scored": true},
+    {"id": "mobility", "text": "Do both vocal folds move?", "options": [ "Both move", "One or both don't", "Can't tell" ], "scored": true},
+    {"id": "usable", "text": "Would you use this image for a diagnostic exam?", "options": [ "1 No", "2", "3", "4", "5 Yes" ], "scored": false}
+  ],
+  "rater": [
+    {"id": "role", "text": "Your role", "options": [ "ENT attending", "ENT resident", "Other clinician", "Other" ]},
+    {"id": "setting", "text": "Where you mostly work", "options": [ "Low-resource hospital", "High-resource hospital", "Both" ]},
+    {"id": "scopes", "text": "Flexible scopes you do per week", "options": [ "0", "1-5", "6-20", "20+" ]}
+  ],
+  "clips": [
+    {
+      "id": "k7",
+      "name": "bvfp-pre",
+      "patient": "li2013-a",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "No",
+        "mobility": "One or both don't"
+      },
+      "credit": {
+        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013",
+        "url": "https://doi.org/10.1371/journal.pone.0077233",
+        "copyright": "© 2013 Li et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S1 (before surgery)"
+      }
+    },
+    {
+      "id": "m2",
+      "name": "bvfp-post",
+      "patient": "li2013-a",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "No",
+        "mobility": "Both move"
+      },
+      "credit": {
+        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013",
+        "url": "https://doi.org/10.1371/journal.pone.0077233",
+        "copyright": "© 2013 Li et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S2 (after surgery)"
+      }
+    },
+    {
+      "id": "x4",
+      "name": "hemangioma",
+      "patient": "shukla2022",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "crop": "516:516:393:100",
+      "truth": {
+        "lesion": "Yes"
+      },
+      "credit": {
+        "work": "Shukla TS. Recurrence of Laryngeal Hemangioma in an Adult: A Case Report. Cureus 2022",
+        "part": "video 2",
+        "url": "https://doi.org/10.7759/cureus.31090",
+        "copyright": "© 2022 Shukla",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+      }
+    }
+  ],
+  "clipBase": "clips/",
+  "endpoint": "https://script.google.com/macros/s/AKfycbz91vVneYYgh0LPNDfpba4Wg61QtBHy4z84rYoR-0pvjOWVNPk_74ay8cvPHkHCkKpmZA/exec",
+  "out": "dist-site/quality",
+  "privateOut": "tools/quality/private-site"
+}

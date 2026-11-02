@@ -5,7 +5,7 @@ const http = require('node:http'), fs = require('node:fs'), path = require('node
 const root = path.resolve(__dirname, '../../dist-site');
 const base = new URL(require('../../site/site.json').url).pathname;
 const PORT = Number(process.env.PORT || 4321);
-const TYPES = {'.html': 'text/html; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.txt': 'text/plain'};
+const TYPES = {'.html': 'text/html; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.txt': 'text/plain', '.mp4': 'video/mp4'};
 
 function tailnetHost() {
   try {

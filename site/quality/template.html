@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>{{title}}</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>{{css}}</style>
+</head>
+<body>
+<main class="quiz" id="quiz" data-screen="intro">
+  <header class="q-top">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 25V12a6 6 0 0 1 12 0v4a4 4 0 0 0 8 0V7"/><circle cx="27" cy="6" r="2"/></svg></span>
+    <span class="q-title">{{title}}</span>
+    <span class="q-step" id="step" aria-live="polite"></span>
+  </header>
+  <p class="note" id="preview-note" hidden>Preview mode: answers are not saved anywhere.</p>
+
+  <section class="screen" data-for="intro">
+    <h1>How low can scope video quality go?</h1>
+    <p>We are designing a low-cost single-use ENT scope. Cheaper cameras mean lower image quality. You will see {{clipCount}} short clips, each at a random quality level, and answer {{questionCount}} questions per clip.</p>
+    <ul>
+      <li>About {{minutes}} minutes. Anonymous: no name or email.</li>
+      <li>Answer from the clip only. "Can't tell" is a valid answer.</li>
+      <li>Clips come from published open-access case reports.</li>
+      <li>Concept research only, not patient care.</li>
+    </ul>
+    <button type="button" class="primary" data-go="rater">Start</button>
+  </section>
+
+  <section class="screen" data-for="rater">
+    <h1>About you</h1>
+    <form id="rater-form">{{raterFields}}</form>
+    <button type="button" class="primary" id="rater-next" disabled>Next</button>
+  </section>
+
+  <section class="screen" data-for="trial">
+    <div class="video-box">
+      <video id="video" muted loop playsinline autoplay preload="auto"></video>
+      <button type="button" class="video-msg" id="tap-play" hidden>Tap to play</button>
+      <div class="video-msg" id="clip-error" hidden><span>This clip did not load.</span><button type="button" id="skip-clip">Skip clip</button></div>
+    </div>
+    <form id="trial-form" inert>{{questionFields}}</form>
+    <button type="button" class="primary" id="trial-next" disabled>Next</button>
+  </section>
+
+  <section class="screen" data-for="done">
+    <h1>Thank you</h1>
+    <p id="done-text" aria-live="polite">Your answers were sent.</p>
+    <button type="button" class="primary" id="retry" hidden>Send again</button>
+    <p class="credits">Clip <a href="credits.html">sources and licenses</a>.</p>
+  </section>
+</main>
+<script type="application/json" id="study">{{study}}</script>
+<script>{{js}}</script>
+</body>
+</html>
