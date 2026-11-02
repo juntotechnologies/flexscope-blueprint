@@ -118,7 +118,7 @@ function workerSource() {
 }
 
 function engine() {
-  return ['sheet.js', 'render-queue.js', 'flipbook.js'].map(function asset(name) { return read(path.join(assets, name)); }).join('\n');
+  return ['sheet.js', 'render-queue.js'].map(function asset(name) { return read(path.join(assets, name)); }).join('\n');
 }
 
 function fill(template, values) {

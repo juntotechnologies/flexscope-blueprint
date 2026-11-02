@@ -8,6 +8,7 @@ const WALK = require('./walk.json');
 
 async function act(page, action) {
   if (action.click) await page.click(action.click);
+  if (action.fill) await page.locator(action.fill[0]).fill(action.fill[1]);
   if (action.key) await page.keyboard.press(action.key);
   if (action.wait) await page.waitForTimeout(action.wait);
   if (action.ready) await page.waitForSelector(action.ready, {timeout: 20000});

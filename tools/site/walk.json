@@ -31,7 +31,7 @@
       },
       "actions": [
         {
-          "wait": 5000
+          "wait": 500
         },
         {
           "click": "[data-view=assembled]"
@@ -41,6 +41,103 @@
         }
       ],
       "expect": "#drawing[data-playing]"
+    },
+    {
+      "name": "laptop-slider-drag",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "fill": [
+            "#spacing",
+            "60"
+          ]
+        },
+        {
+          "wait": 30
+        },
+        {
+          "fill": [
+            "#spacing",
+            "40"
+          ]
+        },
+        {
+          "wait": 30
+        }
+      ],
+      "expect": "#drawing[data-playing] g[data-base] [data-item][transform]"
+    },
+    {
+      "name": "laptop-slider-rest",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "fill": [
+            "#spacing",
+            "40"
+          ]
+        },
+        {
+          "wait": 400
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        },
+        {
+          "wait": 300
+        }
+      ],
+      "expect": "#drawing:not([data-playing]) g:not([data-base])"
+    },
+    {
+      "name": "laptop-tip-animating",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "[data-drawing=tip]"
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        },
+        {
+          "click": "[data-view=assembled]"
+        },
+        {
+          "wait": 250
+        }
+      ],
+      "expect": "#drawing[data-playing] g[data-base]"
+    },
+    {
+      "name": "phone-tip-animating",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-drawing=tip]"
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        },
+        {
+          "click": "[data-view=assembled]"
+        },
+        {
+          "wait": 250
+        }
+      ],
+      "expect": "#drawing[data-playing] g[data-base]"
     },
     {
       "name": "laptop-tip",

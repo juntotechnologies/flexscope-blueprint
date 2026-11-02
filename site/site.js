@@ -1,4 +1,5 @@
-// Single-screen page: live teardown drawing (render queue + flipbook from tools/teardown) + tabbed details.
+// Single-screen page: live teardown drawing (render queue from tools/teardown) + tabbed details.
+// Motion = slide each part's rendered ink (model returns per-part slides); exact render replaces it at rest.
 const $ = function byId(id) { return document.getElementById(id); };
 const DRAWINGS = JSON.parse($('drawing-data').textContent);
 const SHEET = globalThis.TechnicalSheet;
@@ -7,10 +8,9 @@ const PLAY_MS = 700, SLIDER_DELAY = 120, CROP_PAD = 3;
 const ZOOM_STEPS = [1, 1.5, 2, 3, 4];
 const PHONE = matchMedia('(max-width: 899px)');
 
-const state = {drawing: DRAWINGS[0], explosion: 1, labels: true, crop: null, geometry: null, playing: null, zoom: 0};
+const state = {drawing: DRAWINGS[0], explosion: 1, labels: true, crop: null, base: null, geometry: null, playing: null, zoom: 0};
 const workerBlob = new Blob([JSON.parse($('drawing-worker').textContent)], {type: 'text/javascript'});
 const renderer = globalThis.DrawingRenderQueue.create(spawnWorker());
-const flipbook = globalThis.DrawingFlipbook.create(spawnWorker, {size: Math.min(Math.max((navigator.hardwareConcurrency || 4) - 2, 2), 6), ease: globalThis.DrawingFlipbook.easeInOutCubic});
 
 function spawnWorker() {
   const url = URL.createObjectURL(workerBlob), worker = new Worker(url);
@@ -24,8 +24,13 @@ function message(explosion) {
   return {id: d.id, parameters: params, explosion, fitExplosion: 1, isolated: null, fill: true, annotate: state.labels};
 }
 
-function flipbookKey() {
+function renderKey() {
   return state.drawing.id + ':' + state.labels;
+}
+
+function resetBase() {
+  state.crop = null;
+  state.base = null;
 }
 
 // ---- painting: per-part ink + tint fills (mirrors viewer styleGeometry) ----
@@ -60,6 +65,7 @@ function mount(markup) {
   paint(group, state.drawing);
   svg.append(group);
   $('drawing').replaceChildren(svg);
+  $('drawing').toggleAttribute('data-playing', false);
   state.geometry = group;
   return svg;
 }
@@ -81,11 +87,12 @@ function drawingVisible() {
   return $('pane-drawing').checkVisibility();
 }
 
-// Crop once per drawing+labels at full explosion: every frame shares that fit, so the view never jumps.
-async function ensureCrop() {
-  if (state.crop || !drawingVisible()) return;
-  const key = flipbookKey(), result = await renderer.request(message(1));
-  if (key !== flipbookKey()) throw superseded();
+// Crop + base once per drawing+labels at full explosion: every render shares that fit, so the view never jumps.
+async function ensureBase() {
+  if (state.base || !drawingVisible()) return;
+  const key = renderKey(), result = await renderer.request(message(1));
+  if (key !== renderKey()) throw superseded();
+  state.base = {markup: result.markup, slides: result.slides};
   cropTo(mount(result.markup));
 }
 
@@ -94,50 +101,67 @@ function setBusy(busy) {
 }
 
 async function render(delay) {
-  stopPlayback();
   setBusy(true);
   try {
-    await ensureCrop();
-    const result = await renderer.request(message(state.explosion), {preview: true, delay});
+    await ensureBase();
+    const key = renderKey(), result = await renderer.request(message(state.explosion), {preview: true, delay});
+    if (key !== renderKey()) return;
     setBusy(false);
     if (state.playing) return;
     mount(result.markup);
-    flipbook.prepare(flipbookKey(), message(1));
   } catch (error) {
     if (error.name === 'AbortError') return;
     setBusy(false);
+    if (state.base) mount(state.base.markup);
     console.error(JSON.stringify({event: 'drawing.render_failed', drawing: state.drawing.id, error: error.message}));
   }
 }
 
-// ---- exploded <-> assembled playback ----
+// ---- motion: slide base ink (rendered at explosion 1) by slide × (e − 1) ----
+
+function showBase() {
+  if (!state.base) return false;
+  if (!state.geometry?.dataset.base) mount(state.base.markup).firstChild.dataset.base = '1';
+  return true;
+}
+
+function slideTo(explosion) {
+  if (!showBase()) return;
+  const k = explosion - 1, slides = state.base.slides;
+  for (const el of state.geometry.querySelectorAll('[data-item], [data-fill]')) {
+    const s = slides[el.dataset.item ?? el.dataset.fill];
+    if (s) el.setAttribute('transform', `translate(${(s[0] * k).toFixed(3)} ${(s[1] * k).toFixed(3)})`);
+  }
+  $('drawing').toggleAttribute('data-playing', true);
+}
+
+function easeInOutCubic(t) {
+  return t < .5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+}
 
 function stopPlayback() {
   if (!state.playing) return;
   cancelAnimationFrame(state.playing.frame);
   state.playing = null;
-  $('drawing').toggleAttribute('data-playing', false);
 }
 
 function playFrame(run, now) {
   run.began ??= now;
-  const progress = run.duration ? Math.min(1, (now - run.began) / run.duration) : 1;
-  run.value = run.start + (run.end - run.start) * progress;
-  state.geometry.innerHTML = run.frames[Math.round(run.value)];
-  paint(state.geometry, state.drawing);
-  if (progress < 1) run.frame = requestAnimationFrame(function next(t) { playFrame(run, t); });
-  else { state.playing = null; $('drawing').toggleAttribute('data-playing', false); render(0); }
+  const t = run.duration ? Math.min(1, (now - run.began) / run.duration) : 1;
+  run.value = run.from + (run.to - run.from) * easeInOutCubic(t);
+  slideTo(run.value);
+  if (t < 1) { run.frame = requestAnimationFrame(playFrame.bind(null, run)); return; }
+  state.playing = null;
+  render(0);
 }
 
 function play(to) {
-  const frames = state.geometry && flipbook.ready(flipbookKey());
-  if (!frames || matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  const last = frames.length - 1, start = state.playing?.value ?? state.explosion * last, end = to * last;
-  if (state.playing) cancelAnimationFrame(state.playing.frame);
-  const run = {frames, start, end, value: start, began: null, duration: PLAY_MS * Math.abs(end - start) / last, frame: 0};
+  if (!state.base || matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  const from = state.playing?.value ?? state.explosion;
+  stopPlayback();
+  const run = {from, to, value: from, began: null, duration: PLAY_MS * Math.abs(to - from), frame: 0};
   state.playing = run;
-  $('drawing').toggleAttribute('data-playing', true);
-  run.frame = requestAnimationFrame(function first(t) { playFrame(run, t); });
+  run.frame = requestAnimationFrame(playFrame.bind(null, run));
   return true;
 }
 
@@ -163,14 +187,17 @@ function setView(event) {
 }
 
 function setSpacing() {
+  stopPlayback();
   state.explosion = Number($('spacing').value) / 100;
   syncControls();
+  slideTo(state.explosion);
   render(SLIDER_DELAY);
 }
 
 function toggleLabels() {
+  stopPlayback();
   state.labels = !state.labels;
-  state.crop = null;
+  resetBase();
   syncControls();
   render(0);
 }
@@ -178,9 +205,10 @@ function toggleLabels() {
 function setDrawing(event) {
   const b = event.target.closest('[data-drawing]');
   if (!b || b.dataset.drawing === state.drawing.id) return;
+  stopPlayback();
   state.drawing = DRAWINGS.find(function match(d) { return d.id === b.dataset.drawing; });
   state.explosion = state.drawing.initialView === 'assembled' ? 0 : 1;
-  state.crop = null;
+  resetBase();
   applyZoom(0);
   syncControls();
   render(0);
@@ -241,7 +269,7 @@ function tabKey(event) {
 function selectPane(id) {
   $('panes').dataset.pane = id;
   for (const b of $('dock').children) b.setAttribute('aria-pressed', String(b.dataset.pane === id));
-  if (id === 'drawing' && !state.crop) render(0);
+  if (id === 'drawing' && !state.base) render(0);
 }
 
 function onDock(event) {
