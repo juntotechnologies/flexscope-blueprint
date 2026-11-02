@@ -59,3 +59,22 @@ Fresh review agent, 6 defects. All fixed.
 Minor: analyze exits 1 w/ `quality.no_rows` when no real rows (hint `--demo`); rows w/ no truth for a question skipped in % correct.
 
 Recheck after fixes: `npm run check` pass; shots 5/5; walk 20/20; analyze on quoted-CSV sample correct.
+
+## Open-License Clip Search (2026-11-02)
+
+Method: Wikimedia Commons search (video files, 17 ENT terms); Europe PMC search (laryngoscopy/vocal fold + video supplement + open access + CC BY, 49 articles), all supplements downloaded, `ffprobe` resolution, 1 frame per clip checked by eye.
+
+Result: no set of 8–12 clips. 4 usable clips at ≥720p effective view, all CC BY:
+
+| Clip | Source | Res | Finding (truth) |
+|---|---|---|---|
+| BVFP pre-op | PLOS ONE 10.1371/journal.pone.0077233 s001 | 1280×720 | no lesion; both folds fixed |
+| BVFP post-op (same patient) | same, s002 | 1280×720 | no lesion; both folds move |
+| Hairy polyp, infant | Cureus 10.7759/cureus.71489 | 1280×720 | lesion yes; mobility unknown |
+| Laryngeal hemangioma | Cureus 10.7759/cureus.31090 i01/i02 | 1280×720 frame, scope circle ~680 px | lesion yes; mobility unknown |
+
+Below 720p (only fit lower levels): myasthenia BVFP (Frontiers 10.3389/fneur.2020.581060, 854×480); unilateral paresis in sleep endoscopy (Cureus 10.7759/cureus.15157, 640×360); ball-valving laryngeal masses (Commons, 568×320); UVFP pre/post (PLOS 10.1371/journal.pone.0019128, 352×288); ~10 more Cureus case clips at 360–480p.
+Not usable: phone film of monitor, ultrasound, X-ray, intubation-only views. Normal larynx 720p on Commons is rigid strobe, not flexible.
+Datasets: CE-NBI (CC BY) = contact-endoscopy NBI stills; Laryngoscope8 = stills, no license; BAGLS = non-commercial, grayscale.
+
+Gap: ≤4 patients; mobility truth on 2 clips only; no nasopharynx clips.
