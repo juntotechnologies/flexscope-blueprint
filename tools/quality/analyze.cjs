@@ -63,8 +63,8 @@ function balance(rows) {
 }
 
 function main(file) {
-  const rows = parseCsv(fs.readFileSync(file, 'utf8')).filter(function real(r) { return process.argv.includes('--demo') || !clipFor(r.clip).demo; });
-  if (!rows.length) { console.error(JSON.stringify({event: 'quality.no_rows', hint: 'no real-clip rows; pass --demo to include demo clips'})); process.exitCode = 1; return; }
+  const rows = parseCsv(fs.readFileSync(file, 'utf8')).filter(function known(r) { return study.clips.some(function m(c) { return c.id === r.clip; }); });
+  if (!rows.length) { console.error(JSON.stringify({event: 'quality.no_rows', file})); process.exitCode = 1; return; }
   console.table(study.levels.map(function level(l) { return {level: l.label, camera: l.cameraClass, ...score(rows.filter(function m(r) { return r.level === l.id; }))}; }));
   console.table(table(rows, 'setting'));
   console.table(balance(rows));

@@ -391,10 +391,40 @@
         },
         {
           "wait": 300
+        },
+        {
+          "click": "#trial-form input[name=lesion][value=\"No\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=mobility][value=\"Both move\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=usable][value=\"4\"] + span"
+        },
+        {
+          "click": "#trial-next"
+        },
+        {
+          "wait": 300
+        },
+        {
+          "click": "#trial-form input[name=lesion][value=\"No\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=mobility][value=\"Both move\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=usable][value=\"4\"] + span"
+        },
+        {
+          "click": "#trial-next"
+        },
+        {
+          "wait": 300
         }
       ],
       "expect": "#quiz[data-screen=done]",
-      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === 2 && levels.size === 2 && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4'); })()"
+      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === 4 && levels.size === 4 && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4'); })()"
     },
     {
       "name": "phone-quality-trial",
@@ -441,6 +471,17 @@
         }
       ],
       "expect": "#quiz[data-screen=rater]"
+    },
+    {
+      "name": "phone-quality-credits",
+      "path": "quality/credits.html",
+      "pageReady": ".credits-page",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [],
+      "expectJs": "document.querySelectorAll('.credits-page li a[href^=\"https://doi.org/\"]').length === 4"
     }
   ]
 }

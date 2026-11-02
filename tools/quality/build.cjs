@@ -24,7 +24,7 @@ function fieldset(field) {
 
 function pageStudy() {
   return {
-    clips: study.clips.map(function shown(c) { return {id: c.id, demo: c.demo === true}; }),
+    clips: study.clips.map(function shown(c) { return {id: c.id}; }),
     levels: study.levels.map(function id(l) { return {id: l.id}; }),
     questions: study.questions.map(function id(q) { return {id: q.id}; }),
     rater: study.rater.map(function id(r) { return {id: r.id}; }),
@@ -50,8 +50,21 @@ function pageHtml() {
 
 // Levels rotate over clips; a clip count that is a multiple of the level count gives every rater every level equally.
 function checkBalance() {
-  const real = study.clips.filter(function r(c) { return !c.demo; }).length;
-  if (real && real % study.levels.length) throw Error(JSON.stringify({event: 'quality.unbalanced', clips: real, levels: study.levels.length}));
+  const clips = study.clips.length;
+  if (clips % study.levels.length) throw Error(JSON.stringify({event: 'quality.unbalanced', clips, levels: study.levels.length}));
+}
+
+// CC BY: credit each source, link its license, say what was changed. Separate page so findings in titles stay hidden during the test.
+function creditItem(clip) {
+  const c = clip.credit;
+  return `<li>${escapeHtml(c.work)}. <a href="${escapeHtml(c.url)}">${escapeHtml(c.url)}</a>. License: ${escapeHtml(c.license)}.</li>`;
+}
+
+function creditsHtml() {
+  return fill(read('site/quality/credits.html'), {
+    title: escapeHtml(study.title), css: read('site/tokens.css') + read('site/quality/quality.css'),
+    items: study.clips.filter(function credited(c) { return c.credit; }).map(creditItem).join('')
+  });
 }
 
 function main() {
@@ -59,6 +72,7 @@ function main() {
   const out = path.join(root, study.out);
   fs.mkdirSync(out, {recursive: true});
   fs.writeFileSync(path.join(out, 'index.html'), pageHtml());
+  fs.writeFileSync(path.join(out, 'credits.html'), creditsHtml());
   console.log(path.join(out, 'index.html'));
 }
 

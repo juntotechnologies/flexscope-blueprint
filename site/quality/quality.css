@@ -6,8 +6,8 @@
 .mark circle { fill: var(--accent); stroke: none; }
 .q-title { font: 500 13px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; flex: 1; }
 .q-step { font: 500 13px/1 var(--mono); color: var(--ink-2); }
-.quiz:not([data-screen="intro"]) .demo-note { display: none; }
-.demo-note { margin: 0; padding: 10px 14px; border-radius: var(--r-md); background: var(--accent-soft); font-size: 14px; }
+.quiz:not([data-screen="intro"]) .note { display: none; }
+.note { margin: 0; padding: 10px 14px; border-radius: var(--r-md); background: var(--accent-soft); font-size: 14px; }
 
 .screen { display: none; gap: 14px; }
 .quiz[data-screen="intro"] [data-for="intro"], .quiz[data-screen="rater"] [data-for="rater"],
@@ -30,6 +30,13 @@ legend { font-weight: 600; margin-bottom: 6px; padding: 0; font-size: 15px; }
 }
 .choices input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .choices input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.credits-page { display: grid; gap: 14px; }
+.credits-page p, .credits-page ul { margin: 0; }
+.credits-page ul { padding-left: 18px; font-size: 14px; }
+.credits-page li { margin: 6px 0; overflow-wrap: anywhere; }
+.credits { font-size: 14px; color: var(--ink-2); }
+.credits a { color: inherit; }
 
 .primary {
   min-height: 52px; border: 0; border-radius: var(--r-lg); background: var(--accent); color: var(--on-accent); cursor: pointer;

@@ -1,18 +1,18 @@
 # PR 5: Image-quality ladder test
 
-Status: underway (blocked on real clips + answer endpoint)
+Status: underway (answer endpoint next)
 
 Branch: `feature/quality-ladder`
 
 ## Goal
 
-Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test at `/quality/`: each rater sees every clip once, at a rotating quality level (720×720 / 400×400 / 200×200 / 200×200 + noise, 15 fps), answers lesion?, both folds move?, usable 1–5. Results per level, split by low- vs high-resource setting.
+Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test at `/quality/`: each rater sees every clip once, at a rotating quality level (720×720 / 400×400 / 200×200 / 200×200 + noise, 15 fps), answers lesion visible?, both folds move?, usable 1–5. Results per level, split by low- vs high-resource setting.
 
 ## Context
 
 - Claude page w/ database ruled out: its database only works for signed-in Claude users in the org / invited guests → outside ENTs can't submit.
 - BAGLS ruled out as clip source: data CC BY-NC-SA 4.0 (non-commercial), mostly grayscale, max 512×512, high-speed vocal-fold close-ups (not a scope exam). Sources: Zenodo record 3762320; Sci Data 2020 (PMC7305104).
-- No clean public color flexible-laryngoscopy video set w/ findings found → real clips from Shaun's cousin (de-identified, permission from his hospital). Demo clips (synthetic test patterns) stand in until then.
+- No clean public color flexible-laryngoscopy video set w/ findings found. Pilot = 4 open-license (CC BY) case-report clips (see Open-License Clip Search). Main study adds clips from Shaun's cousin (de-identified, hospital permission; never committed).
 
 ## Implementation Checklist
 
@@ -24,9 +24,11 @@ Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test
 - [x] `tools/quality/analyze.cjs`: % correct + usable mean per level, per setting (`npm run quality:analyze <csv>`)
 - [x] CI installs ffmpeg; `npm run site` builds page + clips
 - [x] Walk: full quiz run (payload checked), trial screen video plays, small-phone rater screen
-- [ ] Real clips (≥8–12 cases w/ known findings) → `sources/` + `study.json` (blocked: Shaun/cousin)
+- [x] Pilot clips: 4 CC BY clips committed in `tools/quality/open/`, credits page `/quality/credits.html` (separate page: titles name findings); demo test patterns removed
+- [x] Questions: lesion = any mass/growth (polyp is pharyngeal); mobility option "One or both don't" (BVFP = both fixed)
+- [ ] Main-study clips from cousin → `sources/` (blocked: Shaun/cousin)
 - [ ] Deploy Apps Script, put URL in `endpoint` (blocked: Shaun sign-in)
-- [ ] Decide clip hosting: real clips must not be in public repo/site unless cousin's hospital approves
+- [x] Clip hosting: open-license clips public w/ credit (Shaun 2026-11-02); private clips never public w/o hospital approval
 
 ## Smoke Tests
 
@@ -34,7 +36,7 @@ Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test
 |---|---|
 | `npm run check` | pass |
 | main site shots 5 viewports | pass |
-| `site:walk` 20 steps (incl 3 quiz) | pass |
+| `site:walk` 21 steps (incl 4-trial quiz run, credits page) | pass |
 | analyze on sample CSV | per-level table correct |
 
 ## Product Decisions

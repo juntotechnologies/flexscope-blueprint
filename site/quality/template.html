@@ -15,8 +15,7 @@
     <span class="q-title">{{title}}</span>
     <span class="q-step" id="step" aria-live="polite"></span>
   </header>
-  <p class="demo-note" id="demo-note" hidden>Demo clips (test patterns), not real exams. Answers are for testing only.</p>
-  <p class="demo-note" id="preview-note" hidden>Preview mode: answers are not saved anywhere.</p>
+  <p class="note" id="preview-note" hidden>Preview mode: answers are not saved anywhere.</p>
 
   <section class="screen" data-for="intro">
     <h1>How low can scope video quality go?</h1>
@@ -24,6 +23,7 @@
     <ul>
       <li>About {{minutes}} minutes. Anonymous: no name or email.</li>
       <li>Answer from the clip only. "Can't tell" is a valid answer.</li>
+      <li>Clips come from published open-access case reports.</li>
       <li>Concept research only, not patient care.</li>
     </ul>
     <button type="button" class="primary" data-go="rater">Start</button>
@@ -45,6 +45,7 @@
     <h1>Thank you</h1>
     <p id="done-text" aria-live="polite">Your answers were sent.</p>
     <button type="button" class="primary" id="retry" hidden>Send again</button>
+    <p class="credits">Clip <a href="credits.html">sources and licenses</a>.</p>
   </section>
 </main>
 <script type="application/json" id="study">{{study}}</script>

@@ -129,7 +129,6 @@ function onGo(event) {
 }
 
 function start() {
-  $('demo-note').hidden = !STUDY.clips.some(function demo(c) { return c.demo; });
   $('preview-note').hidden = Boolean(STUDY.endpoint);
   $('quiz').addEventListener('click', onGo);
   $('rater-form').addEventListener('change', onRaterInput);
