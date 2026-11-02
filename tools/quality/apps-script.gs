@@ -1,5 +1,5 @@
-// Google Apps Script bound to the answers Sheet. Deploy: Deploy → New deployment → Web app,
-// execute as Me, access Anyone. Put the /exec URL in tools/quality/study.json "endpoint".
+// Google Apps Script bound to the answers Sheet ("Flexscope quality test responses", Junto Drive). Manifest: appsscript.json
+// (web app, execute as owner, anyone). Deploy: clasp push + clasp create-deployment; /exec URL → study.json "endpoint".
 // One row per trial; analysis lives in tools/quality/analyze.cjs.
 const SHEET = 'responses';
 const HEADER = ['received', 'session', 'startedAt', 'finishedAt', 'phone', 'role', 'setting', 'scopes', 'clip', 'level', 'lesion', 'mobility', 'usable', 'ms', 'skipped'];

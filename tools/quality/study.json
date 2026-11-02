@@ -81,7 +81,7 @@
     }
   ],
   "clipBase": "clips/",
-  "endpoint": "",
+  "endpoint": "https://script.google.com/macros/s/AKfycbz91vVneYYgh0LPNDfpba4Wg61QtBHy4z84rYoR-0pvjOWVNPk_74ay8cvPHkHCkKpmZA/exec",
   "out": "dist-site/quality",
   "privateOut": "tools/quality/private-site"
 }

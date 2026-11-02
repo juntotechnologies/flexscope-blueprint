@@ -1,6 +1,6 @@
 # PR 5: Image-quality ladder test
 
-Status: underway (answer endpoint next)
+Status: ready (pilot; main-study clips pending)
 
 Branch: `feature/quality-ladder`
 
@@ -29,7 +29,8 @@ Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test
 - [x] Video: questions locked until clip plays; tap-to-play if autoplay blocked; load error → "Skip clip" (row `skipped`)
 - [x] Questions: lesion = any mass/growth (polyp is pharyngeal); mobility option "One or both don't" (BVFP = both fixed)
 - [ ] Main-study clips from cousin → `sources/` (blocked: Shaun/cousin)
-- [ ] Deploy Apps Script, put URL in `endpoint` (blocked: Shaun sign-in)
+- [x] Apps Script deployed via clasp (Junto account): Sheet "Flexscope quality test responses", manifest `tools/quality/appsscript.json`, URL in `endpoint`
+- [x] `?preview` mode: full run, nothing sent (site walks use it)
 - [x] Clip hosting: open-license clips public w/ credit (Shaun 2026-11-02); private clips never public w/o hospital approval
 
 ## Smoke Tests
@@ -40,6 +41,7 @@ Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test
 | main site shots 5 viewports | pass |
 | `site:walk` 21 steps (incl full quiz run, credits page w/ license links) | pass |
 | analyze on sample CSV | per-level table correct |
+| live send: curl POST + headless full run at tailnet link | both got `ok` from Sheet script; page showed "Your answers were sent." Test rows: sessions `probe-claude`, `mvzq2548w4zkvun6` (delete before analysis) |
 
 ## Product Decisions
 

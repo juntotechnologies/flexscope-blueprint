@@ -334,7 +334,7 @@
     },
     {
       "name": "phone-quality-full-run",
-      "path": "quality/",
+      "path": "quality/?preview",
       "pageReady": "#quiz[data-screen=intro]",
       "viewport": {
         "width": 390,
@@ -409,11 +409,11 @@
         }
       ],
       "expect": "#quiz[data-screen=done]",
-      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const n = JSON.parse(document.getElementById('study').textContent).clips.length; const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === n && levels.size === n && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4' && !t.skipped && t.ms > 0); })()"
+      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const n = JSON.parse(document.getElementById('study').textContent).clips.length; const levels = new Set(s.trials.map(t => t.level)); return document.getElementById('done-text').textContent.startsWith('Preview mode') && s.trials.length === n && levels.size === n && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4' && !t.skipped && t.ms > 0); })()"
     },
     {
       "name": "phone-quality-trial",
-      "path": "quality/",
+      "path": "quality/?preview",
       "pageReady": "#quiz[data-screen=intro]",
       "viewport": {
         "width": 390,
@@ -444,7 +444,7 @@
     },
     {
       "name": "phone-small-quality-rater",
-      "path": "quality/",
+      "path": "quality/?preview",
       "pageReady": "#quiz[data-screen=intro]",
       "viewport": {
         "width": 360,

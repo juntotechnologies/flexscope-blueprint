@@ -2,6 +2,8 @@
 // (Latin square), so no rater sees one case twice and every level gets equal use across raters.
 const $ = function byId(id) { return document.getElementById(id); };
 const STUDY = JSON.parse($('study').textContent);
+// ?preview (or no endpoint): full run, nothing sent. Used by site walks and for trying the test.
+const PREVIEW = !STUDY.endpoint || new URLSearchParams(location.search).has('preview');
 
 const run = {session: sessionId(), startedAt: new Date().toISOString(), rater: {}, trials: assignTrials(STUDY.clips, STUDY.levels, Math.random), index: 0, shownAt: 0};
 
@@ -141,7 +143,7 @@ function submit() {
   globalThis.qualityLastSubmission = body;
   $('video').removeAttribute('src');
   show('done');
-  if (!STUDY.endpoint) { $('done-text').textContent = 'Preview mode: answers were not sent.'; return; }
+  if (PREVIEW) { $('done-text').textContent = 'Preview mode: answers were not sent.'; return; }
   deliver(body);
 }
 
@@ -155,7 +157,7 @@ function onGo(event) {
 }
 
 function start() {
-  $('preview-note').hidden = Boolean(STUDY.endpoint);
+  $('preview-note').hidden = !PREVIEW;
   $('quiz').addEventListener('click', onGo);
   $('rater-form').addEventListener('change', onRaterInput);
   $('trial-form').addEventListener('change', onTrialInput);
