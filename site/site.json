@@ -2,24 +2,81 @@
   "_note": "SSOT for site copy + URLs. Tab bodies come from README.md sections (by title); drawing titles + colors from drawing/data.json.",
   "url": "https://flexscope.juntotechnologies.com/",
   "repo": "https://github.com/juntotechnologies/flexscope-blueprint",
-  "org": {"name": "Junto Technologies", "url": "https://juntotechnologies.com/"},
-  "wordmark": ["FLEX", "SCOPE"],
+  "org": {
+    "name": "Junto Technologies",
+    "url": "https://juntotechnologies.com/"
+  },
+  "wordmark": [
+    "FLEX",
+    "SCOPE"
+  ],
   "tagline": "Single-use ENT scope · concept",
   "title": "Flexscope Blueprint — low-cost single-use ENT scope concept",
   "description": "Concept blueprint for a low-cost single-use flexible rhinolaryngoscope: exploded teardown drawings, parts, cost-down levers and regulatory path.",
   "chip": "Concept · NTS",
   "dwgPrefix": "FS",
   "repoLabel": "Source",
-  "views": [{"id": "assembled", "label": "Assembled"}, {"id": "exploded", "label": "Exploded"}],
-  "tabs": [
-    {"id": "overview", "label": "Overview", "section": null},
-    {"id": "spec", "label": "Spec", "section": "Target spec"},
-    {"id": "parts", "label": "Parts", "section": "How it works (parts = drawing labels)"},
-    {"id": "cost", "label": "Cost", "section": "Cost-down levers (vs single-use incumbents)"},
-    {"id": "path", "label": "Path", "section": "Path to real device (US)"},
-    {"id": "build", "label": "Build", "section": "Build sequence"},
-    {"id": "sources", "label": "Sources", "section": "Sources"}
+  "views": [
+    {
+      "id": "assembled",
+      "label": "Assembled"
+    },
+    {
+      "id": "exploded",
+      "label": "Exploded"
+    }
   ],
-  "panes": [{"id": "drawing", "label": "Drawing"}, {"id": "details", "label": "Details"}],
+  "tabs": [
+    {
+      "id": "overview",
+      "label": "Overview",
+      "section": null
+    },
+    {
+      "id": "spec",
+      "label": "Spec",
+      "section": "Target spec"
+    },
+    {
+      "id": "parts",
+      "label": "Parts",
+      "section": "How it works (parts = drawing labels)"
+    },
+    {
+      "id": "cost",
+      "label": "Cost",
+      "section": "Cost-down levers (vs single-use incumbents)"
+    },
+    {
+      "id": "proto",
+      "label": "Proto $",
+      "section": "Bench prototype cost (rough)"
+    },
+    {
+      "id": "path",
+      "label": "Path",
+      "section": "Path to real device (US)"
+    },
+    {
+      "id": "build",
+      "label": "Build",
+      "section": "Build sequence"
+    },
+    {
+      "id": "sources",
+      "label": "Sources",
+      "section": "Sources"
+    }
+  ],
+  "panes": [
+    {
+      "id": "drawing",
+      "label": "Drawing"
+    },
+    {
+      "id": "details",
+      "label": "Details"
+    }
+  ],
   "out": "dist-site"
 }
