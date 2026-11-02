@@ -132,7 +132,7 @@ function pageHtml() {
   const md = markdown(), readme = splitReadme(read('README.md'));
   return fill(read('site/template.html'), {
     title: escapeHtml(site.title), description: escapeHtml(site.description), url: site.url,
-    css: read('site/site.css'), lineCss: SHEET.css('technical'), js: scriptSafe(read('site/site.js')), engine: scriptSafe(engine()),
+    css: read('site/tokens.css') + read('site/site.css'), lineCss: SHEET.css('technical'), js: scriptSafe(read('site/site.js')), engine: scriptSafe(engine()),
     word1: site.wordmark[0], word2: site.wordmark[1], tagline: escapeHtml(site.tagline), repo: site.repo, repoLabel: site.repoLabel,
     orgName: site.org.name, orgUrl: site.org.url, chip: escapeHtml(site.chip),
     drawingTabs: drawingTabs(), viewButtons: viewButtons(), dockButtons: dockButtons(),

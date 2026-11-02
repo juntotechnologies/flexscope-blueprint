@@ -1,5 +1,11 @@
 # flexscope-blueprint PR Docs
 
+## Active
+
+| Doc | Description |
+|-----|-------------|
+| [PR 5: Quality ladder](./5-quality-ladder.md) | Image-quality test page for ENTs |
+
 ## Archive
 
 | Doc | Description |

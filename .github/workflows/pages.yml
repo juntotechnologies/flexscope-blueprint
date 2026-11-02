@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: npm ci
       - run: node tools/gen.cjs --check
       - run: npm run site

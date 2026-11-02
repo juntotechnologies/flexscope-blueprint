@@ -1,0 +1,38 @@
+/* Quality test page: one column, phone first. Tokens come from site/tokens.css. */
+.quiz { max-width: 560px; margin: 0 auto; padding: 10px var(--gutter) 16px; display: grid; gap: 12px; }
+.q-top { display: flex; align-items: center; gap: 12px; min-height: var(--tap); }
+.mark { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--ink-card); display: grid; place-items: center; flex: none; }
+.mark svg { width: 24px; height: 24px; fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; }
+.mark circle { fill: var(--accent); stroke: none; }
+.q-title { font: 500 13px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; flex: 1; }
+.q-step { font: 500 13px/1 var(--mono); color: var(--ink-2); }
+.quiz:not([data-screen="intro"]) .demo-note { display: none; }
+.demo-note { margin: 0; padding: 10px 14px; border-radius: var(--r-md); background: var(--accent-soft); font-size: 14px; }
+
+.screen { display: none; gap: 14px; }
+.quiz[data-screen="intro"] [data-for="intro"], .quiz[data-screen="rater"] [data-for="rater"],
+.quiz[data-screen="trial"] [data-for="trial"], .quiz[data-screen="done"] [data-for="done"] { display: grid; }
+h1 { margin: 4px 0 0; font: 600 22px/1.25 var(--sans); }
+.screen p, .screen ul { margin: 0; }
+.screen li { margin: 6px 0; }
+
+.video-box { aspect-ratio: 1; width: min(100%, 44svh); justify-self: center; background: #000; border-radius: var(--r-lg); overflow: hidden; }
+.video-box video { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+fieldset { border: 0; margin: 0 0 10px; padding: 0; }
+legend { font-weight: 600; margin-bottom: 6px; padding: 0; font-size: 15px; }
+.choices { display: flex; gap: 6px; }
+.choices label { flex: 1 1 0; min-width: 0; }
+.choices input { position: absolute; opacity: 0; pointer-events: none; }
+.choices span {
+  display: flex; align-items: center; justify-content: center; min-height: var(--tap); padding: 0 6px; text-align: center;
+  border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); cursor: pointer; font-size: 15px;
+}
+.choices input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.choices input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.primary {
+  min-height: 52px; border: 0; border-radius: var(--r-lg); background: var(--accent); color: var(--on-accent); cursor: pointer;
+  font: 600 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase;
+}
+.primary:disabled { opacity: .4; cursor: default; }

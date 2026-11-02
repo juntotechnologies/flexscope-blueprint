@@ -331,6 +331,116 @@
         }
       ],
       "expect": "#panel-proto:not([hidden]) table"
+    },
+    {
+      "name": "phone-quality-full-run",
+      "path": "quality/",
+      "pageReady": "#quiz[data-screen=intro]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-go=rater]"
+        },
+        {
+          "click": "#rater-form input[name=role][value=\"ENT attending\"] + span"
+        },
+        {
+          "click": "#rater-form input[name=setting][value=\"Low-resource hospital\"] + span"
+        },
+        {
+          "click": "#rater-form input[name=scopes][value=\"6-20\"] + span"
+        },
+        {
+          "click": "#rater-next"
+        },
+        {
+          "ready": "#quiz[data-screen=trial]"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "click": "#trial-form input[name=lesion][value=\"No\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=mobility][value=\"Both move\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=usable][value=\"4\"] + span"
+        },
+        {
+          "click": "#trial-next"
+        },
+        {
+          "wait": 300
+        },
+        {
+          "click": "#trial-form input[name=lesion][value=\"No\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=mobility][value=\"Both move\"] + span"
+        },
+        {
+          "click": "#trial-form input[name=usable][value=\"4\"] + span"
+        },
+        {
+          "click": "#trial-next"
+        },
+        {
+          "wait": 300
+        }
+      ],
+      "expect": "#quiz[data-screen=done]",
+      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === 2 && levels.size === 2 && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4'); })()"
+    },
+    {
+      "name": "phone-quality-trial",
+      "path": "quality/",
+      "pageReady": "#quiz[data-screen=intro]",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-go=rater]"
+        },
+        {
+          "click": "#rater-form input[name=role][value=\"ENT resident\"] + span"
+        },
+        {
+          "click": "#rater-form input[name=setting][value=\"Both\"] + span"
+        },
+        {
+          "click": "#rater-form input[name=scopes][value=\"1-5\"] + span"
+        },
+        {
+          "click": "#rater-next"
+        },
+        {
+          "wait": 2000
+        }
+      ],
+      "expect": "#quiz[data-screen=trial] #trial-next[disabled]",
+      "expectJs": "(() => { const v = document.getElementById('video'); return v.readyState >= 2 && v.videoWidth > 0; })()"
+    },
+    {
+      "name": "phone-small-quality-rater",
+      "path": "quality/",
+      "pageReady": "#quiz[data-screen=intro]",
+      "viewport": {
+        "width": 360,
+        "height": 640
+      },
+      "actions": [
+        {
+          "click": "[data-go=rater]"
+        }
+      ],
+      "expect": "#quiz[data-screen=rater]"
     }
   ]
 }

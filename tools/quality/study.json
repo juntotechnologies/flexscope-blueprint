@@ -1,0 +1,28 @@
+{
+  "_note": "SSOT for the image-quality study: levels (camera classes), questions, clips + true answers, where clips + answers live. make-clips.cjs, build.cjs, analyze.cjs read this.",
+  "title": "Scope image quality test",
+  "minutes": 5,
+  "levels": [
+    {"id": "q720", "label": "720×720", "cameraClass": "3.9 mm USB module", "size": 720, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q400", "label": "400×400", "cameraClass": "OV6946-class 1.4 mm", "size": 400, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200", "label": "200×200", "cameraClass": "OVM6948-class 1 mm", "size": 200, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200low", "label": "200×200 + noise, 15 fps", "cameraClass": "OVM6948-class, poor light", "size": 200, "fps": 15, "noise": 18, "blur": 0.6}
+  ],
+  "questions": [
+    {"id": "lesion", "text": "Lesion on the vocal folds?", "options": ["Yes", "No", "Can't tell"], "scored": true},
+    {"id": "mobility", "text": "Do both vocal folds move?", "options": ["Both move", "One doesn't", "Can't tell"], "scored": true},
+    {"id": "usable", "text": "Would you use this image for a diagnostic exam?", "options": ["1 No", "2", "3", "4", "5 Yes"], "scored": false}
+  ],
+  "rater": [
+    {"id": "role", "text": "Your role", "options": ["ENT attending", "ENT resident", "Other clinician", "Other"]},
+    {"id": "setting", "text": "Where you mostly work", "options": ["Low-resource hospital", "High-resource hospital", "Both"]},
+    {"id": "scopes", "text": "Flexible scopes you do per week", "options": ["0", "1-5", "6-20", "20+"]}
+  ],
+  "clips": [
+    {"id": "demo1", "demo": true, "source": "synthetic", "seconds": 6, "truth": {"lesion": "No", "mobility": "Both move"}},
+    {"id": "demo2", "demo": true, "source": "synthetic", "seconds": 6, "truth": {"lesion": "Yes", "mobility": "Both move"}}
+  ],
+  "clipBase": "clips/",
+  "endpoint": "",
+  "out": "dist-site/quality"
+}

@@ -3,3 +3,4 @@ check
 proof
 .DS_Store
 dist-site
+tools/quality/sources/
