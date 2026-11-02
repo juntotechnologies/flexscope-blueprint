@@ -15,39 +15,53 @@
 <meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>{{css}}</style>
+<style>{{lineCss}}</style>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="./" aria-label="Flexscope home">
     <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 25V12a6 6 0 0 1 12 0v4a4 4 0 0 0 8 0V7"/><circle cx="27" cy="6" r="2"/></svg></span>
-    <span class="word">{{word1}}<br>{{word2}}</span>
+    <span class="word">{{word1}} {{word2}}<small>{{tagline}}</small></span>
   </a>
   <nav class="top-actions">
-    <a class="btn" href="{{repo}}" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.5c3 0 6-2 6-5.5a4.5 4.5 0 0 0-1-3 4 4 0 0 0 0-3s-1-.3-3.5 1.3a12 12 0 0 0-6 0C6.5 2.8 5.5 3 5.5 3a4 4 0 0 0 0 3 4.5 4.5 0 0 0-1 3c0 3.5 3 5.5 6 5.5a3 3 0 0 0-1 2.5V22"/></svg><span class="btn-text">{{repoLabel}}</span></a>
+    <a class="btn" href="{{orgUrl}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg><span class="btn-text">{{orgName}}</span></a>
+    <a class="btn" href="{{repo}}" rel="noopener" target="_blank" aria-label="{{repoLabel}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.5c3 0 6-2 6-5.5a4.5 4.5 0 0 0-1-3 4 4 0 0 0 0-3s-1-.3-3.5 1.3a12 12 0 0 0-6 0C6.5 2.8 5.5 3 5.5 3a4 4 0 0 0 0 3 4.5 4.5 0 0 0-1 3c0 3.5 3 5.5 6 5.5a3 3 0 0 0-1 2.5V22"/></svg><span class="btn-text">{{repoLabel}}</span></a>
     <button class="btn icon" type="button" id="theme" aria-label="Toggle dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
   </nav>
 </header>
 
-<main>
-  <section class="stage" aria-label="Teardown drawing">
-    <span class="chip">{{chip}}</span>
-    <div class="sheets">{{sheets}}</div>
-    <div class="dwgs">{{dwg}}<p class="sub">NTS · Concept drawing</p></div>
-    <div class="controls">
-      {{drawingSwitch}}
-      {{viewSwitch}}
+<main class="panes" id="panes" data-pane="drawing">
+  <section class="pane stage" id="pane-drawing" aria-label="Teardown drawing">
+    <div class="stage-top">
+      <span class="chip">{{chip}}</span>
+      <div class="seg" role="tablist" aria-label="Drawing" id="drawing-tabs">{{drawingTabs}}</div>
     </div>
-    <a class="cta" href="viewer/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z M3 7l9 5 9-5 M12 12v10"/></svg>{{viewerLabel}}</a>
+    <div class="viewport" id="viewport" aria-busy="true"><div id="drawing"></div></div>
+    <p class="dwg" id="dwg"></p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="View" id="view">{{viewButtons}}</div>
+      <label class="spacing"><span>Spacing</span><input type="range" id="spacing" min="0" max="100" value="100" aria-label="Spacing between parts"></label>
+      <button type="button" class="toggle" id="labels" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>Labels</button>
+      <div class="zoom" id="zoom">
+        <button type="button" data-zoom="-1" aria-label="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+        <output id="zoom-level">100%</output>
+        <button type="button" data-zoom="1" aria-label="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button>
+        <button type="button" data-zoom="0" aria-label="Fit drawing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      </div>
+    </div>
   </section>
 
-  <section class="card intro">{{intro}}</section>
-  {{sections}}
+  <section class="pane info" id="pane-details" aria-label="Details">
+    <div class="tabs" role="tablist" aria-label="Details" id="detail-tabs">{{detailTabs}}</div>
+    <div class="tab-body">{{detailPanels}}</div>
+  </section>
 </main>
 
-<footer class="foot">
-  <a href="{{orgUrl}}">{{orgName}}</a>
-  <span>Concept only · not a medical device</span>
-</footer>
+<nav class="dock" aria-label="Panes" id="dock">{{dockButtons}}</nav>
+
+<script type="application/json" id="drawing-data">{{drawingData}}</script>
+<script type="application/json" id="drawing-worker">{{workerSource}}</script>
+<script>{{engine}}</script>
 <script>{{js}}</script>
 </body>
 </html>

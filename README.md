@@ -4,7 +4,7 @@ Concept blueprint: cheap single-use flexible rhinolaryngoscope ("nose scope" ENT
 
 **Concept only.** Not a medical device, not cleared, not for patient use. Dims estimated unless cited. Drawings not to scale (NTS).
 
-Site: https://flexscope.juntotechnologies.com/ (drawings + interactive viewer). Local viewer: `dist/index.html` (offline; exploded/assembled, part labels, color, SVG/PNG/PDF export).
+Site: https://flexscope.juntotechnologies.com/ (one screen: live exploded/assembled drawing w/ labels + tabbed spec). Local viewer: `dist/index.html` (offline; exploded/assembled, part labels, color, SVG/PNG/PDF export).
 
 ## Drawings
 

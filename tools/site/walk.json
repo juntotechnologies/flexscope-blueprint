@@ -1,0 +1,171 @@
+{
+  "ready": "#viewport[aria-busy=\"false\"]",
+  "steps": [
+    {
+      "name": "laptop-assembled",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "wait": 2500
+        },
+        {
+          "click": "[data-view=assembled]"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        }
+      ],
+      "expect": "#spacing[value=\"0\"], #drawing:not([data-playing]) svg[aria-label$=\"assembled view\"]"
+    },
+    {
+      "name": "laptop-animating",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "wait": 5000
+        },
+        {
+          "click": "[data-view=assembled]"
+        },
+        {
+          "wait": 250
+        }
+      ],
+      "expect": "#drawing[data-playing]"
+    },
+    {
+      "name": "laptop-tip",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "[data-drawing=tip]"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        }
+      ],
+      "expect": "svg[aria-label^=\"Distal tip\"]"
+    },
+    {
+      "name": "laptop-no-labels",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "#labels"
+        },
+        {
+          "wait": 800
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        }
+      ],
+      "expect": "#labels[aria-pressed=false]"
+    },
+    {
+      "name": "laptop-parts-tab",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "#tab-parts"
+        }
+      ],
+      "expect": "#panel-parts:not([hidden])"
+    },
+    {
+      "name": "laptop-dark",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "colorScheme": "dark",
+      "actions": [
+        {
+          "wait": 300
+        }
+      ],
+      "expect": "#drawing svg"
+    },
+    {
+      "name": "phone-zoom",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-zoom=\"1\"]"
+        },
+        {
+          "click": "[data-zoom=\"1\"]"
+        },
+        {
+          "wait": 300
+        }
+      ],
+      "expect": "#viewport[data-zoomed]"
+    },
+    {
+      "name": "phone-details",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-pane=details]"
+        },
+        {
+          "click": "#tab-spec"
+        }
+      ],
+      "expect": "#pane-details:visible"
+    },
+    {
+      "name": "phone-tip-assembled",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-drawing=tip]"
+        },
+        {
+          "wait": 3000
+        },
+        {
+          "click": "[data-view=assembled]"
+        },
+        {
+          "wait": 1500
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        }
+      ],
+      "expect": "svg[aria-label$=\"assembled view\"]"
+    }
+  ]
+}

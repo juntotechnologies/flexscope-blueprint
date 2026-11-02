@@ -7,7 +7,7 @@ const source = path.join(root, 'drawing/data.json');
 
 function configDrawing(d) {
   const parts = d.parts.map(function name(p) { return {id: p.id, name: p.name}; });
-  return {id: d.id, title: d.title, description: d.description, initialView: d.initialView, parameters: d.parameters, parts};
+  return {id: d.id, title: d.title, description: d.description, initialView: d.initialView, colors: d.colors, parameters: d.parameters, parts};
 }
 
 function workerData(data) {
