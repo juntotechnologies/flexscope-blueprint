@@ -16,7 +16,11 @@ h1 { margin: 4px 0 0; font: 600 22px/1.25 var(--sans); }
 .screen p, .screen ul { margin: 0; }
 .screen li { margin: 6px 0; }
 
-.video-box { aspect-ratio: 1; width: min(100%, 44svh); justify-self: center; background: #000; border-radius: var(--r-lg); overflow: hidden; }
+.video-box { position: relative; aspect-ratio: 1; width: min(100%, 44svh); justify-self: center; background: #000; border-radius: var(--r-lg); overflow: hidden; }
+.video-msg { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; text-align: center; color: #fff; background: rgb(0 0 0 / .6); border: 0; font: 600 16px/1.3 var(--sans); }
+.video-msg[hidden] { display: none; }
+.video-msg button { min-height: var(--tap); padding: 0 18px; border: 0; border-radius: var(--r-md); background: var(--accent); color: var(--on-accent); font: inherit; }
+#trial-form[inert] { opacity: .45; }
 .video-box video { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 fieldset { border: 0; margin: 0 0 10px; padding: 0; }

@@ -4,6 +4,7 @@ const fs = require('node:fs'), path = require('node:path');
 
 const root = path.resolve(__dirname, '../..');
 const study = require('./study.json');
+const {buildMode} = require('./mode.cjs');
 
 function read(rel) {
   return fs.readFileSync(path.join(root, rel), 'utf8');
@@ -22,9 +23,10 @@ function fieldset(field) {
   return `<fieldset><legend>${escapeHtml(field.text)}</legend><div class="choices">${options}</div></fieldset>`;
 }
 
-function pageStudy() {
+// Only the opaque clip id ships; names, truth and credits stay out of the page.
+function pageStudy(clips) {
   return {
-    clips: study.clips.map(function shown(c) { return {id: c.id}; }),
+    clips: clips.map(function shown(c) { return {id: c.id}; }),
     levels: study.levels.map(function id(l) { return {id: l.id}; }),
     questions: study.questions.map(function id(q) { return {id: q.id}; }),
     rater: study.rater.map(function id(r) { return {id: r.id}; }),
@@ -39,41 +41,40 @@ function fill(template, values) {
   });
 }
 
-function pageHtml() {
+function pageHtml(clips) {
   return fill(read('site/quality/template.html'), {
-    title: escapeHtml(study.title), minutes: study.minutes, clipCount: study.clips.length,
+    title: escapeHtml(study.title), minutes: study.minutes, clipCount: clips.length, questionCount: study.questions.length,
     css: read('site/tokens.css') + read('site/quality/quality.css'), js: read('site/quality/quality.js').replace(/<\/script/gi, '<\\/script'),
     raterFields: study.rater.map(fieldset).join(''), questionFields: study.questions.map(fieldset).join(''),
-    study: JSON.stringify(pageStudy()).replaceAll('<', '\\u003c')
+    study: JSON.stringify(pageStudy(clips)).replaceAll('<', '\\u003c')
   });
 }
 
-// Levels rotate over clips; a clip count that is a multiple of the level count gives every rater every level equally.
-function checkBalance() {
-  const clips = study.clips.length;
-  if (clips % study.levels.length) throw Error(JSON.stringify({event: 'quality.unbalanced', clips, levels: study.levels.length}));
+// Levels rotate over clips from a random offset: balanced across raters always; within one rater only when clips is a multiple of levels.
+function warnBalance(clips) {
+  if (clips.length % study.levels.length) console.error(JSON.stringify({event: 'quality.rater_unbalanced', severity: 'warn', clips: clips.length, levels: study.levels.length}));
 }
 
-// CC BY: credit each source, link its license, say what was changed. Separate page so findings in titles stay hidden during the test.
+// CC BY: credit, copyright notice, link to source + license, note of changes (credits.html). Separate page: titles name findings.
 function creditItem(clip) {
   const c = clip.credit;
-  return `<li>${escapeHtml(c.work)}. <a href="${escapeHtml(c.url)}">${escapeHtml(c.url)}</a>. License: ${escapeHtml(c.license)}.</li>`;
+  return `<li>${escapeHtml(c.work)}, ${escapeHtml(c.part)}. ${escapeHtml(c.copyright)}. <a href="${escapeHtml(c.url)}">${escapeHtml(c.url)}</a>. ` +
+    `License: <a href="${escapeHtml(c.licenseUrl)}">${escapeHtml(c.license)}</a>.</li>`;
 }
 
-function creditsHtml() {
+function creditsHtml(clips) {
   return fill(read('site/quality/credits.html'), {
     title: escapeHtml(study.title), css: read('site/tokens.css') + read('site/quality/quality.css'),
-    items: study.clips.filter(function credited(c) { return c.credit; }).map(creditItem).join('')
+    items: clips.filter(function credited(c) { return c.credit; }).map(creditItem).join('')
   });
 }
 
-function main() {
-  checkBalance();
-  const out = path.join(root, study.out);
-  fs.mkdirSync(out, {recursive: true});
-  fs.writeFileSync(path.join(out, 'index.html'), pageHtml());
-  fs.writeFileSync(path.join(out, 'credits.html'), creditsHtml());
-  console.log(path.join(out, 'index.html'));
+function main(mode) {
+  warnBalance(mode.clips);
+  fs.mkdirSync(mode.out, {recursive: true});
+  fs.writeFileSync(path.join(mode.out, 'index.html'), pageHtml(mode.clips));
+  fs.writeFileSync(path.join(mode.out, 'credits.html'), creditsHtml(mode.clips));
+  console.log(path.join(mode.out, 'index.html'));
 }
 
-main();
+main(buildMode(process.argv));

@@ -1,5 +1,5 @@
 {
-  "_note": "SSOT for the image-quality study: levels (camera classes), questions, clips + true answers + credits, where clips + answers live. make-clips.cjs, build.cjs, analyze.cjs read this. Clip source: open = committed open-license file tools/quality/open/<id>.mp4 (public); private = tools/quality/sources/<id>.mp4 (gitignored, --real only).",
+  "_note": "SSOT for the image-quality study: levels (camera classes), questions, clips + true answers + credits, where clips + answers live. make-clips.cjs, build.cjs, analyze.cjs read this. Clip id = opaque (shown to raters, in file names); name = human label (never shipped). source: open = committed open-license file tools/quality/open/<name>.mp4 → public build (out); private = tools/quality/sources/<name>.mp4 (gitignored) → --real build (privateOut, gitignored). crop = ffmpeg crop to the scope image (default: centered square).",
   "title": "Scope image quality test",
   "minutes": 5,
   "levels": [
@@ -20,7 +20,9 @@
   ],
   "clips": [
     {
-      "id": "bvfp-pre",
+      "id": "k7",
+      "name": "bvfp-pre",
+      "patient": "li2013-a",
       "source": "open",
       "start": 0,
       "seconds": 8,
@@ -29,13 +31,18 @@
         "mobility": "One or both don't"
       },
       "credit": {
-        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013, video S1 (before surgery)",
+        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013",
         "url": "https://doi.org/10.1371/journal.pone.0077233",
-        "license": "CC BY 4.0"
+        "copyright": "© 2013 Li et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S1 (before surgery)"
       }
     },
     {
-      "id": "bvfp-post",
+      "id": "m2",
+      "name": "bvfp-post",
+      "patient": "li2013-a",
       "source": "open",
       "start": 0,
       "seconds": 8,
@@ -44,41 +51,37 @@
         "mobility": "Both move"
       },
       "credit": {
-        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013, video S2 (after surgery)",
+        "work": "Li M et al. Reinnervation of bilateral posterior cricoarytenoid muscles using the left phrenic nerve in patients with bilateral vocal fold paralysis. PLOS ONE 2013",
         "url": "https://doi.org/10.1371/journal.pone.0077233",
-        "license": "CC BY 4.0"
+        "copyright": "© 2013 Li et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S2 (after surgery)"
       }
     },
     {
-      "id": "hairy-polyp",
-      "source": "open",
-      "start": 2,
-      "seconds": 8,
-      "truth": {
-        "lesion": "Yes"
-      },
-      "credit": {
-        "work": "Fujita Y et al. Hairy Polyp Presenting With Respiratory Distress in an Infant With Cleft Palate. Cureus 2024, video 1",
-        "url": "https://doi.org/10.7759/cureus.71489",
-        "license": "CC BY 4.0"
-      }
-    },
-    {
-      "id": "hemangioma",
+      "id": "x4",
+      "name": "hemangioma",
+      "patient": "shukla2022",
       "source": "open",
       "start": 0,
       "seconds": 8,
+      "crop": "516:516:393:100",
       "truth": {
         "lesion": "Yes"
       },
       "credit": {
-        "work": "Shukla TS. Recurrence of Laryngeal Hemangioma in an Adult: A Case Report. Cureus 2022, video 2",
+        "work": "Shukla TS. Recurrence of Laryngeal Hemangioma in an Adult: A Case Report. Cureus 2022",
+        "part": "video 2",
         "url": "https://doi.org/10.7759/cureus.31090",
-        "license": "CC BY 3.0"
+        "copyright": "© 2022 Shukla",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
       }
     }
   ],
   "clipBase": "clips/",
   "endpoint": "",
-  "out": "dist-site/quality"
+  "out": "dist-site/quality",
+  "privateOut": "tools/quality/private-site"
 }

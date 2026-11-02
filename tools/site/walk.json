@@ -406,25 +406,10 @@
         },
         {
           "wait": 300
-        },
-        {
-          "click": "#trial-form input[name=lesion][value=\"No\"] + span"
-        },
-        {
-          "click": "#trial-form input[name=mobility][value=\"Both move\"] + span"
-        },
-        {
-          "click": "#trial-form input[name=usable][value=\"4\"] + span"
-        },
-        {
-          "click": "#trial-next"
-        },
-        {
-          "wait": 300
         }
       ],
       "expect": "#quiz[data-screen=done]",
-      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === 4 && levels.size === 4 && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4'); })()"
+      "expectJs": "(() => { const s = JSON.parse(globalThis.qualityLastSubmission); const n = JSON.parse(document.getElementById('study').textContent).clips.length; const levels = new Set(s.trials.map(t => t.level)); return s.trials.length === n && levels.size === n && s.rater.setting === 'Low-resource hospital' && s.trials.every(t => t.answers.usable === '4' && !t.skipped && t.ms > 0); })()"
     },
     {
       "name": "phone-quality-trial",
@@ -455,7 +440,7 @@
         }
       ],
       "expect": "#quiz[data-screen=trial] #trial-next[disabled]",
-      "expectJs": "(() => { const v = document.getElementById('video'); return v.readyState >= 2 && v.videoWidth > 0; })()"
+      "expectJs": "(() => { const v = document.getElementById('video'); return v.readyState >= 2 && v.videoWidth > 0 && !document.getElementById('trial-form').inert; })()"
     },
     {
       "name": "phone-small-quality-rater",
@@ -481,7 +466,7 @@
         "height": 844
       },
       "actions": [],
-      "expectJs": "document.querySelectorAll('.credits-page li a[href^=\"https://doi.org/\"]').length === 4"
+      "expectJs": "document.querySelectorAll('.credits-page li a[href^=\"https://doi.org/\"]').length === 3 && document.querySelectorAll('.credits-page li a[href^=\"https://creativecommons.org/licenses/\"]').length === 3"
     }
   ]
 }
