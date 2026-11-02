@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Make every clip × level from tools/quality/study.json with ffmpeg → <out>/<clipBase><clip>-<level>.mp4.
-// Real sources: tools/quality/sources/<clip>.mp4 (gitignored; never commit patient video). Demo clips are synthetic.
+// Default: synthetic demo clips only → public site build. `--real`: real clips from tools/quality/sources/<clip>.mp4
+// → tools/quality/private-clips/ (both gitignored), never into the public site output.
 const fs = require('node:fs'), path = require('node:path'), {execFileSync} = require('node:child_process');
 
 const root = path.resolve(__dirname, '../..');
@@ -26,10 +27,10 @@ function encode(clip, level, file) {
   execFileSync('ffmpeg', args, {stdio: 'inherit'});
 }
 
-function main() {
-  const dir = path.join(root, study.out, study.clipBase);
+function main(real) {
+  const dir = real ? path.join(__dirname, 'private-clips') : path.join(root, study.out, study.clipBase);
   fs.mkdirSync(dir, {recursive: true});
-  for (const clip of study.clips) {
+  for (const clip of study.clips.filter(function wanted(c) { return (c.source === 'synthetic') !== real; })) {
     for (const level of study.levels) {
       const file = path.join(dir, `${clip.id}-${level.id}.mp4`);
       encode(clip, level, file);
@@ -38,4 +39,4 @@ function main() {
   }
 }
 
-main();
+main(process.argv.includes('--real'));

@@ -48,7 +48,14 @@ function pageHtml() {
   });
 }
 
+// Levels rotate over clips; a clip count that is a multiple of the level count gives every rater every level equally.
+function checkBalance() {
+  const real = study.clips.filter(function r(c) { return !c.demo; }).length;
+  if (real && real % study.levels.length) throw Error(JSON.stringify({event: 'quality.unbalanced', clips: real, levels: study.levels.length}));
+}
+
 function main() {
+  checkBalance();
   const out = path.join(root, study.out);
   fs.mkdirSync(out, {recursive: true});
   fs.writeFileSync(path.join(out, 'index.html'), pageHtml());

@@ -42,3 +42,20 @@ Find the lowest camera quality ENTs can still use. Phone-friendly anonymous test
 - Each rater sees each clip once (no memory carry-over); levels balanced across raters.
 - Questions scored only where truth is known (lesion, mobility); "usable" = opinion.
 - Clip compression (H.264) is part of every level; real USB cameras compress too.
+
+## Agent Review
+
+Fresh review agent, 6 defects. All fixed.
+
+| # | Defect | Fix |
+|---|---|---|
+| 1 | Apps Script parallel posts could interleave rows | `LockService` lock around append |
+| 2 | `no-cors` send: failures silent, answers lost | CORS fetch, reply must be `ok`, keepalive; "Send again" button; local backup per session, cleared on success |
+| 3 | `--real` clips written into public site output | real → gitignored `tools/quality/private-clips/`; CI synthetic only |
+| 4 | analyze naive comma split breaks quoted fields | RFC 4180 parser (quotes, `""`, newlines) |
+| 5 | level×clip balance unchecked | analyze prints n per clip×level; build fails if real clip count not multiple of level count |
+| 6 | trial timer counted load time | timer starts on video `playing`; `ms` null if never played |
+
+Minor: analyze exits 1 w/ `quality.no_rows` when no real rows (hint `--demo`); rows w/ no truth for a question skipped in % correct.
+
+Recheck after fixes: `npm run check` pass; shots 5/5; walk 20/20; analyze on quoted-CSV sample correct.

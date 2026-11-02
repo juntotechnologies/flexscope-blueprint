@@ -2,7 +2,7 @@
 // (Latin square), so no rater sees one case twice and every level gets equal use across raters.
 const $ = function byId(id) { return document.getElementById(id); };
 const STUDY = JSON.parse($('study').textContent);
-const BACKUP_KEY = 'quality-submission';
+const BACKUP_PREFIX = 'quality-submission-';
 
 const run = {session: sessionId(), startedAt: new Date().toISOString(), rater: {}, trials: assignTrials(STUDY.clips, STUDY.levels, Math.random), index: 0, shownAt: 0};
 
@@ -45,9 +45,14 @@ function loadTrial() {
   const t = run.trials[run.index];
   $('trial-form').reset();
   $('trial-next').disabled = true;
+  run.shownAt = 0;
   $('video').src = `${STUDY.clipBase}${t.clip}-${t.level}.mp4`;
-  run.shownAt = performance.now();
   show('trial');
+}
+
+// Time per trial starts when the clip actually plays, so slow loads don't count.
+function onPlaying() {
+  if (!run.shownAt) run.shownAt = performance.now();
 }
 
 function onRaterInput() {
@@ -66,7 +71,7 @@ function startTrials() {
 function nextTrial() {
   const t = run.trials[run.index];
   t.answers = formAnswers($('trial-form'));
-  t.ms = Math.round(performance.now() - run.shownAt);
+  t.ms = run.shownAt ? Math.round(performance.now() - run.shownAt) : null;
   run.index += 1;
   if (run.index < run.trials.length) loadTrial();
   else submit();
@@ -77,25 +82,45 @@ function payload() {
 }
 
 function backup(body) {
-  try { localStorage.setItem(BACKUP_KEY, body); } catch { /* private mode: no local copy */ }
+  try { localStorage.setItem(BACKUP_PREFIX + run.session, body); } catch { /* private mode: no local copy */ }
 }
 
-// Apps Script web apps answer without CORS headers, so the post is fire-and-forget (no-cors, text/plain).
+function clearBackup() {
+  try { localStorage.removeItem(BACKUP_PREFIX + run.session); } catch { /* nothing kept */ }
+}
+
+// text/plain keeps it a simple request (no preflight); the Apps Script reply is readable, so check it says ok.
 async function send(body) {
-  await fetch(STUDY.endpoint, {method: 'POST', mode: 'no-cors', headers: {'content-type': 'text/plain;charset=utf-8'}, body});
+  const response = await fetch(STUDY.endpoint, {method: 'POST', headers: {'content-type': 'text/plain;charset=utf-8'}, body, keepalive: body.length < 60000});
+  if ((await response.text()).trim() !== 'ok') throw Error('endpoint did not confirm');
 }
 
-async function submit() {
+async function deliver(body) {
+  $('retry').hidden = true;
+  $('done-text').textContent = 'Sending your answers…';
+  try {
+    await send(body);
+    clearBackup();
+    $('done-text').textContent = 'Your answers were sent.';
+  } catch (error) {
+    $('done-text').textContent = 'Could not send your answers. Check your connection, then tap Send again. Please keep this page open.';
+    $('retry').hidden = false;
+    console.error(JSON.stringify({event: 'quality.submit_failed', session: run.session, error: error.message}));
+  }
+}
+
+function submit() {
   const body = JSON.stringify(payload());
   globalThis.qualityLastSubmission = body;
   backup(body);
   $('video').removeAttribute('src');
   show('done');
   if (!STUDY.endpoint) { $('done-text').textContent = 'Preview mode: answers were not sent.'; return; }
-  try { await send(body); } catch (error) {
-    $('done-text').textContent = 'Could not send answers. Please check your connection and reload; your answers are kept on this device.';
-    console.error(JSON.stringify({event: 'quality.submit_failed', session: run.session, error: error.message}));
-  }
+  deliver(body);
+}
+
+function retry() {
+  deliver(globalThis.qualityLastSubmission);
 }
 
 function onGo(event) {
@@ -111,6 +136,8 @@ function start() {
   $('trial-form').addEventListener('change', onTrialInput);
   $('rater-next').addEventListener('click', startTrials);
   $('trial-next').addEventListener('click', nextTrial);
+  $('video').addEventListener('playing', onPlaying);
+  $('retry').addEventListener('click', retry);
   show('intro');
 }
 

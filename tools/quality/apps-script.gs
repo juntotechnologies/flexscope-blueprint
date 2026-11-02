@@ -19,7 +19,13 @@ function trialRow(received, s, t) {
 function doPost(e) {
   const s = JSON.parse(e.postData.contents), received = new Date().toISOString();
   const rows = s.trials.map(function row(t) { return trialRow(received, s, t); });
-  const sheet = responsesSheet();
-  sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADER.length).setValues(rows);
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const sheet = responsesSheet();
+    sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADER.length).setValues(rows);
+  } finally {
+    lock.releaseLock();
+  }
   return ContentService.createTextOutput('ok');
 }

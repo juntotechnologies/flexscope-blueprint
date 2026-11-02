@@ -43,7 +43,8 @@
 
   <section class="screen" data-for="done">
     <h1>Thank you</h1>
-    <p id="done-text">Your answers were sent.</p>
+    <p id="done-text" aria-live="polite">Your answers were sent.</p>
+    <button type="button" class="primary" id="retry" hidden>Send again</button>
   </section>
 </main>
 <script type="application/json" id="study">{{study}}</script>
