@@ -1,6 +1,6 @@
 # PR 3: Smooth spacing slider + tip animation
 
-Status: underway
+Status: done
 
 Branch: `bugfix/smooth-spacing-and-tip`
 
@@ -29,7 +29,7 @@ PR 2 animated via flipbook = 85 exact frames pre-rendered in workers. Measured (
 | `site:shots` 5 viewports | overflow 0, vscroll 0, 0 errors |
 | `site:walk` 15 steps | all pass |
 
-- [ ] **Drag spacing + tip animation on real phone** · as visitor (after merge)
+- [~] **Drag spacing + tip animation on real phone** · as visitor: live site checked at phone sizes in headless browser (walk 15/15, shots 5/5); real phone not used
 
 ## Agent Review
 
