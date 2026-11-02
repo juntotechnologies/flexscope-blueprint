@@ -2,6 +2,8 @@
 self.DrawingModels ??= {};
 
 const TIP_CAMERA = {azimuth: -38, elevation: 24, roll: 0};
+// 48-gon rings: round at page size; 144 made mid-explosion fills ~3x slower.
+const TIP_RING = 48;
 
 function tipDisc(cy, cz, r, count) {
   const points = [];
@@ -31,7 +33,7 @@ function tipStations(d) {
 
 function tipCord(G, d) {
   const p = tipPart(G, 'cord');
-  G.lathe(p, [[0, d.cordInnerRadius], [0, d.cordOuterRadius], [d.cordStub, d.cordOuterRadius], [d.cordStub, d.cordInnerRadius]]);
+  G.lathe(p, [[0, d.cordInnerRadius], [0, d.cordOuterRadius], [d.cordStub, d.cordOuterRadius], [d.cordStub, d.cordInnerRadius]], {segments: TIP_RING});
   return p;
 }
 
@@ -39,7 +41,7 @@ function tipLinks(G, d, s) {
   const p = tipPart(G, 'links');
   for (let i = 0; i < d.linkCount; i++) {
     const a = s.linksStart + i * (d.linkLength + d.linkGap), b = a + d.linkLength;
-    G.merge(p, G.lathe(G.piece(), [[a, d.linkInnerRadius], [a, d.linkOuterRadius], [b, d.linkOuterRadius], [b, d.linkInnerRadius]], {segments: 96}));
+    G.merge(p, G.lathe(G.piece(), [[a, d.linkInnerRadius], [a, d.linkOuterRadius], [b, d.linkOuterRadius], [b, d.linkInnerRadius]], {segments: TIP_RING}));
   }
   return p;
 }
@@ -53,14 +55,14 @@ function tipHousing(G, d, s) {
     tipDisc(0, d.wireOffset, 0.13, 24),
     tipDisc(0, -d.wireOffset, 0.13, 24)
   ];
-  G.extrude(p, tipDisc(0, 0, d.tipOuterRadius, 144), {depth: d.tipLength, holes});
+  G.extrude(p, tipDisc(0, 0, d.tipOuterRadius, TIP_RING), {depth: d.tipLength, holes});
   G.transform(p, {origin: [s.housingStart, 0, 0], ...G.plane('yz')});
   return p;
 }
 
 function tipWindow(G, d, s) {
   const p = tipPart(G, 'window');
-  G.lathe(p, [[s.face, 0], [s.face, d.tipOuterRadius], [s.face + d.windowThickness, d.tipOuterRadius], [s.face + d.windowThickness, 0]]);
+  G.lathe(p, [[s.face, 0], [s.face, d.tipOuterRadius], [s.face + d.windowThickness, d.tipOuterRadius], [s.face + d.windowThickness, 0]], {segments: TIP_RING});
   p.transparent = true;
   return p;
 }
@@ -94,7 +96,9 @@ function tipWires(G, d, s) {
 function tipSheath(G, d, s) {
   const p = tipPart(G, 'sheath');
   const a = d.cordStub - 1.5, b = s.housingStart;
-  G.lathe(p, [[a, d.sheathInnerRadius], [a, d.sheathOuterRadius], [b, d.sheathOuterRadius], [b, d.sheathInnerRadius]]);
+  G.lathe(p, [[a, d.sheathInnerRadius], [a, d.sheathOuterRadius], [b, d.sheathOuterRadius], [b, d.sheathInnerRadius]], {segments: TIP_RING});
+  // See-through sleeve: shows links inside; also skips its costly fill overlap with the links.
+  p.transparent = true;
   return p;
 }
 
@@ -107,7 +111,8 @@ function tipParts(G, d) {
 
 function tipModel(parameters, options) {
   const parts = tipParts(TechnicalGeometry, self.ScopeData.dims.tip);
-  return TechnicalProjection.render(parts, {...options, camera: TIP_CAMERA});
+  const result = TechnicalProjection.render(parts, {...options, camera: TIP_CAMERA});
+  return {...result, slides: partSlides(parts, TIP_CAMERA, result.scale)};
 }
 
 self.DrawingModels.tip = tipModel;

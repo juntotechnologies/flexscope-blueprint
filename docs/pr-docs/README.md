@@ -1,5 +1,11 @@
 # flexscope-blueprint PR Docs
 
+## Active
+
+| Doc | Description |
+|-----|-------------|
+| [PR 3: Smooth spacing + tip](./3-smooth-spacing-and-tip.md) | Live slider motion, fast tip animation |
+
 ## Archive
 
 | Doc | Description |

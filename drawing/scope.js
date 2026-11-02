@@ -108,7 +108,8 @@ function scopeModel(parameters, options) {
   const cordShown = parameters.cordShown;
   if (!Number.isFinite(cordShown) || cordShown < 60 || cordShown > 300) throw Error('Cord length shown must be 60-300 mm');
   const parts = scopeParts(TechnicalGeometry, self.ScopeData.dims.scope, cordShown);
-  return TechnicalProjection.render(parts, {...options, camera: SCOPE_CAMERA});
+  const result = TechnicalProjection.render(parts, {...options, camera: SCOPE_CAMERA});
+  return {...result, slides: partSlides(parts, SCOPE_CAMERA, result.scale)};
 }
 
 self.DrawingModels.scope = scopeModel;

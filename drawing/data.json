@@ -31,7 +31,7 @@
       "title": "Distal tip + bending section (concept)",
       "description": "Illustrative 3.5 mm distal tip: 1 mm-class CMOS camera, two LEDs, cover window, 8 bending links steered by 2 pull wires under a thin sheath. Proportions estimated; not a manufacturing drawing.",
       "initialView": "exploded",
-      "colors": {"hues": {"camera": 45, "leds": 95, "window": 220, "wires": 25}, "fills": ["cord", "links", "sheath", "housing", "camera", "leds", "window"]},
+      "colors": {"hues": {"camera": 45, "leds": 95, "window": 220, "wires": 25}, "fills": ["cord", "links", "housing", "camera", "leds", "window"]},
       "parameters": [],
       "parts": [
         {"id": "cord", "name": "Insertion cord (multi-lumen)", "explosion": [-5, 0, 0]},

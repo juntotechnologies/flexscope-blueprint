@@ -8,7 +8,7 @@ Concept blueprint: low-cost single-use flexible rhinolaryngoscope (ENT nose scop
 - Checks: `npm run proof` (open PNGs in `proof/full/`; fix any occlusion WARNING) + `npm run check` (gen drift + build `dist/index.html` + headless viewer check). Viewer check needs Chrome; set `CHROME_PATH` if not in /Applications.
 - PNG proofs need `resvg` (`brew install resvg`); Quick Look fallback crops sheets square.
 - Every cost, dim, part claim in README cites source or says estimate. No invented prices.
-- Site = 1 screen, no page scroll (bench-bridge style). Checks: `npm run site:shots <url> <dir> '#viewport[aria-busy="false"]'` + `npm run site:walk <url> <dir>` vs `npm run dev` tailnet link. Set `SHOT_CHROME_PATH` (headless shell).
+- Site = 1 screen, no page scroll (bench-bridge style). Motion = slide rendered parts (`drawing/slides.js`); never per-frame exact renders (tip mid frame was 4.9 s). Checks: `npm run site:shots <url> <dir> '#viewport[aria-busy="false"]'` + `npm run site:walk <url> <dir>` vs `npm run dev` tailnet link. Set `SHOT_CHROME_PATH` (headless shell).
 - Linter not set up yet (no app code; JS models only).
 - Hosting: GitHub Pages at subdomain `flexscope.juntotechnologies.com` (CNAME → `juntotechnologies.github.io`, DNS = Squarespace Domains (ex-Google Domains), Shaun-owned). Never use `juntotechnologies.com/<repo>/` paths: apex + www are on Netlify, so project-path Pages 404.
 
