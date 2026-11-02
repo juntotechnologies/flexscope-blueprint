@@ -302,6 +302,35 @@
         }
       ],
       "expect": "#tab-sources[aria-selected=true][tabindex=\"0\"]"
+    },
+    {
+      "name": "laptop-proto-tab",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "#tab-proto"
+        }
+      ],
+      "expect": "#panel-proto:not([hidden]) table"
+    },
+    {
+      "name": "phone-proto-tab",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actions": [
+        {
+          "click": "[data-pane=details]"
+        },
+        {
+          "click": "#tab-proto"
+        }
+      ],
+      "expect": "#panel-proto:not([hidden]) table"
     }
   ]
 }

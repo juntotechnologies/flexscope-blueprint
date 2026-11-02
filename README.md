@@ -55,6 +55,27 @@ Benchmark = Ambu aScope 4 RhinoLaryngo Slim (single-use market reference; values
 
 Unit costs: **not yet quoted**. Get quotes (OmniVision distributor, extrusion house, molder) before any $ target. No price here is sourced yet.
 
+## Bench prototype cost (rough)
+
+Goal: cheapest working bench unit (bends + streams video). **Not for human use** (not sterile, materials not biocompatible). $ = 1 unit, USD. **L** = seen in a listing (snippet, unverified, see Sources); **E** = estimate/guess.
+
+| Part | Cheapest route | $ | Basis |
+|---|---|---|---|
+| Camera + LEDs + USB | 3.9 mm USB endoscope module, 6 LEDs, UVC (or gut a ~$25 3.9 mm USB borescope) | 20 | L |
+| Bending section | Notched tube: 4 mm PTFE or thin-wall steel tube, hand-cut slots (FDM can't print 4 mm links) | 2–10 | E |
+| Pull wires ×2 | 0.2–0.3 mm stainless leader wire / guitar string | 2 | E |
+| Insertion cord | 4 mm OD PTFE tube (camera cable + 2 small wire liners inside) | 2 | L (~£4/m) |
+| Outer sleeve + seal | Thin heat-shrink / silicone sleeve over bend; UV glue at tip | 3 | E |
+| Handle shells, lever, drum | 3D-printed PETG, ~50 g | 1 | E (~$20/kg) |
+| Screws, spring, detent | M2/M3 hardware | 1 | E |
+| Display | Phone/laptop via USB-C OTG + free UVC app | 0 | — |
+| **Per unit** | | **~30–40** | E |
+| One-time | Packs (wire, heat-shrink, glue, screws), small files/Dremel bits | ~30–50 | E |
+
+Biggest gaps vs real device: 3.9 mm tip (target 3.5); off-the-shelf module not medical; LED tip heat unmeasured; no sterilization. Cheapest 3.5 mm-class path = OVM6948/OVM6946 module (~$64 bare at 200+ qty, L) + own USB bridge board → cost up, size down.
+
+Order of work: 1 module + PTFE tube + wire → bend test on bench → print handle around it.
+
 ## Path to real device (US)
 
 Device type = nasopharyngoscope; expect FDA Class II, 510(k) (verify product code + predicate before planning). Typical evidence stack (verify per predicate):
@@ -93,3 +114,4 @@ Cmds: `npm i` → `npm run proof` → `npm run check` → `npm run site`.
 - [Ambu aScope 4 RhinoLaryngo Slim spec](https://www.ambu.co.uk/endoscopy/ent-otorhinolaryngology/rhinolaryngoscopes/product/ambu-ascope-4-rhinolaryngo-slim)
 - [Ambu aScope 4 RhinoLaryngo Slim, FDA GUDID](https://accessgudid.nlm.nih.gov/devices/05707480146284)
 - [OmniVision OVM6948 product brief](https://www.ovt.com/wp-content/uploads/2023/03/OVM6948-PB-v1.5-WEB.pdf)
+- Prototype listings (search snippets 2026-11-01, unverified): [3.9 mm USB endoscope module, Made-in-China](https://m.made-in-china.com/hot-china-products/Endoscope_Camera_Module.html); [3.9 mm USB borescope, eBay](https://www.ebay.de/itm/256364661303); [PTFE 3×4 mm tube, TF Pumps](https://tfpumps.com/product/3-0mm-ptfe-tubing-4-0mm-od-30m-length/); [OVM6946 bulk, LCSC](https://fat.lcsc.com/product-detail/C5182180.html)
