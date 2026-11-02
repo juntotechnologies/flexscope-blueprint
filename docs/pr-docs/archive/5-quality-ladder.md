@@ -1,6 +1,6 @@
 # PR 5: Image-quality ladder test
 
-Status: ready (pilot; main-study clips pending)
+Status: done (pilot live; main-study clips pending)
 
 Branch: `feature/quality-ladder`
 
