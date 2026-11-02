@@ -22,7 +22,7 @@ Site = 1 screen, no page scroll (like bench-bridge). Live drawing on main page: 
 
 ### Tier 3 - Checks
 - [x] `tools/site/shot.cjs`: fail on page scroll (`vscroll`); wait on ready selector
-- [x] `tools/site/walk.cjs` + `walk.json` (`npm run site:walk <url> <dir>`): assembled, mid-animation, tip, labels off, parts tab, dark, phone zoom, phone details, phone tip assembled
+- [x] `tools/site/walk.cjs` + `walk.json` (`npm run site:walk <url> <dir>`): assembled, mid-animation, tip, labels off, parts tab, dark, phone zoom, phone details, phone tip assembled, phone open on Details → Drawing, tab keys
 
 ## Acceptance Coverage
 
@@ -42,7 +42,7 @@ Auto checks (commit = PR head, tailnet dev server `http://citmini.taila4fc43.ts.
 |---|---|
 | `npm run check` (gen drift, site build, offline viewer 11/11 + 8/8 parts) | pass |
 | `site:shots` 5 viewports | overflow 0, vscroll 0, 0 errors |
-| `site:walk` 9 steps | all expect ok, vscroll 0, 0 errors |
+| `site:walk` 11 steps | all expect ok, vscroll 0, 0 errors |
 
 - [ ] **Live site on phone** · as visitor
   1. Open site on phone after merge
@@ -53,6 +53,17 @@ Auto checks (commit = PR head, tailnet dev server `http://citmini.taila4fc43.ts.
   - page never scrolls; only details text scrolls
   - parts slide together/apart smoothly
   - labels readable after zoom **+**
+
+## Agent Review
+
+Fresh read-only reviewer on diff `main...feature/one-screen-site` (commit 1). 4 findings, all fixed, checks rerun:
+
+| # | Finding | Class | Fix | Prevention |
+|---|---|---|---|---|
+| 1 | Phone opened on `#details` → crop measured while hidden → tiny drawing | defect | crop only when drawing pane visible; showing pane renders if no crop | walk `phone-open-details-then-drawing` |
+| 2 | Crop result from old drawing/labels could mount | defect | drop crop result if drawing/labels changed | none (race; code guard) |
+| 3 | Drawing switch used tab roles w/o panels; detail tabs no arrow keys | defect | drawing switch = group + aria-pressed; detail tabs roving tabindex + arrows/Home/End | walk `laptop-tab-keys` |
+| 4 | `aria-busy` stuck after playback/failure | defect | clear on result + on failure | none |
 
 ## Product Decisions
 

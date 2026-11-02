@@ -70,25 +70,43 @@ function cropTo(svg) {
   svg.setAttribute('viewBox', state.crop);
 }
 
+function superseded() {
+  const error = new Error('Drawing changed during render');
+  error.name = 'AbortError';
+  return error;
+}
+
+// getBBox needs a rendered svg: a hidden pane (phone on Details) measures 0x0, so crop waits until the pane shows.
+function drawingVisible() {
+  return $('pane-drawing').checkVisibility();
+}
+
 // Crop once per drawing+labels at full explosion: every frame shares that fit, so the view never jumps.
 async function ensureCrop() {
-  if (state.crop) return;
-  const result = await renderer.request(message(1));
+  if (state.crop || !drawingVisible()) return;
+  const key = flipbookKey(), result = await renderer.request(message(1));
+  if (key !== flipbookKey()) throw superseded();
   cropTo(mount(result.markup));
+}
+
+function setBusy(busy) {
+  $('viewport').setAttribute('aria-busy', String(busy));
 }
 
 async function render(delay) {
   stopPlayback();
-  $('viewport').setAttribute('aria-busy', 'true');
+  setBusy(true);
   try {
     await ensureCrop();
     const result = await renderer.request(message(state.explosion), {preview: true, delay});
+    setBusy(false);
     if (state.playing) return;
     mount(result.markup);
-    $('viewport').setAttribute('aria-busy', 'false');
     flipbook.prepare(flipbookKey(), message(1));
   } catch (error) {
-    if (error.name !== 'AbortError') console.error(JSON.stringify({event: 'drawing.render_failed', drawing: state.drawing.id, error: error.message}));
+    if (error.name === 'AbortError') return;
+    setBusy(false);
+    console.error(JSON.stringify({event: 'drawing.render_failed', drawing: state.drawing.id, error: error.message}));
   }
 }
 
@@ -128,7 +146,7 @@ function play(to) {
 function syncControls() {
   const view = state.explosion === 0 ? 'assembled' : 'exploded';
   for (const b of $('view').children) b.setAttribute('aria-pressed', String(b.dataset.view === view));
-  for (const b of $('drawing-tabs').children) b.setAttribute('aria-selected', String(b.dataset.drawing === state.drawing.id));
+  for (const b of $('drawing-tabs').children) b.setAttribute('aria-pressed', String(b.dataset.drawing === state.drawing.id));
   $('spacing').value = Math.round(state.explosion * 100);
   $('labels').setAttribute('aria-pressed', String(state.labels));
   $('dwg').innerHTML = state.drawing.dwgHtml;
@@ -195,16 +213,35 @@ function onZoom(event) {
 
 // ---- tabs, panes, theme ----
 
+// WAI-ARIA tabs: roving tabindex, arrows/Home/End move + select.
+const TAB_KEYS = {ArrowRight: 1, ArrowLeft: -1, Home: -Infinity, End: Infinity};
+
+function showTab(tab) {
+  for (const t of $('detail-tabs').children) {
+    t.setAttribute('aria-selected', String(t === tab));
+    t.tabIndex = t === tab ? 0 : -1;
+  }
+  for (const p of document.querySelectorAll('.tab-panel')) p.hidden = p.id !== tab.getAttribute('aria-controls');
+}
+
 function selectTab(event) {
   const tab = event.target.closest('[role=tab]');
-  if (!tab) return;
-  for (const t of $('detail-tabs').children) t.setAttribute('aria-selected', String(t === tab));
-  for (const p of document.querySelectorAll('.tab-panel')) p.hidden = p.id !== tab.getAttribute('aria-controls');
+  if (tab) showTab(tab);
+}
+
+function tabKey(event) {
+  if (!(event.key in TAB_KEYS)) return;
+  event.preventDefault();
+  const tabs = [...$('detail-tabs').children], current = tabs.indexOf(document.activeElement);
+  const step = TAB_KEYS[event.key], index = Number.isFinite(step) ? (current + step + tabs.length) % tabs.length : (step < 0 ? 0 : tabs.length - 1);
+  showTab(tabs[index]);
+  tabs[index].focus();
 }
 
 function selectPane(id) {
   $('panes').dataset.pane = id;
   for (const b of $('dock').children) b.setAttribute('aria-pressed', String(b.dataset.pane === id));
+  if (id === 'drawing' && !state.crop) render(0);
 }
 
 function onDock(event) {
@@ -237,12 +274,13 @@ function start() {
   $('labels').addEventListener('click', toggleLabels);
   $('drawing-tabs').addEventListener('click', setDrawing);
   $('detail-tabs').addEventListener('click', selectTab);
+  $('detail-tabs').addEventListener('keydown', tabKey);
+  showTab($('detail-tabs').firstElementChild);
   $('dock').addEventListener('click', onDock);
   $('zoom').addEventListener('click', onZoom);
   applyZoom(0);
-  selectPane(location.hash === '#details' && PHONE.matches ? 'details' : 'drawing');
   syncControls();
-  render(0);
+  selectPane(location.hash === '#details' && PHONE.matches ? 'details' : 'drawing');
 }
 
 start();

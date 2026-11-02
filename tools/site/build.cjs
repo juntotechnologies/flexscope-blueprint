@@ -86,7 +86,7 @@ function detailPanels(md, readme) {
 }
 
 function drawingTabs() {
-  return data.drawings.map(function tab(d) { return `<button type="button" role="tab" data-drawing="${d.id}">${escapeHtml(d.short)}</button>`; }).join('');
+  return data.drawings.map(function tab(d) { return `<button type="button" data-drawing="${d.id}">${escapeHtml(d.short)}</button>`; }).join('');
 }
 
 function viewButtons() {

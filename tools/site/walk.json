@@ -166,6 +166,45 @@
         }
       ],
       "expect": "svg[aria-label$=\"assembled view\"]"
+    },
+    {
+      "name": "phone-open-details-then-drawing",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "hash": "#details",
+      "actions": [
+        {
+          "wait": 1500
+        },
+        {
+          "click": "[data-pane=drawing]"
+        },
+        {
+          "ready": "#viewport[aria-busy=\"false\"]"
+        },
+        {
+          "wait": 500
+        }
+      ],
+      "expect": "#drawing svg:not([viewBox=\"0 0 420 297\"]):not([viewBox^=\"-3.00 -3.00 6.00\"])"
+    },
+    {
+      "name": "laptop-tab-keys",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "actions": [
+        {
+          "click": "#tab-overview"
+        },
+        {
+          "key": "End"
+        }
+      ],
+      "expect": "#tab-sources[aria-selected=true][tabindex=\"0\"]"
     }
   ]
 }

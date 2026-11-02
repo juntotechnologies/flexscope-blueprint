@@ -8,6 +8,7 @@ const WALK = require('./walk.json');
 
 async function act(page, action) {
   if (action.click) await page.click(action.click);
+  if (action.key) await page.keyboard.press(action.key);
   if (action.wait) await page.waitForTimeout(action.wait);
   if (action.ready) await page.waitForSelector(action.ready, {timeout: 20000});
 }
@@ -16,8 +17,8 @@ async function runStep(browser, url, outDir, step) {
   const page = await browser.newPage({viewport: step.viewport, deviceScaleFactor: 2, colorScheme: step.colorScheme || 'light'});
   const errors = [];
   page.on('pageerror', function onError(e) { errors.push(e.message); });
-  await page.goto(url, {waitUntil: 'load'});
-  await page.waitForSelector(WALK.ready, {timeout: 20000});
+  await page.goto(url + (step.hash || ''), {waitUntil: 'load'});
+  if (!step.hash) await page.waitForSelector(WALK.ready, {timeout: 20000});
   for (const action of step.actions) await act(page, action);
   const expectOk = step.expect ? await page.locator(step.expect).count() > 0 : true;
   const vscroll = await page.evaluate('document.documentElement.scrollHeight - document.documentElement.clientHeight');
