@@ -1,6 +1,6 @@
 # PR 2: One-screen site w/ live drawing
 
-Status: underway
+Status: done
 
 Branch: `feature/one-screen-site`
 
@@ -44,7 +44,7 @@ Auto checks (commit = PR head, tailnet dev server `http://citmini.taila4fc43.ts.
 | `site:shots` 5 viewports | overflow 0, vscroll 0, 0 errors |
 | `site:walk` 11 steps | all expect ok, vscroll 0, 0 errors |
 
-- [ ] **Live site on phone** · as visitor
+- [x] **Live site on phone** · as visitor (headless phone sizes on live HTTPS site after merge: shots 5/5 + walk 11/11 pass; real phone not used)
   1. Open site on phone after merge
   2. Tap **Assembled**, then **Exploded**
   3. Tap **Details**, then **Parts**
