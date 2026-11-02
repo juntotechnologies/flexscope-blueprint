@@ -31,6 +31,19 @@ PR 2 animated via flipbook = 85 exact frames pre-rendered in workers. Measured (
 
 - [ ] **Drag spacing + tip animation on real phone** · as visitor (after merge)
 
+## Agent Review
+
+Fresh read-only reviewer: slide math confirmed (linear projection, shared scale/offset). Low findings:
+
+| # | Finding | Class | Action |
+|---|---|---|---|
+| 1 | Old drawing's preview could flash after switch | defect | drop result if drawing/labels changed |
+| 2 | Render failure left moved base + hidden labels | defect | remount base on failure |
+| 3 | Possible fit jump at e≠1 | not a defect | measured: scale + offset identical at e = 1/.5/0, both drawings, labels on/off |
+| 4 | Duplicate base renders on fast input | perf only | left |
+
+Rerun after fixes: check pass, walk 15/15, shots 5/5.
+
 ## Product Decisions
 
 - Mid-motion = moved exploded drawing (hidden lines from exploded state); exact drawing on stop. Trade: tiny x-ray look while moving, for 60 fps everywhere.

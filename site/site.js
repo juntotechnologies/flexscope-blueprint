@@ -104,13 +104,15 @@ async function render(delay) {
   setBusy(true);
   try {
     await ensureBase();
-    const result = await renderer.request(message(state.explosion), {preview: true, delay});
+    const key = renderKey(), result = await renderer.request(message(state.explosion), {preview: true, delay});
+    if (key !== renderKey()) return;
     setBusy(false);
     if (state.playing) return;
     mount(result.markup);
   } catch (error) {
     if (error.name === 'AbortError') return;
     setBusy(false);
+    if (state.base) mount(state.base.markup);
     console.error(JSON.stringify({event: 'drawing.render_failed', drawing: state.drawing.id, error: error.message}));
   }
 }
