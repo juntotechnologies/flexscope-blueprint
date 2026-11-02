@@ -23,7 +23,7 @@ function resolveFile(urlPath) {
 
 function handle(req, res) {
   const urlPath = new URL(req.url, 'http://x').pathname;
-  if (urlPath === base.replace(/\/$/, '') || urlPath === '/') { res.writeHead(302, {location: base}); return res.end(); }
+  if (urlPath !== base && (urlPath === base.replace(/\/$/, '') || urlPath === '/')) { res.writeHead(302, {location: base}); return res.end(); }
   const file = resolveFile(urlPath);
   if (!file) { res.writeHead(404); return res.end('not found'); }
   res.writeHead(200, {'content-type': TYPES[path.extname(file)] || 'application/octet-stream'});
