@@ -1,6 +1,6 @@
 # PR 17: Pick up here (from 2026-11-03)
 
-Status: in-scope work complete
+Status: open; list not done, do not merge yet
 
 Branch: `docs/resume-tomorrow`
 
@@ -28,7 +28,7 @@ Branch: `docs/resume-tomorrow`
 
 Shaun, in order:
 
-- [ ] Send cousin the real link. Ask: check each clip against its label (`tools/quality/study.json`, field `truthQuote`); is 10 points the right pass margin; which normal exam clips could the hospital approve
+- [ ] Send cousin the real link, https://flexscope.juntotechnologies.com/quality/ . Ask: check each clip against its label (`tools/quality/study.json`, field `truthQuote`); is 10 points the right pass margin; which normal exam clips could the hospital approve
 - [ ] Trash 2 blank Sheets: https://docs.google.com/spreadsheets/d/1V4k7oFl6R2t_-key1UNg1K77yLuP8-7vGKyt3dctKn0/edit + https://docs.google.com/spreadsheets/d/1IMByzB8Xn6RfH1BjEFpsr4DMtP0uN7wZzHIdnJYzffQ/edit. Or tell agent "trash those 2 sheets". Keep 1yYPEz…
 - [ ] After cousin replies: email seller 5 questions, `sellerQuestions` in `tools/quality/cameras.json`
 - [ ] After agent says clips are fixed: send link to about 20 ENTs
