@@ -1,6 +1,6 @@
-# PR planned: Save answers before email
+# PR 16: Save answers before email
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `bugfix/save-before-email`
 
