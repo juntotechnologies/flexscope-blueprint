@@ -1,6 +1,6 @@
 # PR 12: Optional contact in survey
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/survey-contact`
 
@@ -43,4 +43,4 @@ Add an optional email + "OK to contact" at the end, so we can follow up with rat
 
 ## Related Docs
 
-- [Roadmap](../roadmap.md)
+- [Roadmap](../../roadmap.md)
