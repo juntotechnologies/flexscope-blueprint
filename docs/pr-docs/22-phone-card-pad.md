@@ -1,6 +1,6 @@
-# PR planned: Phone card padding
+# PR 22: Phone card padding
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `fix/phone-card-padding`
 
