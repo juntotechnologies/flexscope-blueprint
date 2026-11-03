@@ -6,13 +6,15 @@ test('real levels name known cameras + 1 floor', function realLevels() {
   assert.deepStrictEqual(levelIssues(study.levels, cameras), []);
 });
 
+test('level with no camera fails', function noCamera() {
+  assert.ok(levelIssues([{id: 'a', camera: null, floor: true}], cameras).length);
+});
+
 test('unknown camera + missing floor fail', function badLevels() {
   assert.strictEqual(levelIssues([{id: 'a', camera: 'nope'}], cameras).length, 2);
 });
 
 test('label comes from camera table', function label() {
-  assert.strictEqual(cameraLabel({camera: null, floor: true}, cameras), 'none: floor');
-  assert.strictEqual(cameraLabel({camera: null}, cameras), 'none: probe');
   assert.strictEqual(cameraLabel({camera: cameras[0].id}, cameras), cameras[0].part);
 });
 

@@ -9,7 +9,7 @@ function stat(id, camera, lower, upper, usable, assumption) {
   return {id, camera, lower, upper, usable, accuracy: 1 + lower, assumption};
 }
 
-const FLOOR = {...stat('floor', null, -0.5, -0.3, 2), floor: true};
+const FLOOR = {...stat('floor', 'dear', -0.5, -0.3, 2, 'guess'), floor: true};
 
 test('marks only labelled questions; can\'t tell is wrong + counted', function marks() {
   const out = trialMarks({session: 's', level: 'a', lesion: "Can't tell", mobility: 'Both move'}, {patient: 'p', truth: {lesion: 'Yes'}}, QUESTIONS);
@@ -25,7 +25,7 @@ test('too few raters: not enough data', function few() {
 });
 
 test('floor not worse: test void', function voidTest() {
-  assert.strictEqual(verdict([{...stat('floor', null, -0.05, 0.02, 4.5), floor: true}], CAMS, RULE, 20).verdict, 'test void');
+  assert.strictEqual(verdict([{...stat('floor', 'dear', -0.05, 0.02, 4.5, 'guess'), floor: true}], CAMS, RULE, 20).verdict, 'test void');
 });
 
 test('cheapest passing camera wins', function cheapest() {
@@ -48,12 +48,6 @@ test('poor-light fail keeps camera, says fix light', function poorLight() {
   const out = verdict([stat('a', 'cheap', -0.01, 0, 4.5), stat('n', 'cheap', -0.4, -0.2, 2, 'guess'), FLOOR], CAMS, RULE, 20);
   assert.strictEqual(out.camera, 'cheap');
   assert.ok(out.note.includes('fix light'));
-});
-
-test('passing probe says search cheaper parts; failing probe says nothing', function probe() {
-  const cam = stat('a', 'cheap', -0.02, 0, 4.5);
-  assert.deepStrictEqual(verdict([cam, stat('p', null, -0.05, 0, 4.2), FLOOR], CAMS, RULE, 20).cheaperPartsWorthSearching, ['p']);
-  assert.strictEqual(verdict([cam, stat('p', null, -0.4, -0.2, 2), FLOOR], CAMS, RULE, 20).cheaperPartsWorthSearching, undefined);
 });
 
 test('nothing passes', function nonePass() {
