@@ -23,13 +23,17 @@ Proposed rule; Shaun + cousin confirm numbers before pilot:
 
 ## Implementation Checklist
 
-- [ ] `study.json` `decision` block: margins + minimum raters; committed before real data
-- [ ] Analysis: interval per level; accounts for repeats by rater + clip; test vs known sample
-- [ ] Report by setting + role; low-resource raters shown alone
-- [ ] Join `cameras.json`: output part, OD, cost beside each level
-- [ ] Verdict: cheapest passing level, or "not enough data" / "test void"; test each case
-- [ ] "Can't tell" count reported per level, not hidden as wrong
-- [ ] Results doc template: `docs/results/`; totals only
+- [x] `study.json` `decision` block: margins + minimum raters; labelled proposed until confirmed
+- [x] Analysis: bootstrap 95% interval vs best level, resampling raters + patients (seeded); tested
+- [x] Report by setting + role; low-resource raters shown alone
+- [x] Join `cameras.json`: part, OD, cost beside each level; `rankUsd` = worst-case seller price, for order only
+- [x] Verdict: cheapest passing camera, or "not enough data" / "test void" / "no camera passes"; each tested
+- [x] "Can't tell" count per level; counted as not correct
+- [x] Results doc template: `docs/results/template.md`
+
+## Defined here
+
+Floor "clearly worse" = interval vs best entirely below 0, or ENT usable mean ≤3. Assumption levels (noisy 720) can't pass/fail a camera: fail → "fix light/lens". Bootstrap with 15 clips, about 11 patients: interval wide by design.
 
 ## Smoke Tests
 

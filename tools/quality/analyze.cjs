@@ -4,6 +4,7 @@
 const fs = require('node:fs');
 const study = require('./study.json'), {cameras} = require('./cameras.json');
 const {cameraLabel} = require('./levels.cjs');
+const {trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, verdict} = require('./decision.cjs');
 
 // RFC 4180 reader: quoted fields may hold commas, quotes ("") and newlines. One step per char; returns chars used.
 function quotedStep(s, text, i) {
@@ -88,12 +89,59 @@ function balance(rows) {
   });
 }
 
+function allMarks(rows) {
+  return rows.flatMap(function marks(r) { return trialMarks(r, clipFor(r.clip), study.questions); });
+}
+
+function ofLevel(items, id) {
+  return items.filter(function m(x) { return x.level === id; });
+}
+
+function points(fraction) {
+  return (100 * fraction).toFixed(1);
+}
+
+function levelStats(rows, marks) {
+  const rule = study.decision;
+  const base = study.levels.map(function stat(l) {
+    return {id: l.id, camera: l.camera, assumption: l.assumption, accuracy: plainAccuracy(ofLevel(marks, l.id)), usable: usableMean(ofLevel(rows, l.id), rule.raterRoles)};
+  });
+  const ids = base.map(function id(s) { return s.id; });
+  const intervals = differenceIntervals(marks, ids, bestLevel(base), rule.bootstrapRuns, rule.seed);
+  return base.map(function join(s) { return {...s, ...intervals[s.id]}; });
+}
+
+function camera(id) {
+  return cameras.find(function match(c) { return c.id === id; });
+}
+
+function statRow(s, marks) {
+  const own = ofLevel(marks, s.id), c = camera(s.camera);
+  return {level: s.id, part: cameraLabel(s, cameras), tipOdMm: c?.tipOdMm ?? '-', usd: c?.lowQtyUsd ?? '-', marks: own.length,
+    correct: points(s.accuracy), vsBest95: `${points(s.lower)} to ${points(s.upper)}`,
+    cantTell: own.reduce(function sum(n, m) { return n + m.cantTell; }, 0), usableEnt: s.usable.toFixed(2)};
+}
+
+function caveats(rows) {
+  const lesionNo = study.clips.filter(function no(c) { return c.truth.lesion === 'No'; }).length;
+  console.log(`Rule status: ${study.decision.status}. Patients: ${new Set(study.clips.map(function p(c) { return c.patient; })).size}. Lesion "No" clips: ${lesionNo}: lesion score is almost all sensitivity. Raters: ${new Set(rows.map(function s(r) { return r.session; })).size}.`);
+}
+
+function decide(rows) {
+  const marks = allMarks(rows), stats = levelStats(rows, marks);
+  console.table(stats.map(function row(s) { return statRow(s, marks); }));
+  caveats(rows);
+  console.log(JSON.stringify(verdict(stats, cameras, study.decision, new Set(rows.map(function s(r) { return r.session; })).size)));
+}
+
 function main(file) {
   if (!file) { console.error(JSON.stringify({event: 'quality.usage', usage: 'node tools/quality/analyze.cjs responses.csv'})); process.exitCode = 1; return; }
   const rows = cleanRows(parseCsv(fs.readFileSync(file, 'utf8')));
   if (!rows.length) { console.error(JSON.stringify({event: 'quality.no_rows', file})); process.exitCode = 1; return; }
   console.table(study.levels.map(function level(l) { return {level: l.label, camera: cameraLabel(l, cameras), ...score(rows.filter(function m(r) { return r.level === l.id; }))}; }));
+  decide(rows);
   console.table(table(rows, 'setting'));
+  console.table(table(rows, 'role'));
   console.table(balance(rows));
 }
 
