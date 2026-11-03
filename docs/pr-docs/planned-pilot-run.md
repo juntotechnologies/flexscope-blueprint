@@ -10,6 +10,8 @@ Run the rebuilt survey in 2 stages, cousin first, then ENTs, and publish a dated
 
 ## Implementation Checklist
 
+- [ ] Cousin reviews each clip + truth label; bad clip out (keep multiple of 5); record per clip
+- [ ] Set `minutes` in `study.json` from measured run time
 - [ ] Stage 0: cousin reviews preview + clips; record each correction + fix
 - [ ] Confirm Sheet empty + [pass rule](./planned-decision-analysis.md) committed
 - [ ] Stage 1: 3-5 ENTs; check completion, time, phone problems, level balance; fix; keep or discard these rows, decided before reading scores
