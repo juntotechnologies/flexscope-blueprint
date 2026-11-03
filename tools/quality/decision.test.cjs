@@ -1,5 +1,5 @@
 const test = require('node:test'), assert = require('node:assert');
-const {trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, levelPasses, floorDetected, verdict} = require('./decision.cjs');
+const {entOnly, trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, levelPasses, floorDetected, verdict} = require('./decision.cjs');
 
 const RULE = {marginPoints: 10, usableMin: 4, floorUsableMax: 3, minRaters: 20};
 const CAMS = [{id: 'cheap', part: 'Cheap', rankUsd: 40}, {id: 'dear', part: 'Dear', rankUsd: 370}];
@@ -62,9 +62,10 @@ test('pass + floor bounds', function bounds() {
   assert.ok(!floorDetected({upper: 0.1, usable: 3.1}, RULE));
 });
 
-test('usable mean counts only named roles', function roles() {
+test('only named roles count', function roles() {
   const rows = [{role: 'ENT attending', usable: '5 Yes'}, {role: 'Other', usable: '1 No'}];
-  assert.strictEqual(usableMean(rows, ['ENT attending']), 5);
+  assert.deepStrictEqual(entOnly(rows, ['ENT attending']), [rows[0]]);
+  assert.strictEqual(usableMean(entOnly(rows, ['ENT attending'])), 5);
 });
 
 test('best level + accuracy', function best() {
