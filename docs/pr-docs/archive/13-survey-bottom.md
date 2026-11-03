@@ -1,6 +1,6 @@
 # PR 13: Survey bottom levels
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/survey-bottom`
 
@@ -38,4 +38,4 @@ Not applicable beyond site walk: same page, new clip files. Walk + frames checke
 
 ## Related Docs
 
-- [Roadmap](../roadmap.md)
+- [Roadmap](../../roadmap.md)
