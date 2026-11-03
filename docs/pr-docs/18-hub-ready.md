@@ -1,6 +1,6 @@
-# PR planned: Ready for hub
+# PR 18: Ready for hub
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/hub-ready`
 
