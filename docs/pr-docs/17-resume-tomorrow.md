@@ -47,6 +47,10 @@ Agent, after ENT responses:
 - [ ] `npm run quality:analyze`; results doc from `docs/results/template.md`
 - [ ] [Camera bench](./planned-camera-bench.md): real noise replaces simulated guesses
 
+Agent, before survey link goes public on the hub:
+
+- [ ] Analysis: verdict + `minRaters` count ENT roles only; test. Today every session counts. Hub plan: https://github.com/juntotechnologies/juntotechnologies.github.io/blob/docs/hub-all-projects/docs/plans/hub-all-projects.md
+
 Agent, not blocking survey:
 
 - [ ] Trim old instruction text to `ops` pointers; `ops lint --install-hook` in repos
