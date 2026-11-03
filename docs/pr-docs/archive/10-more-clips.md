@@ -1,6 +1,6 @@
 # PR 10: More clips + case mix
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/more-clips`
 
@@ -26,7 +26,7 @@ Before: 3 clips, 2 patients; hemangioma so obvious it may pass at any level.
 
 Gaps, carry into analysis:
 - Lesion score = almost all sensitivity: only 1 "No". Reason: no paper states "no lesion"; k7, m2 lesion "No" removed (was inferred from absence).
-- **No normal exams.** Search: PMC + Zenodo, Figshare, Dryad, Dataverse (titles screened, capped pages): normal video all high-speed, low resolution, under 6 s or overlaid. roksund-normal rejected for poor quality. Source for normals: cousin/[hospital](./planned-private-clips.md).
+- **No normal exams.** Search: PMC + Zenodo, Figshare, Dryad, Dataverse (titles screened, capped pages): normal video all high-speed, low resolution, under 6 s or overlaid. roksund-normal rejected for poor quality. Source for normals: cousin/[hospital](../planned-private-clips.md).
 - Li clips: paper doesn't state different patients; each treated as own patient id.
 - Li + r2 + Baldini license read on PMC, not publisher page. Stelman: sources disagree on version; credited CC BY 3.0. j3, n5, p8 copyright read from Europe PMC.
 - Frames sampled every 2-3 s + at 4 s; not every frame. Build strips audio.
@@ -38,9 +38,9 @@ Gaps, carry into analysis:
 - [x] Accept rule: CC BY only; color laryngoscopy, no burned-in text
 - [x] Truth from paper text, quoted in `truthQuote`; check fails on label w/o quote (`clips.test.cjs`)
 - [x] Add clips to `tools/quality/open/`, opaque ids, credits page
-- [x] Patient ids in `study.json`: same patient pair counted as 1 exam by [Decision analysis](./planned-decision-analysis.md)
+- [x] Patient ids in `study.json`: same patient pair counted as 1 exam by [Decision analysis](../planned-decision-analysis.md)
 - [x] 15 clips = multiple of 5 levels; check fails otherwise
-- [x] Moved to [Pilot run](./planned-pilot-run.md): cousin reviews each clip + label, measured run time
+- [x] Moved to [Pilot run](../planned-pilot-run.md): cousin reviews each clip + label, measured run time
 
 ## Smoke Tests
 
@@ -55,7 +55,7 @@ Gaps, carry into analysis:
 
 ## Product Decisions
 
-- Better footage from hospital: [Private clips](./planned-private-clips.md). Don't wait for it.
+- Better footage from hospital: [Private clips](../planned-private-clips.md). Don't wait for it.
 
 ## Non-Goals
 
@@ -63,4 +63,4 @@ Gaps, carry into analysis:
 
 ## Related Docs
 
-- [Roadmap](../roadmap.md)
+- [Roadmap](../../roadmap.md)

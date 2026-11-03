@@ -6,7 +6,6 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [More clips](./10-more-clips.md) | More exams, normals + lesions |
 | [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
 | [Decision analysis](./planned-decision-analysis.md) | Pass rule before data; cheapest passing level |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
@@ -17,6 +16,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [More clips](./archive/10-more-clips.md) | More exams, normals + lesions |
 | [Survey ladder](./archive/9-survey-ladder.md) | Levels map to parts; level bad enough to fail |
 | [Camera evidence](./archive/8-camera-evidence.md) | Sourced part + price table; README fixes |
 | [PR 6: README survey link](./archive/6-readme-survey-link.md) | Survey link in README, off public page |
