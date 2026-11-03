@@ -1,6 +1,6 @@
 # PR 18: Ready for hub
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/hub-ready`
 
