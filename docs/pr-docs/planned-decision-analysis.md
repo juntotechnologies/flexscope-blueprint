@@ -16,7 +16,7 @@ Proposed rule; Shaun + cousin confirm numbers before pilot:
 
 | Measure | Proposed pass |
 |---|---|
-| Lesion + mobility accuracy | 95% interval lower bound ≥10 points below best level or better (non-inferiority margin: 10 points) |
+| Lesion + mobility accuracy | Not worse than best level by more than 10 points, using 95% interval lower bound (non-inferiority margin) |
 | "Would you use this" | Mean ≥4 of 5 among ENT attendings + residents |
 | Floor level | Must score clearly worse; else test can't detect loss + result is void |
 | Raters | Target about 20 ENTs; compute real power from pilot before fixing |
