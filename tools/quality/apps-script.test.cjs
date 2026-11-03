@@ -64,3 +64,11 @@ test('old page with no device still saves', function oldPage() {
   save(book, {...BASE, device: undefined}, 'now');
   assert.strictEqual(book.sheets.responses.rows.length, 3);
 });
+
+test('email-only post adds a contact, no trial rows', function emailOnly() {
+  const book = new FakeBook(), {save} = loadScript();
+  save(book, BASE, 'now');
+  save(book, {session: 's1', contact: {email: 'a@b.co'}, trials: []}, 'later');
+  assert.strictEqual(book.sheets.responses.rows.length, 3);
+  assert.strictEqual(book.sheets.contacts.rows[1][2], 'a@b.co');
+});

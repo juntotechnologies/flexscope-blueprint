@@ -48,19 +48,20 @@
 
   <section class="screen" data-for="contact">
     <h1>Almost done</h1>
+    <p id="done-text" aria-live="polite">Sending your answers…</p>
+    <button type="button" class="primary" id="retry" hidden>Send again</button>
     <p>{{contactPurpose}} {{contactAccess}} To remove it, write to <a href="mailto:{{contactMail}}">{{contactMail}}</a>.</p>
     <form id="contact-form">
       <label class="field">Email<input type="email" name="email" id="contact-email" autocomplete="email"></label>
       <label class="check"><input type="checkbox" id="contact-ok"><span>{{contactConsent}}</span></label>
     </form>
     <p class="hint">Leave blank to skip. Email is saved only if the box is ticked.</p>
-    <button type="button" class="primary" id="contact-send">Send answers</button>
+    <button type="button" class="primary" id="contact-send" disabled>Finish</button>
   </section>
 
   <section class="screen" data-for="done">
     <h1>Thank you</h1>
-    <p id="done-text" aria-live="polite">Your answers were sent.</p>
-    <button type="button" class="primary" id="retry" hidden>Send again</button>
+    <p id="thanks-text" aria-live="polite">You can close this page.</p>
     <p class="credits">Clip <a href="credits.html">sources and licenses</a>.</p>
   </section>
 </main>
