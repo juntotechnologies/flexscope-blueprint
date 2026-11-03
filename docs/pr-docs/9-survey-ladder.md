@@ -1,6 +1,6 @@
-# PR planned: Survey ladder tied to cameras
+# PR 9: Survey ladder tied to cameras
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/survey-ladder`
 
