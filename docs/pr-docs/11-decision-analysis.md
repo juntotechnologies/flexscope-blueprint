@@ -1,6 +1,6 @@
-# PR planned: Decision rule + analysis
+# PR 11: Decision rule + analysis
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/decision-analysis`
 
