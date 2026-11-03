@@ -6,7 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
+| [Survey contact](./12-survey-contact.md) | Optional email + OK to contact |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |

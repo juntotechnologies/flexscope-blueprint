@@ -4,6 +4,7 @@ const fs = require('node:fs'), path = require('node:path');
 
 const root = path.resolve(__dirname, '../..');
 const study = require('./study.json');
+const site = require('../../site/site.json');
 const {buildMode} = require('./mode.cjs');
 
 function read(rel) {
@@ -45,6 +46,7 @@ function pageHtml(clips) {
   return fill(read('site/quality/template.html'), {
     title: escapeHtml(study.title), minutes: study.minutes, clipCount: clips.length, questionCount: study.questions.length,
     css: read('site/tokens.css') + read('site/quality/quality.css'), js: read('site/quality/quality.js').replace(/<\/script/gi, '<\\/script'),
+    contactPurpose: escapeHtml(study.contact.purpose), contactAccess: escapeHtml(study.contact.access), contactConsent: escapeHtml(study.contact.consent), contactMail: escapeHtml(site.privacy.contact),
     raterFields: study.rater.map(fieldset).join(''), questionFields: study.questions.map(fieldset).join(''),
     study: JSON.stringify(pageStudy(clips)).replaceAll('<', '\\u003c')
   });
