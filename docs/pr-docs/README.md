@@ -4,12 +4,12 @@
 
 | Doc | Description |
 |-----|-------------|
-| [PR 6: README survey link](./6-readme-survey-link.md) | Survey link in README, off public page |
 
 ## Archive
 
 | Doc | Description |
 |-----|-------------|
+| [PR 6: README survey link](./archive/6-readme-survey-link.md) | Survey link in README, off public page |
 | [PR 5: Quality ladder](./archive/5-quality-ladder.md) | Image-quality test page for ENTs (3 open-clip pilot, live Sheet) |
 | [PR 3: Smooth spacing + tip](./archive/3-smooth-spacing-and-tip.md) | Live slider motion, fast tip animation |
 | [PR 2: One-screen site](./archive/2-one-screen-site.md) | One-screen page, live animated drawing w/ labels + color, tabs |

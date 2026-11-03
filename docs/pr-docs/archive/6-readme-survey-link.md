@@ -1,6 +1,6 @@
 # PR 6: Add survey link to README
 
-Status: in-scope work complete
+Status: done
 
 Branch: `docs/readme-survey-link`
 
