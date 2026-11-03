@@ -155,11 +155,19 @@ function copyAssets() {
   }
 }
 
+// Standalone page for the Google sign-in screen's required privacy link.
+function privacyHtml() {
+  return fill(read('site/privacy.html'), {
+    css: read('site/tokens.css') + read('site/privacy.css'), home: site.org.url, org: site.org.name, contact: site.privacy.contact, updated: site.privacy.updated
+  });
+}
+
 function main() {
   fs.rmSync(out, {recursive: true, force: true});
   fs.mkdirSync(out, {recursive: true});
   copyAssets();
   fs.writeFileSync(path.join(out, 'index.html'), pageHtml());
+  fs.writeFileSync(path.join(out, 'privacy.html'), privacyHtml());
   fs.writeFileSync(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\n`);
   console.log(path.join(out, 'index.html'));
 }

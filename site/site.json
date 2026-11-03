@@ -2,6 +2,10 @@
   "_note": "SSOT for site copy + URLs. Tab bodies come from README.md sections (by title); drawing titles + colors from drawing/data.json.",
   "url": "https://flexscope.juntotechnologies.com/",
   "repo": "https://github.com/juntotechnologies/flexscope-blueprint",
+  "privacy": {
+    "contact": "shaun.porwal@juntotechnologies.com",
+    "updated": "November 2, 2026"
+  },
   "org": {
     "name": "Junto Technologies",
     "url": "https://juntotechnologies.com/"
