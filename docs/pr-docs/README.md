@@ -6,7 +6,6 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Survey ladder](./9-survey-ladder.md) | Levels map to parts; level bad enough to fail |
 | [More clips](./planned-more-clips.md) | More exams, normals + lesions |
 | [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
 | [Decision analysis](./planned-decision-analysis.md) | Pass rule before data; cheapest passing level |
@@ -18,6 +17,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [Survey ladder](./archive/9-survey-ladder.md) | Levels map to parts; level bad enough to fail |
 | [Camera evidence](./archive/8-camera-evidence.md) | Sourced part + price table; README fixes |
 | [PR 6: README survey link](./archive/6-readme-survey-link.md) | Survey link in README, off public page |
 | [PR 5: Quality ladder](./archive/5-quality-ladder.md) | Image-quality test page for ENTs (3 open-clip pilot, live Sheet) |

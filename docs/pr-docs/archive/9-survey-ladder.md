@@ -1,6 +1,6 @@
 # PR 9: Survey ladder tied to cameras
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/survey-ladder`
 
@@ -27,13 +27,13 @@ Proposed levels (final set follows camera table):
 - [x] `study.json` levels reference `cameras.json` part ids; check fails on unknown id (`levels.test.cjs`, in `npm run check`)
 - [x] Add floor + noisy-720 levels; drop q200low
 - [x] `npm run quality:levels`: SSIM per level per clip; warns on neighbor levels too close
-- [x] Noise values labelled `assumption` in `study.json` until [bench data](./planned-camera-bench.md) replaces them
+- [x] Noise values labelled `assumption` in `study.json` until [bench data](../planned-camera-bench.md) replaces them
 - [x] Clips w/ source under level size: `upscaled` column in `quality:levels`
 - [x] Enlarge button: video fills screen, Close returns; resets each clip
 - [x] Bitrate cap 3 Mbit/s: noisy clips were 21 MB, now about 3.2 MB
 - [x] Intro: drop "Cheaper cameras mean lower image quality" (primes raters)
-- [x] Moved to [Survey contact](./planned-survey-contact.md): device size column (Apps Script change)
-- [x] Balance warning stays until [More clips](./planned-more-clips.md): 3 clips, 5 levels
+- [x] Moved to [Survey contact](../planned-survey-contact.md): device size column (Apps Script change)
+- [x] Balance warning stays until [More clips](../planned-more-clips.md): 3 clips, 5 levels
 
 ## Measured
 
@@ -70,4 +70,4 @@ Limit: q400~q200 stay flagged too close: source footage soft + SSIM forgiving on
 
 ## Related Docs
 
-- [Camera evidence](./planned-camera-evidence.md), [Decision analysis](./planned-decision-analysis.md), [Roadmap](../roadmap.md)
+- [Camera evidence](../planned-camera-evidence.md), [Decision analysis](../planned-decision-analysis.md), [Roadmap](../../roadmap.md)
