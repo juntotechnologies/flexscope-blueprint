@@ -136,7 +136,7 @@ td:first-child::before { content: none; }
   .top { padding: 6px var(--gutter); }
   .mark { width: 40px; height: 40px; }
   .chip, .dwg { display: none; }
-  .stage { padding: 8px; gap: 6px; }
+  .stage { padding: var(--card-pad); gap: 6px; }
   .controls { padding: 4px; }
   .dock button { min-height: 44px; }
 }
