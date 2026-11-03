@@ -20,7 +20,7 @@ function levelFilter(clip, level) {
 function encode(clip, level, file) {
   const input = path.join(__dirname, SOURCE_DIRS[clip.source], clip.name + '.mp4');
   const args = ['-y', '-loglevel', 'error', '-ss', String(clip.start), '-i', input, '-t', String(clip.seconds), '-vf', levelFilter(clip, level),
-    '-c:v', 'libx264', '-profile:v', 'baseline', '-crf', '23', '-movflags', '+faststart', '-an', file];
+    '-c:v', 'libx264', '-profile:v', 'baseline', '-crf', '23', '-maxrate', '3M', '-bufsize', '6M', '-movflags', '+faststart', '-an', file];
   execFileSync('ffmpeg', args, {stdio: 'inherit'});
 }
 

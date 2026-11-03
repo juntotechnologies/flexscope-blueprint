@@ -19,7 +19,7 @@
 
   <section class="screen" data-for="intro">
     <h1>How low can scope video quality go?</h1>
-    <p>We are designing a low-cost single-use ENT scope. Cheaper cameras mean lower image quality. You will see {{clipCount}} short clips, each at a random quality level, and answer {{questionCount}} questions per clip.</p>
+    <p>We are designing a low-cost single-use ENT scope. You will see {{clipCount}} short clips, each at a random quality level, and answer {{questionCount}} questions per clip.</p>
     <ul>
       <li>About {{minutes}} minutes. Anonymous: no name or email.</li>
       <li>Answer from the clip only. "Can't tell" is a valid answer.</li>
@@ -36,8 +36,9 @@
   </section>
 
   <section class="screen" data-for="trial">
-    <div class="video-box">
+    <div class="video-box" id="video-box">
       <video id="video" muted loop playsinline autoplay preload="auto"></video>
+      <button type="button" class="video-size" id="video-size" aria-pressed="false">Enlarge</button>
       <button type="button" class="video-msg" id="tap-play" hidden>Tap to play</button>
       <div class="video-msg" id="clip-error" hidden><span>This clip did not load.</span><button type="button" id="skip-clip">Skip clip</button></div>
     </div>

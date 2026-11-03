@@ -2,7 +2,8 @@
 // Score answers per quality level (and per setting) from a CSV export of the "responses" sheet.
 // Usage: node tools/quality/analyze.cjs responses.csv
 const fs = require('node:fs');
-const study = require('./study.json');
+const study = require('./study.json'), {cameras} = require('./cameras.json');
+const {cameraLabel} = require('./levels.cjs');
 
 // RFC 4180 reader: quoted fields may hold commas, quotes ("") and newlines. One step per char; returns chars used.
 function quotedStep(s, text, i) {
@@ -91,7 +92,7 @@ function main(file) {
   if (!file) { console.error(JSON.stringify({event: 'quality.usage', usage: 'node tools/quality/analyze.cjs responses.csv'})); process.exitCode = 1; return; }
   const rows = cleanRows(parseCsv(fs.readFileSync(file, 'utf8')));
   if (!rows.length) { console.error(JSON.stringify({event: 'quality.no_rows', file})); process.exitCode = 1; return; }
-  console.table(study.levels.map(function level(l) { return {level: l.label, camera: l.cameraClass, ...score(rows.filter(function m(r) { return r.level === l.id; }))}; }));
+  console.table(study.levels.map(function level(l) { return {level: l.label, camera: cameraLabel(l, cameras), ...score(rows.filter(function m(r) { return r.level === l.id; }))}; }));
   console.table(table(rows, 'setting'));
   console.table(balance(rows));
 }

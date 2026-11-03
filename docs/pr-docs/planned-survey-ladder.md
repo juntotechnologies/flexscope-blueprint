@@ -20,17 +20,33 @@ Proposed levels (final set follows camera table):
 | 720×720 + noise, 15 fps | OV9734 in poor light | Key test; fail → fix light/lens before changing sensor |
 | 400×400, 30 fps | OVM6946 | Tiny camera OK; only buy if tip must go under 3 mm |
 | 200×200, 30 fps | OVM6948 | Lower bound on a real part |
-| 100×100, 30 fps | No part | Expected to fail; proves raters + clips can detect loss |
+| 64×64, 30 fps | No part | Expected to fail; proves raters + clips can detect loss. 100×100 still looked readable, so went lower |
 
 ## Implementation Checklist
 
-- [ ] `study.json` levels reference `cameras.json` part ids; check fails on unknown id
-- [ ] Add floor + noisy-720 levels; drop q200low
-- [ ] Measure SSIM per level per clip; store as `quality:levels` output, flag neighbor levels too close
-- [ ] Decide noise values: label as assumption until [bench data](./planned-camera-bench.md) replaces them
-- [ ] Clips w/ source under level size: flag, never count as true detail (x4 crop = 516 px, upscaled at 720)
-- [ ] Larger video: tap to enlarge, still 1 screen; record device size w/ each response
-- [ ] Rater count + balance check for 5 levels: clip count = multiple of level count
+- [x] `study.json` levels reference `cameras.json` part ids; check fails on unknown id (`levels.test.cjs`, in `npm run check`)
+- [x] Add floor + noisy-720 levels; drop q200low
+- [x] `npm run quality:levels`: SSIM per level per clip; warns on neighbor levels too close
+- [x] Noise values labelled `assumption` in `study.json` until [bench data](./planned-camera-bench.md) replaces them
+- [x] Clips w/ source under level size: `upscaled` column in `quality:levels`
+- [x] Enlarge button: video fills screen, Close returns; resets each clip
+- [x] Bitrate cap 3 Mbit/s: noisy clips were 21 MB, now about 3.2 MB
+- [x] Intro: drop "Cheaper cameras mean lower image quality" (primes raters)
+- [x] Moved to [Survey contact](./planned-survey-contact.md): device size column (Apps Script change)
+- [x] Balance warning stays until [More clips](./planned-more-clips.md): 3 clips, 5 levels
+
+## Measured
+
+Method: `npm run quality:levels` (ffmpeg SSIM vs q720, upscaled bicubic), commit of this PR, 3 clips.
+
+| Level | SSIM | Size, 8 s |
+|---|---|---|
+| q720low | 0.79-0.81 | 3.2-3.3 MB |
+| q400 | 0.976-0.983 | about 0.5 MB |
+| q200 | 0.960-0.975 | about 0.2 MB |
+| q64 | 0.930-0.958 | 25-44 KB |
+
+Limit: q400~q200 stay flagged too close: source footage soft + SSIM forgiving on smooth tissue. Side-by-side frames do differ by eye. Results between these 2 levels: read w/ care.
 
 ## Smoke Tests
 

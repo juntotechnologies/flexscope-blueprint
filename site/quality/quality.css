@@ -20,6 +20,8 @@ h1 { margin: 4px 0 0; font: 600 22px/1.25 var(--sans); }
 .video-msg { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; text-align: center; color: #fff; background: rgb(0 0 0 / .6); border: 0; font: 600 16px/1.3 var(--sans); }
 .video-msg[hidden] { display: none; }
 .video-msg button { min-height: var(--tap); padding: 0 18px; border: 0; border-radius: var(--r-md); background: var(--accent); color: var(--on-accent); font: inherit; }
+.video-size { position: absolute; right: 8px; bottom: 8px; min-height: var(--tap); padding: 0 14px; border: 0; border-radius: var(--r-md); background: rgb(0 0 0 / .65); color: #fff; font: 600 15px/1 var(--sans); }
+.video-box.big { position: fixed; inset: 0; z-index: 10; width: 100%; height: 100svh; aspect-ratio: auto; border-radius: 0; }
 #trial-form[inert] { opacity: .45; }
 .video-box video { width: 100%; height: 100%; object-fit: contain; display: block; }
 

@@ -3,10 +3,11 @@
   "title": "Scope image quality test",
   "minutes": 5,
   "levels": [
-    {"id": "q720", "label": "720×720", "cameraClass": "OV9734, 1280×720, cropped", "size": 720, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q400", "label": "400×400", "cameraClass": "OVM6946, 1.1 mm module", "size": 400, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q200", "label": "200×200", "cameraClass": "OVM6948, 0.65 mm module", "size": 200, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q200low", "label": "200×200 + noise, 15 fps", "cameraClass": "OVM6948-class, poor light", "size": 200, "fps": 15, "noise": 18, "blur": 0.6}
+    {"id": "q720", "label": "720×720", "camera": "ov9734-3.5", "size": 720, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q720low", "label": "720×720 + noise, 15 fps", "camera": "ov9734-3.5", "assumption": "Noise + blur + fps are guesses at poor light until bench data replaces them", "size": 720, "fps": 15, "noise": 18, "blur": 0.6},
+    {"id": "q400", "label": "400×400", "camera": "ovm6946-2.0", "size": 400, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200", "label": "200×200", "camera": "ovm6948-1.0", "size": 200, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q64", "label": "64×64 floor", "camera": null, "size": 64, "fps": 30, "noise": 0, "blur": 0}
   ],
   "questions": [
     {"id": "lesion", "text": "Any lesion (mass or growth) visible?", "options": [ "Yes", "No", "Can't tell" ], "scored": true},
