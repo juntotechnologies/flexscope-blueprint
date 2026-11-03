@@ -21,7 +21,7 @@
     <h1>How low can scope video quality go?</h1>
     <p>We are designing a low-cost single-use ENT scope. You will see {{clipCount}} short clips, each at a random quality level, and answer {{questionCount}} questions per clip.</p>
     <ul>
-      <li>About {{minutes}} minutes. Anonymous: no name or email.</li>
+      <li>About {{minutes}} minutes. No name asked; email at the end is optional.</li>
       <li>Answer from the clip only. "Can't tell" is a valid answer.</li>
       <li>Clips come from published open-access papers.</li>
       <li>Concept research only, not patient care.</li>
@@ -44,6 +44,17 @@
     </div>
     <form id="trial-form" inert>{{questionFields}}</form>
     <button type="button" class="primary" id="trial-next" disabled>Next</button>
+  </section>
+
+  <section class="screen" data-for="contact">
+    <h1>Almost done</h1>
+    <p>{{contactPurpose}} {{contactAccess}} To remove it, write to <a href="mailto:{{contactMail}}">{{contactMail}}</a>.</p>
+    <form id="contact-form">
+      <label class="field">Email<input type="email" name="email" id="contact-email" autocomplete="email"></label>
+      <label class="check"><input type="checkbox" id="contact-ok"><span>{{contactConsent}}</span></label>
+    </form>
+    <p class="hint">Leave blank to skip. Email is saved only if the box is ticked.</p>
+    <button type="button" class="primary" id="contact-send">Send answers</button>
   </section>
 
   <section class="screen" data-for="done">

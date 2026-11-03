@@ -10,13 +10,15 @@ Add an optional email + "OK to contact" at the end, so we can follow up with rat
 
 ## Implementation Checklist
 
-- [ ] `study.json`: optional email + OK-to-contact fields; basic format check at page edge
-- [ ] Device size columns (screen w × h, pixel ratio) w/ same redeploy
-- [ ] Apps Script + Sheet: new columns, redeploy; email on 1 row per session, not repeated per trial
-- [ ] Page: remove any "anonymous" claim; say what email is for + who sees it
-- [ ] `privacy.html`: cover survey email: purpose, Sheet access, how to request deletion
-- [ ] Analysis never prints email; test proves it
-- [ ] Preview mode still sends nothing: test
+- [x] `study.json` `contact` wording; end screen w/ optional email + OK box; browser format check
+- [x] Device size columns (screen w × h, pixel ratio)
+- [x] Apps Script: `contacts` tab, 1 row/session, apart from `responses`; tested on fake Sheet (`apps-script.test.cjs`)
+- [x] Page: no "anonymous" claim; says purpose, who sees it, how to remove
+- [x] Survey note lives on contact screen, not `privacy.html`: that page = Google sign-in tool
+- [x] Analysis can't print email: reads `responses` export; email only in `contacts`
+- [x] Preview sends nothing: walk checks; email w/o tick stays on page: walk checks
+- [x] `tools/quality/deploy-script.sh`: dry run default; signs in, pushes, keeps URL, signs out
+- [ ] Deploy script (blocked: needs Shaun's Google sign-in), BEFORE merge: old script silently drops email
 
 ## Smoke Tests
 

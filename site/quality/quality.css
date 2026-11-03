@@ -11,7 +11,7 @@
 
 .screen { display: none; gap: 14px; }
 .quiz[data-screen="intro"] [data-for="intro"], .quiz[data-screen="rater"] [data-for="rater"],
-.quiz[data-screen="trial"] [data-for="trial"], .quiz[data-screen="done"] [data-for="done"] { display: grid; }
+.quiz[data-screen="trial"] [data-for="trial"], .quiz[data-screen="contact"] [data-for="contact"], .quiz[data-screen="done"] [data-for="done"] { display: grid; }
 h1 { margin: 4px 0 0; font: 600 22px/1.25 var(--sans); }
 .screen p, .screen ul { margin: 0; }
 .screen li { margin: 6px 0; }
@@ -36,6 +36,13 @@ legend { font-weight: 600; margin-bottom: 6px; padding: 0; font-size: 15px; }
 }
 .choices input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .choices input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+#contact-form { display: grid; gap: 12px; }
+.field { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+.field input { min-height: var(--tap); padding: 0 12px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); color: var(--ink); font: 16px/1.2 var(--sans); }
+.check { display: flex; align-items: center; gap: 10px; min-height: var(--tap); font-size: 15px; }
+.check input { width: 22px; height: 22px; flex: none; }
+.hint { font-size: 14px; color: var(--ink-2); }
 
 .credits-page { display: grid; gap: 14px; }
 .credits-page p, .credits-page ul { margin: 0; }

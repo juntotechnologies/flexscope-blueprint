@@ -123,11 +123,21 @@ function nextTrial() {
 function advance() {
   run.index += 1;
   if (run.index < run.trials.length) loadTrial();
-  else submit();
+  else show('contact');
+}
+
+// Email leaves the page only when valid + ticked.
+function contactAnswer() {
+  const email = $('contact-email');
+  return email.value.trim() && email.validity.valid && $('contact-ok').checked ? {email: email.value.trim()} : null;
+}
+
+function device() {
+  return {w: screen.width, h: screen.height, ratio: devicePixelRatio};
 }
 
 function payload() {
-  return {session: run.session, startedAt: run.startedAt, finishedAt: new Date().toISOString(), phone: matchMedia('(max-width: 600px)').matches, rater: run.rater, trials: run.trials};
+  return {session: run.session, startedAt: run.startedAt, finishedAt: new Date().toISOString(), phone: matchMedia('(max-width: 600px)').matches, device: device(), contact: contactAnswer(), rater: run.rater, trials: run.trials};
 }
 
 // text/plain keeps it a simple request (no preflight); the Apps Script reply is readable, so check it says ok.
@@ -179,6 +189,7 @@ function start() {
   $('tap-play').addEventListener('click', onTapPlay);
   $('video-size').addEventListener('click', onVideoSize);
   $('skip-clip').addEventListener('click', skipClip);
+  $('contact-send').addEventListener('click', submit);
   $('retry').addEventListener('click', retry);
   show('intro');
 }
