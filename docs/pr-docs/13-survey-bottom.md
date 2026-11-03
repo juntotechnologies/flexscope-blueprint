@@ -1,6 +1,6 @@
-# PR planned: Survey bottom levels
+# PR 13: Survey bottom levels
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/survey-bottom`
 
