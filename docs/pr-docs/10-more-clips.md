@@ -1,6 +1,6 @@
-# PR planned: More clips + case mix
+# PR 10: More clips + case mix
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/more-clips`
 
