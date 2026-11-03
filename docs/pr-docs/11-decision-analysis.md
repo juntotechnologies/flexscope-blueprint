@@ -50,3 +50,11 @@ Not applicable: command-line output. Tested on synthetic CSV for pass, fail, voi
 ## Related Docs
 
 - [Survey ladder](./planned-survey-ladder.md), [Camera evidence](./planned-camera-evidence.md), [Roadmap](../roadmap.md)
+
+## Synthetic run
+
+Method: `npm run quality:analyze` on made-up CSV: 20 raters, 15 clips, true accuracy q720 95%, q400 92%, q200 90%, q720low 85%, q64 40%. Numbers show tool behavior, not results.
+
+- q400 interval -13.4 to 12.3; q200 -20.7 to 12.6: at 20 raters + 13 patients, 10-point margin fails levels only 3-5 points below best. Lower levels will rarely "pass" w/ this rater count.
+- q720 = cheapest + top level: passes accuracy by construction if best; its real test = usable ≥4 + noisy level.
+- Floor detected; verdict line correct. Margin stays proposed: confirm w/ cousin + pilot data.
