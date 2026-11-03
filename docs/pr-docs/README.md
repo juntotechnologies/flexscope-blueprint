@@ -4,7 +4,7 @@
 
 | Doc | Description |
 |-----|-------------|
-| [PR planned: README survey link](./planned-readme-survey-link.md) | Survey link in README, off public page |
+| [PR 6: README survey link](./6-readme-survey-link.md) | Survey link in README, off public page |
 
 ## Archive
 
