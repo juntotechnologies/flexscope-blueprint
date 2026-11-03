@@ -1,0 +1,4 @@
+{
+  "setup": "sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg && npm ci",
+  "test": "CHROME_PATH=\"${CHROME_PATH:-$(command -v google-chrome || echo '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser')}\" npm run --silent check"
+}
