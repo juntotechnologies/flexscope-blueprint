@@ -6,7 +6,6 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Save before email](./16-save-before-email.md) | Closing on email screen keeps answers |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
@@ -15,6 +14,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [Save before email](./archive/16-save-before-email.md) | Closing on email screen keeps answers |
 | [Survey real parts](./archive/15-survey-real-parts.md) | Every level pairs w/ a buyable camera |
 | [Survey ops notes](./archive/14-survey-ops-notes.md) | Sheet id + deploy pointer |
 | [Survey bottom](./archive/13-survey-bottom.md) | Levels bad enough to find where quality fails |
