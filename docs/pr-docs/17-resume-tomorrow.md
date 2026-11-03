@@ -28,8 +28,8 @@ Branch: `docs/resume-tomorrow`
 
 Shaun, in order:
 
-- [ ] Send cousin the real link, https://flexscope.juntotechnologies.com/quality/ . Ask: check each clip against its label (`tools/quality/study.json`, field `truthQuote`); is 10 points the right pass margin; which normal exam clips could the hospital approve
-- [ ] Trash 2 blank Sheets: https://docs.google.com/spreadsheets/d/1V4k7oFl6R2t_-key1UNg1K77yLuP8-7vGKyt3dctKn0/edit + https://docs.google.com/spreadsheets/d/1IMByzB8Xn6RfH1BjEFpsr4DMtP0uN7wZzHIdnJYzffQ/edit. Or tell agent "trash those 2 sheets". Keep 1yYPEz…
+- [x] Send cousin the real link, https://flexscope.juntotechnologies.com/quality/ . Ask: check each clip against its label (`tools/quality/study.json`, field `truthQuote`); is 10 points the right pass margin; which normal exam clips could the hospital approve Sent 2026-11-03; waiting on reply.
+- [x] Blank Sheets trashed.
 - [ ] After cousin replies: email seller 5 questions, `sellerQuestions` in `tools/quality/cameras.json`
 - [ ] After agent says clips are fixed: send link to about 20 ENTs
 - [ ] After verdict: approve sample buy, about $405-420 (money)
@@ -49,7 +49,8 @@ Agent, after ENT responses:
 
 Agent, before survey link goes public on the hub:
 
-- [ ] Analysis: verdict + `minRaters` count ENT roles only; test. Today every session counts. Hub plan: https://github.com/juntotechnologies/juntotechnologies.github.io/blob/docs/hub-all-projects/docs/plans/hub-all-projects.md
+- [x] Analysis: verdict + `minRaters` count ENT roles only.
+- [ ] After cousin check: add survey link to hub + Flexscope site. Hub live with Concepts: https://www.juntotechnologies.com/
 
 Agent, not blocking survey:
 
@@ -57,6 +58,10 @@ Agent, not blocking survey:
 - [ ] swarm-infra: archive PR 42 doc w/ next swarm change
 - [ ] 3d-printing-lab: bare `python3` → `uv`
 - [ ] `~/.ssh/config` differs from personal-config copy: resolve
+
+Shaun, not blocking survey:
+
+- [ ] OptoLab: ping hackathon people for written consent; tell Dean repo moved to https://github.com/juntotechnologies/OptoLab
 
 ## Known Limits
 
