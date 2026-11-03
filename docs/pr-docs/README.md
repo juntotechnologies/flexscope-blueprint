@@ -2,8 +2,18 @@
 
 ## Active
 
+Order + evidence rules: [roadmap](../roadmap.md).
+
 | Doc | Description |
 |-----|-------------|
+| [Camera evidence](./planned-camera-evidence.md) | Sourced part + price table; README fixes |
+| [Survey ladder](./planned-survey-ladder.md) | Levels map to parts; level bad enough to fail |
+| [More clips](./planned-more-clips.md) | More exams, normals + lesions |
+| [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
+| [Decision analysis](./planned-decision-analysis.md) | Pass rule before data; cheapest passing level |
+| [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
+| [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
+| [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
 
 ## Archive
 
