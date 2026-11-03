@@ -1,7 +1,7 @@
 {
   "_note": "SSOT for the image-quality study: levels (camera classes), questions, clips + true answers + credits, where clips + answers live. make-clips.cjs, build.cjs, analyze.cjs read this. Clip id = opaque (shown to raters, in file names); name = human label (never shipped). source: open = committed open-license file tools/quality/open/<name>.mp4 → public build (out); private = tools/quality/sources/<name>.mp4 (gitignored) → --real build (privateOut, gitignored). crop = ffmpeg crop to the scope image (default: centered square).",
   "title": "Scope image quality test",
-  "minutes": 5,
+  "minutes": 8,
   "levels": [
     {"id": "q720", "label": "720×720", "camera": "ov9734-3.5", "size": 720, "fps": 30, "noise": 0, "blur": 0},
     {"id": "q720low", "label": "720×720 + noise, 15 fps", "camera": "ov9734-3.5", "assumption": "Noise + blur + fps are guesses at poor light until bench data replaces them", "size": 720, "fps": 15, "noise": 18, "blur": 0.6},
@@ -10,14 +10,14 @@
     {"id": "q64", "label": "64×64 floor", "camera": null, "size": 64, "fps": 30, "noise": 0, "blur": 0}
   ],
   "questions": [
-    {"id": "lesion", "text": "Any lesion (mass or growth) visible?", "options": [ "Yes", "No", "Can't tell" ], "scored": true},
-    {"id": "mobility", "text": "Do both vocal folds move?", "options": [ "Both move", "One or both don't", "Can't tell" ], "scored": true},
-    {"id": "usable", "text": "Would you use this image for a diagnostic exam?", "options": [ "1 No", "2", "3", "4", "5 Yes" ], "scored": false}
+    {"id": "lesion", "text": "Any lesion (mass or growth) visible?", "options": ["Yes", "No", "Can't tell"], "scored": true},
+    {"id": "mobility", "text": "Do both vocal folds move?", "options": ["Both move", "One or both don't", "Can't tell"], "scored": true},
+    {"id": "usable", "text": "Would you use this image for a diagnostic exam?", "options": ["1 No", "2", "3", "4", "5 Yes"], "scored": false}
   ],
   "rater": [
-    {"id": "role", "text": "Your role", "options": [ "ENT attending", "ENT resident", "Other clinician", "Other" ]},
-    {"id": "setting", "text": "Where you mostly work", "options": [ "Low-resource hospital", "High-resource hospital", "Both" ]},
-    {"id": "scopes", "text": "Flexible scopes you do per week", "options": [ "0", "1-5", "6-20", "20+" ]}
+    {"id": "role", "text": "Your role", "options": ["ENT attending", "ENT resident", "Other clinician", "Other"]},
+    {"id": "setting", "text": "Where you mostly work", "options": ["Low-resource hospital", "High-resource hospital", "Both"]},
+    {"id": "scopes", "text": "Flexible scopes you do per week", "options": ["0", "1-5", "6-20", "20+"]}
   ],
   "clips": [
     {
@@ -28,7 +28,6 @@
       "start": 0,
       "seconds": 8,
       "truth": {
-        "lesion": "No",
         "mobility": "One or both don't"
       },
       "credit": {
@@ -38,7 +37,8 @@
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "part": "video S1 (before surgery)"
-      }
+      },
+      "truthQuote": "bilateral vocal fold paralysis (paper title); video S1 before surgery"
     },
     {
       "id": "m2",
@@ -48,7 +48,6 @@
       "start": 0,
       "seconds": 8,
       "truth": {
-        "lesion": "No",
         "mobility": "Both move"
       },
       "credit": {
@@ -58,7 +57,8 @@
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "part": "video S2 (after surgery)"
-      }
+      },
+      "truthQuote": "video S2 after reinnervation surgery; cousin must confirm from clip"
     },
     {
       "id": "x4",
@@ -78,6 +78,245 @@
         "copyright": "© 2022 Shukla",
         "license": "CC BY 3.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+      },
+      "truthQuote": "Recurrence of Laryngeal Hemangioma (paper title); video 2"
+    },
+    {
+      "id": "a3",
+      "name": "lp-glottic-a",
+      "patient": "li2023-s1",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes"
+      },
+      "truthQuote": "Video S1. Laryngeal cancer (glottic carcinoma) detection of LPAIDS in the WLI video",
+      "credit": {
+        "work": "Li et al. Real-time detection of laryngopharyngeal cancer using an artificial intelligence-assisted system with multimodal data. J Transl Med 2023",
+        "url": "https://doi.org/10.1186/s12967-023-04572-y",
+        "copyright": "© The Author(s) 2023",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S1, from 1 s"
+      }
+    },
+    {
+      "id": "b9",
+      "name": "lp-glottic-b",
+      "patient": "li2023-s3",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes"
+      },
+      "truthQuote": "Video S3. Laryngeal cancer (glottic carcinoma)",
+      "credit": {
+        "work": "Li et al. Real-time detection of laryngopharyngeal cancer using an artificial intelligence-assisted system with multimodal data. J Transl Med 2023",
+        "url": "https://doi.org/10.1186/s12967-023-04572-y",
+        "copyright": "© The Author(s) 2023",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S3, from 2 s"
+      }
+    },
+    {
+      "id": "c5",
+      "name": "lp-supraglottic",
+      "patient": "li2023-s5",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes"
+      },
+      "truthQuote": "Video S5. Laryngeal cancer (supraglottic carcinoma)",
+      "credit": {
+        "work": "Li et al. Real-time detection of laryngopharyngeal cancer using an artificial intelligence-assisted system with multimodal data. J Transl Med 2023",
+        "url": "https://doi.org/10.1186/s12967-023-04572-y",
+        "copyright": "© The Author(s) 2023",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S5, from 1 s"
+      }
+    },
+    {
+      "id": "d8",
+      "name": "lp-hypopharyngeal",
+      "patient": "li2023-s7",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes"
+      },
+      "truthQuote": "Video S7. Hypopharyngeal cancer",
+      "credit": {
+        "work": "Li et al. Real-time detection of laryngopharyngeal cancer using an artificial intelligence-assisted system with multimodal data. J Transl Med 2023",
+        "url": "https://doi.org/10.1186/s12967-023-04572-y",
+        "copyright": "© The Author(s) 2023",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S7, from 6 s"
+      }
+    },
+    {
+      "id": "e2",
+      "name": "baldini-scc",
+      "patient": "baldini2024-b",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes"
+      },
+      "truthQuote": "Video S2: This endoscopy shows a white light examination of a right laryngeal squamous cell carcinoma.",
+      "credit": {
+        "work": "Baldini et al. An automated approach for real-time informative frames classification in laryngeal endoscopy using deep learning. Eur Arch Otorhinolaryngol 2024",
+        "url": "https://doi.org/10.1007/s00405-024-08676-z",
+        "copyright": "© The Author(s) 2024",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S2, from 26 s"
+      }
+    },
+    {
+      "id": "f6",
+      "name": "ajeti-pre",
+      "patient": "ajeti2024",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {},
+      "credit": {
+        "work": "Ajeti. Laryngeal Mycosis in an Immunocompetent Patient: A Case Report. Cureus 2024",
+        "url": "https://doi.org/10.7759/cureus.54241",
+        "copyright": "Copyright © 2024, Ajeti et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video 1, from 30 s"
+      }
+    },
+    {
+      "id": "g4",
+      "name": "ajeti-post",
+      "patient": "ajeti2024",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "No"
+      },
+      "truthQuote": "complete resolution of symptoms and signs after three weeks",
+      "credit": {
+        "work": "Ajeti. Laryngeal Mycosis in an Immunocompetent Patient: A Case Report. Cureus 2024",
+        "url": "https://doi.org/10.7759/cureus.54241",
+        "copyright": "Copyright © 2024, Ajeti et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video 2, from 20 s"
+      }
+    },
+    {
+      "id": "h7",
+      "name": "aortic-cyst-palsy",
+      "patient": "g2023",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "lesion": "Yes",
+        "mobility": "One or both don't"
+      },
+      "truthQuote": "left vallecular cyst and left true vocal cord palsy",
+      "credit": {
+        "work": "G et al. Aortic Pseudoaneurysm as an Unusual Cause of Vocal Palsy. Cureus 2023",
+        "url": "https://doi.org/10.7759/cureus.44255",
+        "copyright": "© 2023 G et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video 1, from 26 s"
+      }
+    },
+    {
+      "id": "j3",
+      "name": "varshney-palsy",
+      "patient": "varshney2023",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "mobility": "One or both don't"
+      },
+      "truthQuote": "his left true vocal cord was found to be paralyzed",
+      "credit": {
+        "work": "Varshney et al. A Unique Case of Unilateral Vocal Cord Palsy Following an Electrocution Injury. Cureus 2023",
+        "url": "https://doi.org/10.7759/cureus.45443",
+        "copyright": "Copyright © 2023, Varshney et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video 1, from 3 s"
+      }
+    },
+    {
+      "id": "n5",
+      "name": "kamarudin-uvfp",
+      "patient": "kamarudin2022",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "mobility": "One or both don't"
+      },
+      "truthQuote": "bowed and immobile left vocal fold",
+      "credit": {
+        "work": "Kamarudin et al. Subchordal Cyst Containing Non-degraded Hyaluronic Acid: A Rare Complication of Injection Laryngoplasty. Cureus 2022",
+        "url": "https://doi.org/10.7759/cureus.27801",
+        "copyright": "Copyright © 2022, Kamarudin et al.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video 1"
+      }
+    },
+    {
+      "id": "p8",
+      "name": "stelman-tapia",
+      "patient": "stelman2021",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "mobility": "One or both don't"
+      },
+      "truthQuote": "immobility of the right vocal cord (Video 1)",
+      "credit": {
+        "work": "Stelman et al. Tapia's Syndrome (Concurrent Unilateral Recurrent Laryngeal and Hypoglossal Nerve Palsy) Following Left Retrosigmoid Craniotomy for Schwannoma Resection. Cureus 2021",
+        "url": "https://doi.org/10.7759/cureus.17909",
+        "copyright": "Copyright © 2021, Stelman et al.",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "part": "video 1, from 40 s"
+      }
+    },
+    {
+      "id": "r2",
+      "name": "pianosi-pvfm",
+      "patient": "pianosi2018",
+      "source": "open",
+      "start": 0,
+      "seconds": 8,
+      "truth": {
+        "mobility": "Both move"
+      },
+      "truthQuote": "This patient's glottis alternates between normal, wide-open configuration, and paradoxical vocal fold movement.",
+      "credit": {
+        "work": "Pianosi et al. Observational study of laryngoscopy plus flow-volume loops during exercise. Clin Case Rep 2018",
+        "url": "https://doi.org/10.1002/ccr3.1375",
+        "copyright": "© 2018 The Authors. Clinical Case Reports published by John Wiley & Sons Ltd.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "part": "video S2, from 15 s"
       }
     }
   ],

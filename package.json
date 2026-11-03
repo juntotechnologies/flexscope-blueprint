@@ -6,7 +6,7 @@
     "build": "npm run gen && node tools/teardown/scripts/build-viewer.cjs drawing/drawing.json dist/index.html",
     "proof:quick": "npm run gen && node tools/teardown/scripts/proof.cjs drawing/drawing.json proof/quick --quick",
     "proof": "npm run gen && node tools/teardown/scripts/proof.cjs drawing/drawing.json proof/full",
-    "check": "node tools/gen.cjs --check && node --test tools/quality/gen-camera-table.test.cjs tools/quality/levels.test.cjs && node tools/quality/gen-camera-table.cjs --check && npm run site && node tools/teardown/scripts/check-viewer.cjs dist/index.html check/",
+    "check": "node tools/gen.cjs --check && node --test tools/quality/gen-camera-table.test.cjs tools/quality/levels.test.cjs tools/quality/clips.test.cjs && node tools/quality/gen-camera-table.cjs --check && npm run site && node tools/teardown/scripts/check-viewer.cjs dist/index.html check/",
     "site": "npm run build && node tools/site/build.cjs && npm run quality",
     "dev": "npm run site && node tools/site/serve.cjs",
     "site:shots": "node tools/site/shot.cjs",

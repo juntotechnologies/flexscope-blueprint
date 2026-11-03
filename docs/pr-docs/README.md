@@ -6,7 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [More clips](./planned-more-clips.md) | More exams, normals + lesions |
+| [More clips](./10-more-clips.md) | More exams, normals + lesions |
 | [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
 | [Decision analysis](./planned-decision-analysis.md) | Pass rule before data; cheapest passing level |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
