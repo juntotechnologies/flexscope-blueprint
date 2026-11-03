@@ -1,6 +1,6 @@
-# PR planned: Camera evidence table
+# PR 8: Camera evidence table
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/camera-evidence`
 
