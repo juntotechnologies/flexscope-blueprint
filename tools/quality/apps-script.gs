@@ -33,7 +33,7 @@ function saveContact(book, received, s) {
 
 function save(book, s, received) {
   const rows = s.trials.map(function row(t) { return trialRow(received, s, t); });
-  appendText(sheetWithHeader(book, SHEET, HEADER), rows, HEADER.length);
+  if (rows.length) appendText(sheetWithHeader(book, SHEET, HEADER), rows, HEADER.length);
   saveContact(book, received, s);
 }
 

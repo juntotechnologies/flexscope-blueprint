@@ -123,7 +123,7 @@ function nextTrial() {
 function advance() {
   run.index += 1;
   if (run.index < run.trials.length) loadTrial();
-  else show('contact');
+  else submitAnswers();
 }
 
 // Email leaves the page only when valid + ticked.
@@ -137,7 +137,7 @@ function device() {
 }
 
 function payload() {
-  return {session: run.session, startedAt: run.startedAt, finishedAt: new Date().toISOString(), phone: matchMedia('(max-width: 600px)').matches, device: device(), contact: contactAnswer(), rater: run.rater, trials: run.trials};
+  return {session: run.session, startedAt: run.startedAt, finishedAt: new Date().toISOString(), phone: matchMedia('(max-width: 600px)').matches, device: device(), rater: run.rater, trials: run.trials};
 }
 
 // text/plain keeps it a simple request (no preflight); the Apps Script reply is readable, so check it says ok.
@@ -152,6 +152,7 @@ async function deliver(body) {
   try {
     await send(body);
     $('done-text').textContent = 'Your answers were sent.';
+    $('contact-send').disabled = false;
   } catch (error) {
     $('done-text').textContent = 'Could not send your answers. Check your connection, then tap Send again. Please keep this page open.';
     $('retry').hidden = false;
@@ -159,17 +160,34 @@ async function deliver(body) {
   }
 }
 
-function submit() {
+// Answers go as soon as the last clip ends: closing on the email screen must not lose them.
+function submitAnswers() {
   const body = JSON.stringify(payload());
   globalThis.qualityLastSubmission = body;
   $('video').removeAttribute('src');
-  show('done');
-  if (PREVIEW) { $('done-text').textContent = 'Preview mode: answers were not sent.'; return; }
+  show('contact');
+  if (PREVIEW) { $('done-text').textContent = 'Preview mode: answers were not sent.'; $('contact-send').disabled = false; return; }
   deliver(body);
 }
 
 function retry() {
   deliver(globalThis.qualityLastSubmission);
+}
+
+async function sendContact(contact) {
+  try {
+    await send(JSON.stringify({session: run.session, contact, trials: []}));
+  } catch (error) {
+    $('thanks-text').textContent = 'Your answers were saved, but your email could not be sent.';
+    console.error(JSON.stringify({event: 'quality.contact_failed', session: run.session, error: error.message}));
+  }
+}
+
+function finish() {
+  const contact = contactAnswer();
+  globalThis.qualityLastContact = contact;
+  show('done');
+  if (contact && !PREVIEW) sendContact(contact);
 }
 
 function onGo(event) {
@@ -189,7 +207,7 @@ function start() {
   $('tap-play').addEventListener('click', onTapPlay);
   $('video-size').addEventListener('click', onVideoSize);
   $('skip-clip').addEventListener('click', skipClip);
-  $('contact-send').addEventListener('click', submit);
+  $('contact-send').addEventListener('click', finish);
   $('retry').addEventListener('click', retry);
   show('intro');
 }
