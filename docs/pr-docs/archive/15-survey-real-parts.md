@@ -1,6 +1,6 @@
 # PR 15: Every survey level = real part
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/survey-real-parts`
 
@@ -37,4 +37,4 @@ Not applicable beyond site walk: same page, new clip files.
 
 ## Related Docs
 
-- [Roadmap](../roadmap.md)
+- [Roadmap](../../roadmap.md)
