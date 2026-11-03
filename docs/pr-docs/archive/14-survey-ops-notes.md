@@ -1,6 +1,6 @@
 # PR 14: Survey ops notes
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/survey-ops-notes`
 

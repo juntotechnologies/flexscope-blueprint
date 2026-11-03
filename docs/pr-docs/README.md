@@ -6,7 +6,6 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Survey ops notes](./14-survey-ops-notes.md) | Sheet id + deploy pointer |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
@@ -15,6 +14,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [Survey ops notes](./archive/14-survey-ops-notes.md) | Sheet id + deploy pointer |
 | [Survey bottom](./archive/13-survey-bottom.md) | Levels bad enough to find where quality fails |
 | [Survey contact](./archive/12-survey-contact.md) | Optional email + OK to contact |
 | [Decision analysis](./archive/11-decision-analysis.md) | Pass rule before data; cheapest passing level |
