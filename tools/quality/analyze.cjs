@@ -104,7 +104,7 @@ function points(fraction) {
 function levelStats(rows, marks) {
   const rule = study.decision;
   const base = study.levels.map(function stat(l) {
-    return {id: l.id, camera: l.camera, assumption: l.assumption, accuracy: plainAccuracy(ofLevel(marks, l.id)), usable: usableMean(ofLevel(rows, l.id), rule.raterRoles)};
+    return {id: l.id, camera: l.camera, assumption: l.assumption, floor: l.floor, accuracy: plainAccuracy(ofLevel(marks, l.id)), usable: usableMean(ofLevel(rows, l.id), rule.raterRoles)};
   });
   const ids = base.map(function id(s) { return s.id; });
   const intervals = differenceIntervals(marks, ids, bestLevel(base), rule.bootstrapRuns, rule.seed);

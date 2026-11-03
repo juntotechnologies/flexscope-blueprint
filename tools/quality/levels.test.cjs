@@ -11,7 +11,8 @@ test('unknown camera + missing floor fail', function badLevels() {
 });
 
 test('label comes from camera table', function label() {
-  assert.strictEqual(cameraLabel({camera: null}, cameras), 'none: floor');
+  assert.strictEqual(cameraLabel({camera: null, floor: true}, cameras), 'none: floor');
+  assert.strictEqual(cameraLabel({camera: null}, cameras), 'none: probe');
   assert.strictEqual(cameraLabel({camera: cameras[0].id}, cameras), cameras[0].part);
 });
 
