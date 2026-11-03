@@ -1,6 +1,6 @@
 # PR 8: Camera evidence table
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/camera-evidence`
 
@@ -35,7 +35,7 @@ Seller cautions: some Camemake pages show "This combination does not exist"; CM_
 - [x] Re-fetched seller pages 2026-11-02: CM_ENDO_001, 002, 005, 007, 008, 010, 011 match; others not re-fetched
 - [x] Seller questions drafted in `cameras.json`
 - [x] README: corrected claims; build sequence follows table
-- [~] ~~Record seller answers + quotes~~ moved to [Camera bench](./planned-camera-bench.md): needs sending from Shaun
+- [~] ~~Record seller answers + quotes~~ moved to [Camera bench](../planned-camera-bench.md): needs sending from Shaun
 
 ## Smoke Tests
 
@@ -47,8 +47,8 @@ Not applicable: data + docs. `npm run check` pass: table tests, drift check, sit
 
 ## Non-Goals
 
-- Buying samples: [Camera bench](./planned-camera-bench.md).
+- Buying samples: [Camera bench](../planned-camera-bench.md).
 
 ## Related Docs
 
-- [Roadmap](../roadmap.md)
+- [Roadmap](../../roadmap.md)
