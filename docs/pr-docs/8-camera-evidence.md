@@ -1,6 +1,6 @@
-# PR planned: Camera evidence table
+# PR 8: Camera evidence table
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/camera-evidence`
 
@@ -30,16 +30,16 @@ Seller cautions: some Camemake pages show "This combination does not exist"; CM_
 
 ## Implementation Checklist
 
-- [ ] `tools/quality/cameras.json`: SSOT for table; each row has source URL, date seen, class
-- [ ] Test fails on row w/o source, date or class
-- [ ] Re-fetch each seller page; mark changes + unavailable parts
-- [ ] Draft seller questions: decoder needed? cable OD (cord = 3.0 mm)? LED count? real fps at 720p? MOQ + lead time? NDA?
-- [ ] Record seller answers + quotes in table
-- [ ] README: correct lines above; cost-down + build sequence follow table
+- [x] `tools/quality/cameras.json`: SSOT for table; each row has source URL + class; generated README table + drift check
+- [x] Test fails on row w/o source or class
+- [x] Re-fetched seller pages 2026-11-02: CM_ENDO_001, 002, 005, 007, 008, 010, 011 match; others not re-fetched
+- [x] Seller questions drafted in `cameras.json`
+- [x] README: corrected claims; build sequence follows table
+- [~] ~~Record seller answers + quotes~~ moved to [Camera bench](./planned-camera-bench.md): needs sending from Shaun
 
 ## Smoke Tests
 
-Not applicable: data + docs. Main site README tabs checked w/ `ops site-check` after edit.
+Not applicable: data + docs. `npm run check` pass: table tests, drift check, site build, viewer.
 
 ## Product Decisions
 

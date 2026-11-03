@@ -16,6 +16,7 @@ First candidate, from list prices: 10× CM_ENDO_011 or 010 + 10× CM_ENDO_017 de
 
 ## Implementation Checklist
 
+- [ ] Shaun sends seller questions from `tools/quality/cameras.json`; record answers + quotes there
 - [ ] Purchase request: part, qty, cost, lead time, seller answers; Shaun approves
 - [ ] Bench setup: throat phantom, fixed light + distance, script for capture
 - [ ] Measure: resolution chart, noise in low light, real fps + compression, field of view, tip temperature over time

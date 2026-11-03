@@ -33,7 +33,7 @@ Benchmark = Ambu aScope 4 RhinoLaryngo Slim (single-use market reference; values
 | Part | Job | Cheap build route |
 |---|---|---|
 | Distal tip (camera + LEDs) | Image + light at tip | 3.5 mm molded housing; wafer-level CMOS camera; 2 white LEDs beside it |
-| Camera module + cable | Sensor | OmniVision OVM6948: 0.65 × 0.65 × 1.158 mm, 200 × 200 px, 120° FOV, analog out, single-use target (OVM6948 brief). Hi-res alt: OV6946-class 400 × 400 (est.) |
+| Camera module + cable | Sensor | OmniVision OVM6948: 0.65 × 0.65 × 1.158 mm, 200 × 200 px, 120° FOV, analog out, single-use target (OVM6948 brief). Options + prices: Camera options below |
 | Cover window | Seal + optical face | Clear PC/PMMA disc, UV-cure glued |
 | Bending links (×8) | Flex in 1 plane | Stainless/nitinol rings, or 1 laser-cut notched hypotube (fewer parts) |
 | Pull wires (×2) | Steer tip up/down | Stainless or PE (Dyneema) braid, anchored in tip housing, wound on drum |
@@ -63,7 +63,7 @@ Goal: cheapest working bench unit (bends + streams video). **Not for human use**
 
 | Part | Cheapest route | $ | Basis |
 |---|---|---|---|
-| Camera + LEDs + USB | 3.9 mm USB endoscope module, 6 LEDs, UVC (or gut a ~$25 3.9 mm USB borescope) | 20 | L |
+| Camera + LEDs + USB | 3.9 mm OV9734 USB endoscope module, UVC (CM_ENDO_023, $20.51 @10; or gut a ~$25 3.9 mm USB borescope) | 20 | L |
 | Bending section | Notched tube: 4 mm PTFE or thin-wall steel tube, hand-cut slots (FDM can't print 4 mm links) | 2–10 | E |
 | Pull wires ×2 | 0.2–0.3 mm stainless leader wire / guitar string | 2 | E |
 | Insertion cord | 4 mm OD PTFE tube (camera cable + 2 small wire liners inside) | 2 | L (~£4/m) |
@@ -74,7 +74,7 @@ Goal: cheapest working bench unit (bends + streams video). **Not for human use**
 | **Per unit** | | **~30–40** | E |
 | One-time | Packs (wire, heat-shrink, glue, screws), small files/Dremel bits | ~30–50 | E |
 
-Biggest gaps vs real device: 3.9 mm tip (target 3.5); off-the-shelf module not medical; LED tip heat unmeasured; no sterilization. Cheapest 3.5 mm-class path = OVM6948/OVM6946 module (~$64 bare at 200+ qty, L) + own USB bridge board → cost up, size down.
+Biggest gaps vs real device: 3.9 mm tip (target 3.5); off-the-shelf module not medical; LED tip heat unmeasured; no sterilization. Cheapest 3.5 mm-class path seen = OV9734 module, about $18-42 @10 (seller list, not quoted): more pixels than OVM6948/OVM6946 + lower price, larger size. Cable fit in 3.0 mm cord unverified.
 
 Order of work: 1 module + PTFE tube + wire → bend test on bench → print handle around it.
 
@@ -94,7 +94,7 @@ Device type = nasopharyngoscope; expect FDA Class II, 510(k) (verify product cod
 ## Build sequence
 
 1. Bench prototype: off-the-shelf 2–3.9 mm USB borescope camera + 3D-printed handle + notched tube → prove bending + image.
-2. Swap to OVM6948-class sensor + custom bridge board at 3.5 mm.
+2. Swap to 3.3-3.5 mm camera chosen from survey + bench results (see Camera options).
 3. Molded handle + extruded cord; DFM (design for manufacture) review.
 4. Verification testing vs table above; 510(k).
 
@@ -110,6 +110,22 @@ Device type = nasopharyngoscope; expect FDA Class II, 510(k) (verify product cod
 | `tools/teardown/`, `.agents/skills/teardown/` | Teardown skill (from bench-bridge) |
 
 Cmds: `npm i` → `npm run proof` → `npm run check` → `npm run site`.
+
+## Camera options
+
+<!-- cameras:begin -->
+| Part | Pixels | Tip OD | Fits 3.5 mm tip | List price, low qty | Evidence |
+|---|---|---|---|---|---|
+| CM_ENDO_010 / 011 (OV9734) | 1280×720 | 3.5 mm | yes, no spare wall; LEDs integrated | $17.43-18.71 @10; 40.57-41.85 if decoder needed | [seller-list](https://camemake.eu/shop/cm-endo-011-ov9734-hd-endoscope-camera-1280-720-with-102-fov-967) |
+| CM_ENDO_014 (OV9734) | 1280×720 | 3.3 mm | yes | $19.49 @10; 42.63 if decoder needed | [seller-list](https://camemake.eu/shop?tags=7) |
+| CM_ENDO_023 (OV9734) | 1280×720 | 3.9 mm | no; bench only | $20.51 @10, decoder built in | [seller-list](https://www.digikey.at/en/products/detail/camemake/CM-ENDO-023/26957912) |
+| CM_ENDO_021 + 022 decoder (ES101) | 960×960 | 3 mm | yes | $101.72 @10 | [seller-list](https://camemake.eu/shop?tags=7) |
+| CM_ENDO_007 + 008 decoder (OCHFA10) | 720×720 | 2 mm | yes | $608.28 @10 | [seller-list](https://camemake.eu/shop/cm-endo-007-ochfa10-packaged-endoscope-module-720-720-with-4-leds-963) |
+| CM_ENDO_001 / 002 + 005 decoder (OVM6946; seller table says OV6949: confirm) | 400×400 | 2 mm | yes | $364.00-376.86 @10 | [seller-list](https://camemake.eu/shop/cm-endo-002-400-400-packaged-endoscope-camera-with-ov6946-4-leds-958) |
+| OVM6948 USB, Huake | 200×200 | 1 mm | yes | $365-370 @1 | [snippet](https://www.ovt.com/wp-content/uploads/2023/03/OVM6948-PB-v1.5-WEB.pdf) |
+
+Seen 2026-11-02. List prices, not quotes; nothing ordered.
+<!-- cameras:end -->
 
 ## Sources
 

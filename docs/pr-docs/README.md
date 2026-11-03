@@ -6,7 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Camera evidence](./planned-camera-evidence.md) | Sourced part + price table; README fixes |
+| [Camera evidence](./8-camera-evidence.md) | Sourced part + price table; README fixes |
 | [Survey ladder](./planned-survey-ladder.md) | Levels map to parts; level bad enough to fail |
 | [More clips](./planned-more-clips.md) | More exams, normals + lesions |
 | [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
