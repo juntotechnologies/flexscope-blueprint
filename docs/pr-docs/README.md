@@ -6,7 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Survey real parts](./planned-survey-real-parts.md) | Every level pairs w/ a buyable camera |
+| [Survey real parts](./15-survey-real-parts.md) | Every level pairs w/ a buyable camera |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |

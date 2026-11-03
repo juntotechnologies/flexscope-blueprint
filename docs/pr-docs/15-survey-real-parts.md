@@ -1,6 +1,6 @@
-# PR planned: Every survey level = real part
+# PR 15: Every survey level = real part
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/survey-real-parts`
 
