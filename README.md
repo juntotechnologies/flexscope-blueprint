@@ -121,6 +121,7 @@ Cmds: `npm i` → `npm run proof` → `npm run check` → `npm run site`.
 | CM_ENDO_023 (OV9734) | 1280×720 | 3.9 mm | no; bench only | $20.51 @10, decoder built in | [seller-list](https://www.digikey.at/en/products/detail/camemake/CM-ENDO-023/26957912) |
 | CM_ENDO_021 + 022 decoder (ES101) | 960×960 | 3 mm | yes | $101.72 @10 | [seller-list](https://camemake.eu/shop?tags=7) |
 | CM_ENDO_007 + 008 decoder (OCHFA10) | 720×720 | 2 mm | yes | $608.28 @10 | [seller-list](https://camemake.eu/shop/cm-endo-007-ochfa10-packaged-endoscope-module-720-720-with-4-leds-963) |
+| AMC0310USB-D3.9 (GalaxyCore, 1/10 in) | 640×480 | 3.9 mm | no; bench only | $47-63 by option | [seller-list](https://dothecamera.com/product/3-9mm-endoscope-camera-module-usb-vga-30fps-10-100mm/) |
 | CM_ENDO_001 / 002 + 005 decoder (OVM6946; seller table says OV6949: confirm) | 400×400 | 2 mm | yes | $364.00-376.86 @10 | [seller-list](https://camemake.eu/shop/cm-endo-002-400-400-packaged-endoscope-camera-with-ov6946-4-leds-958) |
 | OVM6948 USB, Huake | 200×200 | 1 mm | yes | $365-370 @1 | [snippet](https://www.ovt.com/wp-content/uploads/2023/03/OVM6948-PB-v1.5-WEB.pdf) |
 

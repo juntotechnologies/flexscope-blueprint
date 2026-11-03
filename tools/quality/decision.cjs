@@ -109,13 +109,6 @@ function goodResult(result) {
   return {verdict: 'bench-test', camera: result.camera.id, part: result.camera.part, rankUsd: result.camera.rankUsd, note};
 }
 
-// A passing level below every priced part means quality has room to fall: look for cheaper parts.
-function withProbe(result, levelStats, rule) {
-  const probes = levelStats.filter(function isProbe(s) { return s.camera === null && !s.floor; });
-  const passing = probes.filter(function pass(s) { return levelPasses(s, rule); }).map(function id(s) { return s.id; });
-  return passing.length ? {...result, cheaperPartsWorthSearching: passing} : result;
-}
-
 function verdict(levelStats, cameras, rule, raterCount) {
   if (raterCount < rule.minRaters) return {verdict: 'not enough data', note: `${raterCount} of ${rule.minRaters} raters`};
   const floor = levelStats.find(function isFloor(s) { return s.floor; });
@@ -123,7 +116,7 @@ function verdict(levelStats, cameras, rule, raterCount) {
   const ranked = [...cameras].sort(function cheap(a, b) { return a.rankUsd - b.rankUsd; });
   const results = ranked.map(function result(c) { return cameraResult(c, levelStats, rule); });
   const winner = results.find(function pass(r) { return r.passes; });
-  return withProbe(winner ? goodResult(winner) : {verdict: 'no camera passes', note: 'no tested part met the rule'}, levelStats, rule);
+  return winner ? goodResult(winner) : {verdict: 'no camera passes', note: 'no tested part met the rule'};
 }
 
 module.exports = {trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, levelPasses, floorDetected, verdict, mulberry32};

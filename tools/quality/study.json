@@ -5,9 +5,9 @@
   "levels": [
     {"id": "q720", "label": "720×720", "camera": "ov9734-3.5", "size": 720, "fps": 30, "noise": 0, "blur": 0},
     {"id": "q720low", "label": "720×720 + noise, 15 fps", "camera": "ov9734-3.5", "assumption": "Noise + blur + fps are guesses at poor light until bench data replaces them", "size": 720, "fps": 15, "noise": 18, "blur": 0.6},
+    {"id": "q400", "label": "400×400", "camera": "ovm6946-2.0", "size": 400, "fps": 30, "noise": 0, "blur": 0},
     {"id": "q200", "label": "200×200", "camera": "ovm6948-1.0", "size": 200, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q100bad", "label": "100×100 + noise, blur, 10 fps", "camera": null, "probe": "Below every priced part. Passes → search for cheaper parts", "size": 100, "fps": 10, "noise": 18, "blur": 1},
-    {"id": "q32", "label": "32×32 floor", "camera": null, "floor": true, "size": 32, "fps": 30, "noise": 0, "blur": 0}
+    {"id": "q200low", "label": "200×200 + heavy noise + blur, 10 fps", "camera": "ovm6948-1.0", "floor": true, "assumption": "Worst case for the lowest-resolution part found, poor light. Noise + blur + fps are guesses until bench data replaces them", "size": 200, "fps": 10, "noise": 28, "blur": 1.2}
   ],
   "decision": {"status": "Proposed: Shaun + cousin confirm before pilot", "marginPoints": 10, "usableMin": 4, "floorUsableMax": 3, "minRaters": 20, "raterRoles": ["ENT attending", "ENT resident"], "bootstrapRuns": 2000, "seed": 1},
   "questions": [
