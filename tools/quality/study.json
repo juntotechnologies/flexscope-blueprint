@@ -3,9 +3,9 @@
   "title": "Scope image quality test",
   "minutes": 5,
   "levels": [
-    {"id": "q720", "label": "720×720", "cameraClass": "3.9 mm USB module", "size": 720, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q400", "label": "400×400", "cameraClass": "OV6946-class 1.4 mm", "size": 400, "fps": 30, "noise": 0, "blur": 0},
-    {"id": "q200", "label": "200×200", "cameraClass": "OVM6948-class 1 mm", "size": 200, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q720", "label": "720×720", "cameraClass": "OV9734, 1280×720, cropped", "size": 720, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q400", "label": "400×400", "cameraClass": "OVM6946, 1.1 mm module", "size": 400, "fps": 30, "noise": 0, "blur": 0},
+    {"id": "q200", "label": "200×200", "cameraClass": "OVM6948, 0.65 mm module", "size": 200, "fps": 30, "noise": 0, "blur": 0},
     {"id": "q200low", "label": "200×200 + noise, 15 fps", "cameraClass": "OVM6948-class, poor light", "size": 200, "fps": 15, "noise": 18, "blur": 0.6}
   ],
   "questions": [
