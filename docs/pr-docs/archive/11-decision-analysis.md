@@ -1,6 +1,6 @@
 # PR 11: Decision rule + analysis
 
-Status: in-scope work complete
+Status: done
 
 Branch: `feature/decision-analysis`
 
@@ -49,7 +49,7 @@ Not applicable: command-line output. Tested on synthetic CSV for pass, fail, voi
 
 ## Related Docs
 
-- [Survey ladder](./planned-survey-ladder.md), [Camera evidence](./planned-camera-evidence.md), [Roadmap](../roadmap.md)
+- [Survey ladder](../planned-survey-ladder.md), [Camera evidence](../planned-camera-evidence.md), [Roadmap](../../roadmap.md)
 
 ## Synthetic run
 
