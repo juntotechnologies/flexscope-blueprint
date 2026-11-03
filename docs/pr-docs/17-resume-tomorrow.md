@@ -1,6 +1,6 @@
-# PR planned: Pick up here (from 2026-11-03)
+# PR 17: Pick up here (from 2026-11-03)
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `docs/resume-tomorrow`
 
