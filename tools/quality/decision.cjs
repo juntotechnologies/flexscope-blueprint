@@ -79,9 +79,12 @@ function mean(values) {
   return values.length ? values.reduce(function sum(a, b) { return a + b; }, 0) / values.length : NaN;
 }
 
-function usableMean(rows, roles) {
-  const entRows = rows.filter(function ent(r) { return roles.includes(r.role); });
-  return mean(entRows.map(function score(r) { return parseInt(r.usable, 10); }).filter(Number.isFinite));
+function entOnly(rows, roles) {
+  return rows.filter(function ent(r) { return roles.includes(r.role); });
+}
+
+function usableMean(rows) {
+  return mean(rows.map(function score(r) { return parseInt(r.usable, 10); }).filter(Number.isFinite));
 }
 
 function bestLevel(stats) {
@@ -119,4 +122,4 @@ function verdict(levelStats, cameras, rule, raterCount) {
   return winner ? goodResult(winner) : {verdict: 'no camera passes', note: 'no tested part met the rule'};
 }
 
-module.exports = {trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, levelPasses, floorDetected, verdict, mulberry32};
+module.exports = {entOnly, trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, levelPasses, floorDetected, verdict, mulberry32};

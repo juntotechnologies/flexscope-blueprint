@@ -4,7 +4,7 @@
 const fs = require('node:fs');
 const study = require('./study.json'), {cameras} = require('./cameras.json');
 const {cameraLabel} = require('./levels.cjs');
-const {trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, verdict} = require('./decision.cjs');
+const {entOnly, trialMarks, plainAccuracy, differenceIntervals, usableMean, bestLevel, verdict} = require('./decision.cjs');
 
 // RFC 4180 reader: quoted fields may hold commas, quotes ("") and newlines. One step per char; returns chars used.
 function quotedStep(s, text, i) {
@@ -104,7 +104,7 @@ function points(fraction) {
 function levelStats(rows, marks) {
   const rule = study.decision;
   const base = study.levels.map(function stat(l) {
-    return {id: l.id, camera: l.camera, assumption: l.assumption, floor: l.floor, accuracy: plainAccuracy(ofLevel(marks, l.id)), usable: usableMean(ofLevel(rows, l.id), rule.raterRoles)};
+    return {id: l.id, camera: l.camera, assumption: l.assumption, floor: l.floor, accuracy: plainAccuracy(ofLevel(marks, l.id)), usable: usableMean(ofLevel(rows, l.id))};
   });
   const ids = base.map(function id(s) { return s.id; });
   const intervals = differenceIntervals(marks, ids, bestLevel(base), rule.bootstrapRuns, rule.seed);
@@ -127,7 +127,9 @@ function caveats(rows) {
   console.log(`Rule status: ${study.decision.status}. Patients: ${new Set(study.clips.map(function p(c) { return c.patient; })).size}. Lesion "No" clips: ${lesionNo}: lesion score is almost all sensitivity. Raters: ${new Set(rows.map(function s(r) { return r.session; })).size}.`);
 }
 
-function decide(rows) {
+// Survey link is public: only ENT roles decide; every role still shows in the by-role table.
+function decide(allRows) {
+  const rows = entOnly(allRows, study.decision.raterRoles);
   const marks = allMarks(rows), stats = levelStats(rows, marks);
   console.table(stats.map(function row(s) { return statRow(s, marks); }));
   caveats(rows);

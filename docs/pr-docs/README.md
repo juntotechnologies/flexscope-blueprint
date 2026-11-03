@@ -6,6 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [Ready for hub](./planned-hub-ready.md) | Backlink + ENT-only verdict |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
