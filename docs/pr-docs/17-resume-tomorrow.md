@@ -28,13 +28,13 @@ Branch: `docs/resume-tomorrow`
 
 Shaun, in order:
 
-- [x] Send cousin the real link, https://flexscope.juntotechnologies.com/quality/ . Ask: check each clip against its label (`tools/quality/study.json`, field `truthQuote`); is 10 points the right pass margin; which normal exam clips could the hospital approve Sent 2026-11-03; waiting on reply.
+- [x] Cousin check dropped (Shaun, 2026-11-03): clip labels + 10-point margin not clinician-reviewed; state this when reading results.
 - [x] Blank Sheets trashed.
-- [ ] After cousin replies: email seller 5 questions, `sellerQuestions` in `tools/quality/cameras.json`
-- [ ] After agent says clips are fixed: send link to about 20 ENTs
+- [ ] Email seller 5 questions, `sellerQuestions` in `tools/quality/cameras.json`
+- [ ] Send link to about 20 ENTs
 - [ ] After verdict: approve sample buy, about $405-420 (money)
 
-Agent, once cousin replies:
+Agent, next:
 
 - [ ] Check Sheet got rows from a real page run (only direct script posts + preview walks tested so far)
 - [ ] Set `minutes` in `study.json` from cousin's measured time (8 = estimate)
@@ -50,7 +50,7 @@ Agent, after ENT responses:
 Agent, before survey link goes public on the hub:
 
 - [x] Analysis: verdict + `minRaters` count ENT roles only.
-- [ ] After cousin check: add survey link to hub + Flexscope site. Hub live with Concepts: https://www.juntotechnologies.com/
+- [x] Survey link on hub. Flexscope site link still open.
 
 Agent, not blocking survey:
 
@@ -58,10 +58,6 @@ Agent, not blocking survey:
 - [ ] swarm-infra: archive PR 42 doc w/ next swarm change
 - [ ] 3d-printing-lab: bare `python3` → `uv`
 - [ ] `~/.ssh/config` differs from personal-config copy: resolve
-
-Shaun, not blocking survey:
-
-- [ ] OptoLab: ping hackathon people for written consent; tell Dean repo moved to https://github.com/juntotechnologies/OptoLab
 
 ## Known Limits
 
