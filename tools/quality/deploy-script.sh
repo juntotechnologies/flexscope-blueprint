@@ -15,7 +15,9 @@ cp "$ROOT/tools/quality/apps-script.gs" "$WORK/Code.gs"
 cp "$ROOT/tools/quality/appsscript.json" "$WORK/appsscript.json"
 echo "{\"scriptId\": \"$SCRIPT_ID\", \"rootDir\": \".\"}" > "$WORK/.clasp.json"
 cd "$WORK"
-CLASP=(npx --yes @google/clasp@3.4.1)
+TOOL="$HOME/.local/share/flexscope-clasp"
+[ -x "$TOOL/node_modules/.bin/clasp" ] || npm install --silent --prefix "$TOOL" @google/clasp@3.4.1
+CLASP=("$TOOL/node_modules/.bin/clasp")
 "${CLASP[@]}" show-authorized-user 2>&1 | grep -q "@" || "${CLASP[@]}" login
 "${CLASP[@]}" push --force
 "${CLASP[@]}" update-deployment "$DEPLOYMENT" --description "quality test contact"
