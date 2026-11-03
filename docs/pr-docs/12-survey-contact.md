@@ -1,6 +1,6 @@
-# PR planned: Optional contact in survey
+# PR 12: Optional contact in survey
 
-Status: planned
+Status: in-scope work complete
 
 Branch: `feature/survey-contact`
 
