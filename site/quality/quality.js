@@ -50,6 +50,7 @@ function loadTrial() {
   $('trial-next').disabled = true;
   $('tap-play').hidden = true;
   $('clip-error').hidden = true;
+  setBig(false);
   run.shownAt = 0;
   $('video').src = `${STUDY.clipBase}${t.clip}-${t.level}.mp4`;
   show('trial');
@@ -63,6 +64,16 @@ function playClip() {
 
 function showTapPlay() {
   if (!run.shownAt) $('tap-play').hidden = false;
+}
+
+function setBig(big) {
+  $('video-box').classList.toggle('big', big);
+  $('video-size').textContent = big ? 'Close' : 'Enlarge';
+  $('video-size').setAttribute('aria-pressed', String(big));
+}
+
+function onVideoSize() {
+  setBig(!$('video-box').classList.contains('big'));
 }
 
 function onTapPlay() {
@@ -166,6 +177,7 @@ function start() {
   $('video').addEventListener('playing', onPlaying);
   $('video').addEventListener('error', onVideoError);
   $('tap-play').addEventListener('click', onTapPlay);
+  $('video-size').addEventListener('click', onVideoSize);
   $('skip-clip').addEventListener('click', skipClip);
   $('retry').addEventListener('click', retry);
   show('intro');

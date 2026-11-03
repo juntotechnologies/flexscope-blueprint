@@ -6,7 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [Survey ladder](./planned-survey-ladder.md) | Levels map to parts; level bad enough to fail |
+| [Survey ladder](./9-survey-ladder.md) | Levels map to parts; level bad enough to fail |
 | [More clips](./planned-more-clips.md) | More exams, normals + lesions |
 | [Survey contact](./planned-survey-contact.md) | Optional email + OK to contact |
 | [Decision analysis](./planned-decision-analysis.md) | Pass rule before data; cheapest passing level |
