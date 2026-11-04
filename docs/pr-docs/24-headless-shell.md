@@ -1,4 +1,4 @@
-# PR headless shell: checks stop launching Brave
+# PR 24: checks stop launching Brave
 
 Status: underway
 
