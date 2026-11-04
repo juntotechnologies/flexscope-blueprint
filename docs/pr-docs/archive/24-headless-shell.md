@@ -1,6 +1,6 @@
 # PR 24: checks stop launching Brave
 
-Status: underway
+Status: done
 
 Branch: `fix/headless-shell`
 
