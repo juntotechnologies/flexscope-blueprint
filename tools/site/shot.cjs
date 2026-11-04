@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 // Screenshot a page at each viewport in tools/site/viewports.json; fails on side scroll, page scroll or page errors. Usage: shot.cjs <url> <outDir> [readySelector]
 const fs = require('node:fs'), path = require('node:path');
-const {chromium} = require('playwright-core');
-const {findChrome} = require('../teardown/scripts/commands.cjs');
+const {launchBrowser} = require('../teardown/scripts/browser.cjs');
 
 const VIEWPORTS = require('./viewports.json');
 
@@ -23,7 +22,7 @@ async function shoot(browser, url, outDir, ready, v) {
 
 async function main(url, outDir, ready) {
   fs.mkdirSync(outDir, {recursive: true});
-  const browser = await chromium.launch({executablePath: process.env.SHOT_CHROME_PATH || findChrome()});
+  const browser = await launchBrowser();
   const results = [];
   for (const v of VIEWPORTS) results.push(await shoot(browser, url, outDir, ready, v));
   await browser.close();

@@ -1,4 +1,4 @@
-const fs = require('node:fs'), {execFileSync} = require('node:child_process');
+const {execFileSync} = require('node:child_process');
 
 function has(command) {
   try {
@@ -9,9 +9,4 @@ function has(command) {
   }
 }
 
-function findChrome() {
-  const candidates = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium', 'google-chrome', 'chromium', 'chromium-browser'];
-  return candidates.filter(Boolean).find(c => c.startsWith('/') ? fs.existsSync(c) : has(c));
-}
-
-module.exports = {has, findChrome};
+module.exports = {has};

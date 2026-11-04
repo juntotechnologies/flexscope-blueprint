@@ -14,7 +14,7 @@ Add `--only=id` to proof one drawing, `--set=key=value` to proof a pose other th
 
 The full-sheet PNG maps 420 mm to 2000 px, so divide a pixel position by 4.76 to get crop millimeters. Crop filenames carry their rectangle, and runs never delete older files, so give each pass a fresh folder.
 
-It writes PNG previews through `rsvg-convert`, `resvg`, Chrome or macOS Quick Look, whichever it finds first. Open every PNG; the script cannot judge the drawing.
+It writes PNG previews through `rsvg-convert`, `resvg` or macOS Quick Look, whichever it finds first. Open every PNG; the script cannot judge the drawing.
 
 The full run warns when an exploded part shows less than half of the linework it has alone. That part sits behind another one, so change its explosion path or the camera.
 

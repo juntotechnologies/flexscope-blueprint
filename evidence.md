@@ -20,7 +20,8 @@ Omitted: wire anchors/crimps, LED + sensor wiring, drum friction detent, seals, 
 npm i
 brew install resvg          # PNG proofs
 npm run proof               # proof/full/*.png; open every sheet
-CHROME_PATH=... npm run check   # gen drift + dist/index.html + headless viewer
+npm run browser:install     # headless shell, once
+npm run check               # gen drift + dist/index.html + headless viewer
 ```
 
 Last proof (2026-11-01): no occlusion WARNING; most hidden exploded part: tip `leds` 64%, scope `shellRight` 98%.
