@@ -96,7 +96,7 @@ Coding workflow w/ Shaun ("me").
 - Local verification = proof. Before "done": run full local checks (typecheck, lint, unit + e2e, whatever project defines) on exact commit reported; state results. Never pass off earlier-session/other-agent results; rerun or say not rerun.
 - No routine remote CI; local pass on same commit covers it. Run CI only if change touches CI config, or I ask (eg pre-merge). Then wait for finish before report.
 - Report measurement only w/ method that produced it; check method first.
-- Pre-commit: reread whole diff as hostile reviewer, incl every touched fn. Ugly fn → restructure in same change, or say why not.
+- Pre-commit: reread whole diff as a regular reviewer, incl every touched fn. Ugly fn → restructure in same change, or say why not.
 
 ## 9. Python via uv only
 - Every Python call via `uv`: `uv run <script.py>`, `uv run python -m pytest`, `uv run --with <pkg>` for one-off dep, `uvx <tool>` for CLI. Never bare `python`, `python3`, `/usr/bin/python3`, `pip`.
