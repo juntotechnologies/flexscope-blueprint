@@ -52,8 +52,10 @@ Not applicable: no UI change. Evidence is agent-run, below.
 |---|---|
 | `browser.test.cjs` + `proof.test.cjs` | 12 pass |
 | `npm run check` viewer step | OK scope 11 parts, OK tip 8 parts |
-| `ops check` (committed tree) | see PR comment |
-| Dock `recent-apps` before/after | see PR comment |
+| `ops check` on b495c67 (code = ce11eff; clean worktree) | pass: tests, gen drift, build, viewer OK scope 11 + tip 8 parts |
+| Dock `recent-apps` before/after that run | 3 Brave tiles, GUIDs 3565549256-58 both times (a Brave launch rewrites them) |
+| `ps` polled every 0.2 s during that run | no `Brave Browser.app/Contents/MacOS` process except Shaun's own (pid 609); 4 `chrome-headless-shell` pids seen |
+| Output of `proof.cjs` before/after refactor | full, `--quick`, `--crop` runs byte-identical (`diff -rq`) |
 
 ## Product Decisions
 
