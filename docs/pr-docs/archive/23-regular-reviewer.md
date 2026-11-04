@@ -1,6 +1,6 @@
 # PR 23: regular reviewer, not hostile
 
-Status: underway
+Status: done
 
 Branch: `chore/regular-reviewer`
 

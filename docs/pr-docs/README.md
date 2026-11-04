@@ -6,7 +6,6 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
-| [PR 23: regular reviewer, not hostile](./23-regular-reviewer.md) | `AGENTS.md` tells agents to reread their diff as a regular reviewer. |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
@@ -15,6 +14,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [PR 23: regular reviewer, not hostile](./archive/23-regular-reviewer.md) | `AGENTS.md` tells agents to reread their diff as a regular reviewer. |
 | [Phone card padding](./archive/22-phone-card-pad.md) | Card padding from 1 token |
 | [Ready for hub](./archive/18-hub-ready.md) | Backlink + ENT-only verdict |
 | [Save before email](./archive/16-save-before-email.md) | Closing on email screen keeps answers |
