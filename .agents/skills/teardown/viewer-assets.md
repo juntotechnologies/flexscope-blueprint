@@ -101,7 +101,7 @@ A newer preview supersedes queued and running ones, and slider input is debounce
 
 ## Test the controls and the downloaded bytes
 
-For every build, run `node tools/teardown/scripts/check-viewer.cjs dist/index.html check/` from the project folder, with Node 22 or later. It opens the page from disk in headless Chrome, waits for each drawing, screenshots it and fails on errors, missing parts or network requests. Add `--dark` to check the dark appearance.
+For every build, run `node tools/teardown/scripts/check-viewer.cjs dist/index.html check/` from the project folder, with Node 22 or later. It opens the page from disk in Playwright's headless shell (a `playwright-core` dev dependency; add the package script `"browser:install": "playwright-core install chromium-headless-shell"` and run it once; never a browser app, which adds a Dock tile per launch), waits for each drawing, screenshots it and fails on errors, missing parts or network requests. Add `--dark` to check the dark appearance.
 
 The page renders in a worker, so a plain headless screenshot taken at load shows an empty page. Interactive checks beyond the script need a DevTools driver that waits until `#render-status` reads `Drawing updated`.
 

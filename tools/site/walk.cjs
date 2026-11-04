@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 // Click walk: each step in tools/site/walk.json runs on a fresh page; screenshot + fail on page errors, page scroll or a missing expected state.
 const fs = require('node:fs'), path = require('node:path');
-const {chromium} = require('playwright-core');
-const {findChrome} = require('../teardown/scripts/commands.cjs');
+const {launchBrowser} = require('../teardown/scripts/browser.cjs');
 
 const WALK = require('./walk.json');
 
@@ -32,7 +31,7 @@ async function runStep(browser, url, outDir, step) {
 
 async function main(url, outDir) {
   fs.mkdirSync(outDir, {recursive: true});
-  const browser = await chromium.launch({executablePath: process.env.SHOT_CHROME_PATH || findChrome()});
+  const browser = await launchBrowser();
   const results = [];
   for (const step of WALK.steps) results.push(await runStep(browser, url, outDir, step));
   await browser.close();

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm'), {execFileSync} = require('node:child_process');
-const {has, findChrome} = require('./commands.cjs');
+const {has} = require('./commands.cjs');
 const {assets, RUNTIME, load: loadConfig} = require('./config.cjs');
 
 const SHEET = require(path.join(assets, 'sheet.js'));
@@ -42,11 +42,9 @@ function sheet(markup, title, viewBox = SHEET_BOX.join(' '), size = `width="${SH
 }
 
 function rasterizer() {
-  const chrome = findChrome();
   const named = (name, run) => Object.assign(run, {label: name});
   if (has('rsvg-convert')) return named('rsvg-convert', (svg, png) => execFileSync('rsvg-convert', ['-w', String(PIXELS), '-o', png, svg]));
   if (has('resvg')) return named('resvg', (svg, png) => execFileSync('resvg', ['-w', String(PIXELS), svg, png]));
-  if (chrome) return named('Chrome', (svg, png, height) => execFileSync(chrome, ['--headless', '--disable-gpu', '--hide-scrollbars', `--screenshot=${png}`, `--window-size=${PIXELS},${height}`, '--default-background-color=ffffffff', `file://${svg}`], {stdio: 'ignore'}));
   if (has('qlmanage')) {
     return named('Quick Look', (svg, png) => {
       execFileSync('qlmanage', ['-t', '-s', String(PIXELS), '-o', path.dirname(png), svg], {stdio: 'ignore'});
@@ -60,7 +58,7 @@ function writePng(rasterize, markup, title, file, [x, y, w, h] = SHEET_BOX) {
   const height = Math.round(PIXELS * h / w), pixels = file.replace(/\.png$/, '.px.svg');
   fs.writeFileSync(pixels, sheet(markup, title, `${x} ${y} ${w} ${h}`, `width="${PIXELS}" height="${height}"`));
   try {
-    rasterize(pixels, file, height);
+    rasterize(pixels, file);
   } finally {
     fs.rmSync(pixels, {force: true});
   }
@@ -125,7 +123,7 @@ function contactSheet(rasterize, files, outDir, warnings) {
   const sheetFile = path.resolve(outDir, 'contact.svg'), sheetHeight = Math.round(PIXELS * height / width);
   fs.writeFileSync(sheetFile, `<svg xmlns="http://www.w3.org/2000/svg" width="${PIXELS}" height="${sheetHeight}" viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/>${tiles}</svg>`);
   try {
-    rasterize(sheetFile, path.resolve(outDir, 'contact.png'), sheetHeight);
+    rasterize(sheetFile, path.resolve(outDir, 'contact.png'));
   } catch (e) {
     warnings.push(`Could not rasterize the contact sheet: ${e.message}`);
   }
@@ -141,42 +139,83 @@ function writeSheet(rasterize, markup, title, file, warnings) {
   }
 }
 
-function proof(configPath, outDir, {png = true, quick = false, crop = null, only = null, view: viewFilter = null, overrides = {}} = {}) {
-  const {config, models} = load(configPath);
-  fs.mkdirSync(outDir, {recursive: true});
-  const rasterize = png ? rasterizer() : null, files = [], warnings = [];
-  const drawings = config.drawings.filter(d => !only || d.id === only);
+const NO_RASTERIZER = 'No SVG rasterizer found. Install resvg (brew install resvg), then rerun';
+const PROOF_DEFAULTS = {png: true, quick: false, crop: null, only: null, view: null, overrides: {}};
+const isNamed = (id, item) => item.id === id;
+const isViewNamed = (name, [viewName]) => viewName === name;
+
+function chooseDrawings(config, only) {
+  const drawings = only ? config.drawings.filter(isNamed.bind(null, only)) : config.drawings;
   if (!drawings.length) throw Error(`No drawing with id ${only}`);
+  return drawings;
+}
+
+function chooseViews(brief, viewFilter) {
+  const views = VIEWS.slice(0, brief ? 2 : 3);
+  const chosen = viewFilter ? views.filter(isViewNamed.bind(null, viewFilter)) : views;
+  if (!chosen.length) throw Error('View must be assembled, exploded or spread');
+  return chosen;
+}
+
+function proofView(run, d, model, label, values, [view, explosion]) {
+  const {markup} = model(values, {explosion, fitExplosion: explosion, isolated: null});
+  const name = `${d.id}-${label}-${view}`, title = `${d.title}, ${label} parameters, ${view}`;
+  if (run.crop) {
+    const file = path.resolve(run.outDir, `${name}-crop-${run.crop.join('-')}.png`);
+    writePng(run.rasterize, markup, title, file, run.crop);
+    run.files.push(file);
+    return;
+  }
+  const file = path.resolve(run.outDir, name + '.svg');
+  writeSheet(run.rasterize, markup, title, file, run.warnings);
+  run.files.push(file);
+  if (explosion) checkInk(d, markup, `${d.id} ${label} parameters, ${view}`, run.warnings);
+}
+
+function proofParameters(run, d, model, label, values) {
+  for (const view of run.views) proofView(run, d, model, label, values, view);
+}
+
+function proofDrawing(run, d, models) {
+  const model = models[d.id];
+  if (!model) throw Error(`No model registered for ${d.id}`);
+  for (const [label, values] of parameterSets(d, run.brief, run.overrides)) proofParameters(run, d, model, label, values);
+  if (!run.brief) checkOcclusion(d, model, run.overrides, run.warnings);
+}
+
+function summary(run) {
+  const kind = run.crop ? 'crops' : 'sheets';
+  const previews = run.rasterize && !run.crop ? ` with PNG previews from ${run.rasterize.label}` : '';
+  return `Wrote ${run.files.length} ${kind}${previews} to ${path.resolve(run.outDir)}`;
+}
+
+function addContactSheet(run) {
+  if (run.rasterize && !run.crop && run.files.length > 2) contactSheet(run.rasterize, run.files, run.outDir, run.warnings);
+}
+
+function finishProof(run, png) {
+  addContactSheet(run);
+  if (png && !run.rasterize) run.warnings.push(NO_RASTERIZER);
+  for (const w of run.warnings) console.warn('WARNING ' + w);
+  console.log(summary(run));
+  return {files: run.files, warnings: run.warnings};
+}
+
+function startProof(outDir, {png, quick, crop, view, overrides}) {
+  const rasterize = png ? rasterizer() : null;
   if (crop && !rasterize) throw Error('Crops need an SVG rasterizer');
   const brief = quick || Boolean(crop);
-  const views = VIEWS.slice(0, brief ? 2 : 3).filter(([name]) => !viewFilter || name === viewFilter);
-  if (!views.length) throw Error('View must be assembled, exploded or spread');
-  for (const d of drawings) {
-    const model = models[d.id];
-    if (!model) throw Error(`No model registered for ${d.id}`);
-    for (const [label, values] of parameterSets(d, brief, overrides)) {
-      for (const [view, explosion] of views) {
-        const {markup} = model(values, {explosion, fitExplosion: explosion, isolated: null});
-        const name = `${d.id}-${label}-${view}`, title = `${d.title}, ${label} parameters, ${view}`;
-        if (crop) {
-          const file = path.resolve(outDir, `${name}-crop-${crop.join('-')}.png`);
-          writePng(rasterize, markup, title, file, crop);
-          files.push(file);
-        } else {
-          const file = path.resolve(outDir, name + '.svg');
-          writeSheet(rasterize, markup, title, file, warnings);
-          files.push(file);
-          if (explosion) checkInk(d, markup, `${d.id} ${label} parameters, ${view}`, warnings);
-        }
-      }
-    }
-    if (!brief) checkOcclusion(d, model, overrides, warnings);
-  }
-  if (rasterize && !crop && files.length > 2) contactSheet(rasterize, files, outDir, warnings);
-  if (png && !rasterize) warnings.push('No SVG rasterizer found. Install librsvg for rsvg-convert, or Chrome, then rerun');
-  for (const w of warnings) console.warn('WARNING ' + w);
-  console.log(`Wrote ${files.length} ${crop ? 'crops' : 'sheets'}${rasterize && !crop ? ` with PNG previews from ${rasterize.label}` : ''} to ${path.resolve(outDir)}`);
-  return {files, warnings};
+  return {outDir, rasterize, crop, overrides, brief, views: chooseViews(brief, view), files: [], warnings: []};
+}
+
+function proof(configPath, outDir, options = {}) {
+  const settings = {...PROOF_DEFAULTS, ...options};
+  const {config, models} = load(configPath);
+  fs.mkdirSync(outDir, {recursive: true});
+  const drawings = chooseDrawings(config, settings.only);
+  const run = startProof(outDir, settings);
+  for (const d of drawings) proofDrawing(run, d, models);
+  return finishProof(run, settings.png);
 }
 
 if (require.main === module) {

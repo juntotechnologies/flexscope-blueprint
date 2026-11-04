@@ -6,6 +6,7 @@ Order + evidence rules: [roadmap](../roadmap.md).
 
 | Doc | Description |
 |-----|-------------|
+| [PR 24: checks stop launching Brave](./24-headless-shell.md) | `ops check`, `npm run check`, `site:shots` and `site:walk` never launch a browser `.app`. |
 | [Pilot run](./planned-pilot-run.md) | Cousin, then ENTs; results doc |
 | [Private clips](./planned-private-clips.md) | Hospital-approved clips; blocked on approval |
 | [Camera bench](./planned-camera-bench.md) | Sample buy + measurement; spend needs approval |
